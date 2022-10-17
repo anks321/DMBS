@@ -10,14 +10,14 @@ public class Employee {
     private int age;
     private int phone_no;
     private int pin;
-    private string ifsc;
-    private string dob;
+    private String ifsc;
+    private String dob;
     private String first_name;
     private String last_name;
     private String Designation;
-    private string email;
-    private string city;
-    private string street;
+    private String email;
+    private String city;
+    private String street;
 
     public int getEid() {
         return eid;
@@ -61,16 +61,16 @@ public class Employee {
     public void setPin(int pin) {
         this.pin = pin;
     }
-    public string getIfsc() {
+    public String getIfsc() {
         return ifsc;
     }
-    public void setIfsc(string ifsc) {
+    public void setIfsc(String ifsc) {
         this.ifsc = ifsc;
     }
-    public string getDob() {
+    public String getDob() {
         return dob;
     }
-    public void setDob(string dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
     public String getFirst_name() {
@@ -91,26 +91,22 @@ public class Employee {
     public void setDesignation(String designation) {
         Designation = designation;
     }
-    public string getEmail() {
+    public String getEmail() {
         return email;
     }
-    public void setEmail(string email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-    public string getCity() {
+    public String getCity() {
         return city;
     }
-    public void setCity(string city) {
+    public void setCity(String city) {
         this.city = city;
     }
-    public string getStreet() {
+    public String getStreet() {
         return street;
     }
-    public void setStreet(string street) {
+    public void setStreet(String street) {
         this.street = street;
     }
-
-
-
-
 }
