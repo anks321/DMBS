@@ -11,7 +11,9 @@ public class Employee {
     private int phone_no;
     private int pin;
     private String ifsc;
+
     private Date dob;
+
     private String first_name;
     private String last_name;
     private String Designation;
@@ -67,10 +69,13 @@ public class Employee {
     public void setIfsc(String ifsc) {
         this.ifsc = ifsc;
     }
+
     public Date getDob() {
         return dob;
     }
     public void setDob(Date dob) {
+
+
         this.dob = dob;
     }
     public String getFirst_name() {
@@ -109,6 +114,5 @@ public class Employee {
     public void setStreet(String street) {
         this.street = street;
     }
-    
 
 }
