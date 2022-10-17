@@ -4,20 +4,20 @@ import java.util.Date;
 
 public class Employee {
     private int eid;
-    private int aadhar_number;
+    private int e_aadhar_number;
     private int salary;
     private int account_no;
     private int age;
     private int phone_no;
     private int pin;
-    private string ifsc;
-    private string dob;
+    private String ifsc;
+    private Date dob;
     private String first_name;
     private String last_name;
     private String Designation;
-    private string email;
-    private string city;
-    private string street;
+    private String email;
+    private String city;
+    private String street;
 
     public int getEid() {
         return eid;
@@ -25,11 +25,11 @@ public class Employee {
     public void setEid(int eid) {
         this.eid = eid;
     }
-    public int getAadhar_number() {
-        return aadhar_number;
+    public int getE_aadhar_number() {
+        return e_aadhar_number;
     }
-    public void setAadhar_number(int aadhar_number) {
-        this.aadhar_number = aadhar_number;
+    public void setE_aadhar_number(int e_aadhar_number) {
+        this.e_aadhar_number = e_aadhar_number;
     }
     public int getSalary() {
         return salary;
@@ -61,16 +61,16 @@ public class Employee {
     public void setPin(int pin) {
         this.pin = pin;
     }
-    public string getIfsc() {
+    public String getIfsc() {
         return ifsc;
     }
-    public void setIfsc(string ifsc) {
+    public void setIfsc(String ifsc) {
         this.ifsc = ifsc;
     }
-    public string getDob() {
+    public Date getDob() {
         return dob;
     }
-    public void setDob(string dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
     public String getFirst_name() {
@@ -91,26 +91,24 @@ public class Employee {
     public void setDesignation(String designation) {
         Designation = designation;
     }
-    public string getEmail() {
+    public String getEmail() {
         return email;
     }
-    public void setEmail(string email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-    public string getCity() {
+    public String getCity() {
         return city;
     }
-    public void setCity(string city) {
+    public void setCity(String city) {
         this.city = city;
     }
-    public string getStreet() {
+    public String getStreet() {
         return street;
     }
-    public void setStreet(string street) {
+    public void setStreet(String street) {
         this.street = street;
     }
-
-
-
+    
 
 }
