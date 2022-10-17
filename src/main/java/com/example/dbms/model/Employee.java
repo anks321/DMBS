@@ -4,14 +4,16 @@ import java.util.Date;
 
 public class Employee {
     private int eid;
-    private int aadhar_number;
+    private int e_aadhar_number;
     private int salary;
     private int account_no;
     private int age;
     private int phone_no;
     private int pin;
     private String ifsc;
-    private String dob;
+
+    private Date dob;
+
     private String first_name;
     private String last_name;
     private String Designation;
@@ -25,11 +27,11 @@ public class Employee {
     public void setEid(int eid) {
         this.eid = eid;
     }
-    public int getAadhar_number() {
-        return aadhar_number;
+    public int getE_aadhar_number() {
+        return e_aadhar_number;
     }
-    public void setAadhar_number(int aadhar_number) {
-        this.aadhar_number = aadhar_number;
+    public void setE_aadhar_number(int e_aadhar_number) {
+        this.e_aadhar_number = e_aadhar_number;
     }
     public int getSalary() {
         return salary;
@@ -67,10 +69,13 @@ public class Employee {
     public void setIfsc(String ifsc) {
         this.ifsc = ifsc;
     }
-    public String getDob() {
+
+    public Date getDob() {
         return dob;
     }
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
+
+
         this.dob = dob;
     }
     public String getFirst_name() {
@@ -109,4 +114,5 @@ public class Employee {
     public void setStreet(String street) {
         this.street = street;
     }
+
 }
