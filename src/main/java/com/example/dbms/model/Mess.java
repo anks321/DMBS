@@ -5,8 +5,14 @@ public class Mess {
     private int mess_id;
     private int phone_no;
     private int mess_no;
-    private String name;
+    private String m_name;
     private String hostel_name;
+    public String getM_name() {
+        return m_name;
+    }
+    public void setM_name(String m_name) {
+        this.m_name = m_name;
+    }
     public int getMess_id() {
         return mess_id;
     }
@@ -24,12 +30,6 @@ public class Mess {
     }
     public void setMess_no(int mess_no) {
         this.mess_no = mess_no;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
     public String getHostel_name() {
         return hostel_name;

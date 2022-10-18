@@ -4,28 +4,26 @@ import java.util.Date;
 
 public class Customer {
     private int cid;
-    private int c_aadhar_number;
     private int balance;
     private int pin;
-    private int account_no;
     private int phone_no;
+    private String c_aadhar_number;
+    private String account_no;
     private String sex;
     private String ifsc;
     private String dob;
     private String first_name;
     private String last_name;
-    private String email;
-    private String city;
     public int getCid() {
         return cid;
     }
     public void setCid(int cid) {
         this.cid = cid;
     }
-    public int getC_aadhar_number() {
+    public String getC_aadhar_number() {
         return c_aadhar_number;
     }
-    public void setC_aadhar_number(int c_aadhar_number) {
+    public void setC_aadhar_number(String c_aadhar_number) {
         this.c_aadhar_number = c_aadhar_number;
     }
     public int getBalance() {
@@ -40,17 +38,17 @@ public class Customer {
     public void setPin(int pin) {
         this.pin = pin;
     }
-    public int getAccount_no() {
-        return account_no;
-    }
-    public void setAccount_no(int account_no) {
-        this.account_no = account_no;
-    }
     public int getPhone_no() {
         return phone_no;
     }
     public void setPhone_no(int phone_no) {
         this.phone_no = phone_no;
+    }
+    public String getAccount_no() {
+        return account_no;
+    }
+    public void setAccount_no(String account_no) {
+        this.account_no = account_no;
     }
     public String getSex() {
         return sex;
@@ -100,5 +98,9 @@ public class Customer {
     public void setStreet(String street) {
         this.street = street;
     }
+    private String email;
+    private String city;
     private String street;
+    
+    
 }

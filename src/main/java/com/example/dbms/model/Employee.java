@@ -3,35 +3,26 @@ package com.example.dbms.model;
 import java.util.Date;
 
 public class Employee {
-    private int eid;
-    private int e_aadhar_number;
+    private int eid; 
     private int salary;
-    private int account_no;
     private int age;
     private int phone_no;
     private int pin;
-    private String ifsc;
-
     private Date dob;
-
+    private String ifsc;
+    private String account_no;
+    private String e_aadhar_number;
     private String first_name;
     private String last_name;
     private String Designation;
     private String email;
     private String city;
     private String street;
-
     public int getEid() {
         return eid;
     }
     public void setEid(int eid) {
         this.eid = eid;
-    }
-    public int getE_aadhar_number() {
-        return e_aadhar_number;
-    }
-    public void setE_aadhar_number(int e_aadhar_number) {
-        this.e_aadhar_number = e_aadhar_number;
     }
     public int getSalary() {
         return salary;
@@ -39,10 +30,10 @@ public class Employee {
     public void setSalary(int salary) {
         this.salary = salary;
     }
-    public int getAccount_no() {
+    public String getAccount_no() {
         return account_no;
     }
-    public void setAccount_no(int account_no) {
+    public void setAccount_no(String account_no) {
         this.account_no = account_no;
     }
     public int getAge() {
@@ -69,14 +60,17 @@ public class Employee {
     public void setIfsc(String ifsc) {
         this.ifsc = ifsc;
     }
-
     public Date getDob() {
         return dob;
     }
     public void setDob(Date dob) {
-
-
         this.dob = dob;
+    }
+    public String getE_aadhar_number() {
+        return e_aadhar_number;
+    }
+    public void setE_aadhar_number(String e_aadhar_number) {
+        this.e_aadhar_number = e_aadhar_number;
     }
     public String getFirst_name() {
         return first_name;
@@ -114,5 +108,7 @@ public class Employee {
     public void setStreet(String street) {
         this.street = street;
     }
+
+    
 
 }

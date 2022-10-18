@@ -4,9 +4,9 @@ import java.util.Date;
 public class Section {
     private int section_id;
     private int hall_no;
-    private int breakfast;
-    private int lunch;
-    private int dinner;
+    private String breakfast;
+    private String lunch;
+    private String dinner;
     public int getSection_id() {
         return section_id;
     }
@@ -19,22 +19,23 @@ public class Section {
     public void setHall_no(int hall_no) {
         this.hall_no = hall_no;
     }
-    public int getBreakfast() {
+    public String getBreakfast() {
         return breakfast;
     }
-    public void setBreakfast(int breakfast) {
+    public void setBreakfast(String breakfast) {
         this.breakfast = breakfast;
     }
-    public int getLunch() {
+    public String getLunch() {
         return lunch;
     }
-    public void setLunch(int lunch) {
+    public void setLunch(String lunch) {
         this.lunch = lunch;
     }
-    public int getDinner() {
+    public String getDinner() {
         return dinner;
     }
-    public void setDinner(int dinner) {
+    public void setDinner(String dinner) {
         this.dinner = dinner;
     }
+   
 }

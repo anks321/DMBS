@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Inventory {
     private int item_id;
-    private int date;
+    private Date date;
     private int quantity;
     private Date expiry_date;
     private String name;
@@ -13,10 +13,10 @@ public class Inventory {
     public void setItem_id(int item_id) {
         this.item_id = item_id;
     }
-    public int getDate() {
+    public Date getDate() {
         return date;
     }
-    public void setDate(int date) {
+    public void setDate(Date date) {
         this.date = date;
     }
     public int getQuantity() {
@@ -37,4 +37,5 @@ public class Inventory {
     public void setName(String name) {
         this.name = name;
     }
+    
 }
