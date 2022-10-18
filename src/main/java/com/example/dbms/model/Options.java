@@ -18,5 +18,4 @@ public class Options {
     public void setOptionText(String optionText) {
         OptionText = optionText;
     }
-
 }
