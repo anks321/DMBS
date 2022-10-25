@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.example.dbms.model.Student;
+import com.example.dbms.model.Transaction;
 
 @Lazy
 @Repository
@@ -84,6 +85,7 @@ public class StudentDAO {
 		return jt.queryForObject(sql, Integer.class);
 	}
 
+
 	// public User findByID(int userID) {
 	// 	String sql = "select * from student where userID = ?";
 	// 	return jt.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userID);
@@ -140,6 +142,10 @@ public class StudentDAO {
         	return null;
         }         
     }
+
+	public List<Transaction> alltransactions(int roll, int i) {
+		return null;
+	}
 	
 }
 

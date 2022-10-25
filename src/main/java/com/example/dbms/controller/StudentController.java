@@ -8,13 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.example.dbms.service.AuthenticateService;
+import com.example.dbms.service.ToastService;
+import com.example.dbms.validator.UserValidator;
 import com.example.dbms.dao.AnnouncementsDAO;
 import com.example.dbms.dao.SectionDAO;
 import com.example.dbms.dao.StudentDAO;
+import com.example.dbms.dao.TransactionDAO;
 import com.example.dbms.model.Announcements;
 import com.example.dbms.model.Section;
 import com.example.dbms.model.Student;
+import com.example.dbms.model.Transaction;
 
 @Controller
 public class StudentController {
@@ -26,11 +32,44 @@ public class StudentController {
 	@Autowired
 	private StudentDAO studentDAO; 
     @Autowired
-	private AnnouncementsDAO AnnouncementsDAO;      
+	private AnnouncementsDAO AnnouncementsDAO;
+    @Autowired
+	private TransactionDAO transactionDAO;      
+    @Autowired
+    private UserValidator userValidator;
+    @Autowired
+    private ToastService toastService;
 
     //Forum, Poll, Announcements, Menu, Balance, Transactions
+    @GetMapping("/studentprofile")
+    public String profile(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+
+        String loginMessage = "Please Sign in to proceed!!!";
+        if(!auth_Service.isAuthenticated(session))
+        {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String username = auth_Service.getCurrentUser(session);
+
+        Student student = studentDAO.findByUsername(username);
+        
+        model.addAttribute("student", student);
+        return "studentprofile";
+    }
+
     @GetMapping("/studentmenu")
-    public String Menu(Model model, HttpSession session){
+    public String Menu(Model model, HttpSession session, RedirectAttributes redirectAttributes){
+
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if(!auth_Service.isAuthenticated(session))
+        {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
         String curr_user =  auth_Service.getCurrentUser(session);
 
         Student student = studentDAO.findByUsername(curr_user);
@@ -51,8 +90,16 @@ public class StudentController {
     }
 
     @GetMapping("/studentannouncement")
-    public String Announce(Model model, HttpSession session){
-        String curr_user =  "aloo";
+    public String Announce(Model model, HttpSession session, RedirectAttributes redirectAttributes){
+
+        String loginMessage = "Please Sign in to proceed!!!";
+        if(!auth_Service.isAuthenticated(session))
+        {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String curr_user =  auth_Service.getCurrentUser(session);
 
         Student student = studentDAO.findByUsername(curr_user);
 
@@ -68,5 +115,35 @@ public class StudentController {
 
         return "studentannouncement";
     }
+
+    @GetMapping("/studenttransaction")
+	 public String alltransactions(Model model,HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if(!auth_Service.isAuthenticated(session))
+        {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+        // if(student==null){
+        // student = customerDAO.findByUsername(authenticateService.getCurrentUser(session));
+        // }
+
+        Student student = studentDAO.findByUsername(auth_Service.getCurrentUser(session));
+        int roll = student.getRoll_no();
+
+        List<Transaction> list = transactionDAO.alltransactions(roll,1);
+        model.addAttribute("transactions", list);
+        if(auth_Service.isAuthenticated(session))
+          {
+              model.addAttribute("loggedinUser", auth_Service.getCurrentUser(session));
+  
+          Student loggedUser = studentDAO.findByUsername(auth_Service.getCurrentUser(session));
+          model.addAttribute("loggedUser", loggedUser);
+          }
+   
+        return "studenttransaction";	
+	}
 
 }
