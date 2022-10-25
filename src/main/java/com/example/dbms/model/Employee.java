@@ -2,7 +2,21 @@ package com.example.dbms.model;
 
 import java.util.Date;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Employee {
+    private String username;
+	private String password;
+	private String passwordConfirm;
+	private String oldPassword;
+	private String role;
+    private String token;
+	private int active;
     private int eid; 
     private int salary;
     private int age;
@@ -18,97 +32,5 @@ public class Employee {
     private String email;
     private String city;
     private String street;
-    public int getEid() {
-        return eid;
-    }
-    public void setEid(int eid) {
-        this.eid = eid;
-    }
-    public int getSalary() {
-        return salary;
-    }
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-    public String getAccount_no() {
-        return account_no;
-    }
-    public void setAccount_no(String account_no) {
-        this.account_no = account_no;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-    public int getPhone_no() {
-        return phone_no;
-    }
-    public void setPhone_no(int phone_no) {
-        this.phone_no = phone_no;
-    }
-    public int getPin() {
-        return pin;
-    }
-    public void setPin(int pin) {
-        this.pin = pin;
-    }
-    public String getIfsc() {
-        return ifsc;
-    }
-    public void setIfsc(String ifsc) {
-        this.ifsc = ifsc;
-    }
-    public Date getDob() {
-        return dob;
-    }
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-    public String getE_aadhar_number() {
-        return e_aadhar_number;
-    }
-    public void setE_aadhar_number(String e_aadhar_number) {
-        this.e_aadhar_number = e_aadhar_number;
-    }
-    public String getFirst_name() {
-        return first_name;
-    }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-    public String getLast_name() {
-        return last_name;
-    }
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-    public String getDesignation() {
-        return Designation;
-    }
-    public void setDesignation(String designation) {
-        Designation = designation;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getCity() {
-        return city;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
-    public String getStreet() {
-        return street;
-    }
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    
 
 }
