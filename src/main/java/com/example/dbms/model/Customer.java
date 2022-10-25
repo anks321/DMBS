@@ -29,4 +29,6 @@ public class Customer {
     private String email;
     private String city;
     private String street;
+    private int mess_id;
+    private int section_id;
 }

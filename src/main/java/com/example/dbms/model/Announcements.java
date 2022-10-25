@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 
 public class Announcements {
     private int A_id;
-    private String text;
+    private String announce_text;
     private String date_and_time;
+    private int mess_id;
+    private int section_id;
     
 }
