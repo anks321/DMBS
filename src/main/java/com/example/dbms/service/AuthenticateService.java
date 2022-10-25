@@ -2,9 +2,9 @@ package com.example.dbms.service;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.dbms.dao.UserDAO;
-import com.example.dbms.model.User;
-
+import com.example.dbms.dao.CustomerDAO;
+import com.example.dbms.dao.StudentDAO;
+import com.example.dbms.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 public class AuthenticateService {
     
     @Autowired
-    private UserDAO users;
+    private StudentDAO students;
+    @Autowired
+    private CustomerDAO customers;
 
     @Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -22,8 +24,12 @@ public class AuthenticateService {
     private String loggedUser = "AUTH_USER";
 
     public Boolean checkCredentials(String username, String password) {
-        User user = users.findByUsername(username);
-        return bCryptPasswordEncoder.matches(password,user.getPassword());
+        Customer customer = customers.findByUsername(username);
+        Student  student= students.findByUsername(username);
+        if(customer!=null&&student==null){return (bCryptPasswordEncoder.matches(password,customer.getPassword()));}
+        else if(student!=null&&customer==null)return (bCryptPasswordEncoder.matches(password,student.getPassword()));
+        else if(student!=null&&customer!=null) return ((bCryptPasswordEncoder.matches(password,customer.getPassword()))||(bCryptPasswordEncoder.matches(password,student.getPassword())));
+        return false;
     }
 
     public void loginUser(HttpSession session, String username) {

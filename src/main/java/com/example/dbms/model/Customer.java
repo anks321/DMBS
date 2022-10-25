@@ -18,7 +18,7 @@ public class Customer {
     private int cid;
     private int balance;
     private int pin;
-    private int phone_no;
+    private String phone_no;
     private String c_aadhar_number;
     private String account_no;
     private String sex;

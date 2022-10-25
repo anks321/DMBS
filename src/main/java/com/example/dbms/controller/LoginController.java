@@ -73,15 +73,17 @@ public class LoginController {
 		try {
             if(authenticateService.checkCredentials(username, password)) {
                 authenticateService.loginUser(session, username);
-			// System.out.println(username);
+			   System.out.println(username);
 
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
-                return "redirect:/welcome";
+                //return "redirect:/welcome";
+                return "faltu";
             }
             errorMessage = "Incorrect password.";
 
 		} catch (Exception e) {
             errorMessage = "No user with this username found.";
+            System.out.println(e);
         }
         model.addAttribute("user", userForm);
         toastService.displayErrorToast(model, errorMessage);

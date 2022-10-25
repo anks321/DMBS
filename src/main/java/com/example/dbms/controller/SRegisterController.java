@@ -1,4 +1,5 @@
- package com.example.dbms.controller;
+package com.example.dbms.controller;
+
 
 import java.util.UUID;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.example.dbms.dao.CustomerDAO;
 import com.example.dbms.dao.StudentDAO;
 //import com.example.dbms.Utils.HostName;
+import com.example.dbms.dao.UserDAO;
 import com.example.dbms.model.*;
 import com.example.dbms.service.AuthenticateService;
 // import com.example.dbms.service.Em ailSenderService;
@@ -25,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class RegisterController {
+public class SRegisterController {
 
+    @Autowired
+	 private UserDAO userDAO;
 	 @Autowired
 	 private CustomerDAO customerDAO;
 	 @Autowired
@@ -40,20 +44,19 @@ public class RegisterController {
 	//  @Autowired
 	//  EmailSenderService emailSenderService;
 
-    @GetMapping("/register")
+    @GetMapping("/studentregister")
 	 public String showForm(Model model,HttpSession session) {
 
 		if (authenticateService.isAuthenticated(session)) {
 			return "redirect:/welcome";
 		}
-		
-		Customer customer = new Customer();		 
-	 	model.addAttribute("customer", customer);
-	    return "register";
+		Student student = new Student();		 
+	 	model.addAttribute("student", student);
+	    return "studentregister";
 	 }
 
-	 @PostMapping("/register")
-	 public String submitForm(@ModelAttribute("Customer") Customer Customer, Model model, BindingResult bindingResult,HttpSession session, RedirectAttributes redirectAttributes) {
+	 @PostMapping("/studentregister")
+	 public String submitForm(@ModelAttribute("student") Student student, Model model, BindingResult bindingResult,HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		// userValidator.validate(userForm, bindingResult);
 	    
@@ -62,33 +65,38 @@ public class RegisterController {
 	    //     return "register";
 	    // }
 
-		String username=Customer.getUsername();
+		String username=student.getUsername();
         String errorMessage = null;
-		System.out.println(username);
-		try {
-			if(!(Customer.getPassword().equals(Customer.getPasswordConfirm()))) {
+		
+		//System.out.println(username);
 
+		try {
+			
+			if(!(student.getPassword().equals(student.getPasswordConfirm()))) {
+				
 				errorMessage = "Password and Confirm Password do not match...";
 
-				model.addAttribute("Customer", Customer);
+				model.addAttribute("student", student);
        	 		toastService.displayErrorToast(model, errorMessage);
-        		return "/register";
+        		return "/studentregister";
 			}
-            if (!studentDAO.userExists(username)&&!customerDAO.userExists(username)) {
-				Customer.setRole("Patient");
-				Customer.setActive(0);
-				System.out.println(Customer.getUsername());
+			System.out.println("dxrdexcftrdctr");
+            if (!studentDAO.userExists(username)) {
+				System.out.println("laaaaaaaaaa");
+				student.setRole("Patient");
+				student.setActive(0);
+				System.out.println(student.getUsername());
 				System.out.println("#4#");
-				System.out.println(Customer.getUsername());
+				System.out.println(student.getUsername());
 
 
 				// ////////////////////////Email-Verification/////////////////////
 				String token = UUID.randomUUID().toString();
-				Customer.setToken(token);
-				customerDAO.save(Customer);
+				student.setToken(token);
+				studentDAO.save(student);
 
 				// SimpleMailMessage mailMessage = new SimpleMailMessage();
-				// mailMessage.setTo(Customer.getEmailID());
+				// mailMessage.setTo(user.getEmailID());
 				// mailMessage.setSubject("Complete Registration!");
 				// mailMessage.setFrom("guptacare18@gmail.com");
 				// mailMessage.setText("Your account has been registered on Gupta-Care. To confirm your account, please click here : "
@@ -102,27 +110,27 @@ public class RegisterController {
                 return "redirect:/login";
 
             }
-			
+			System.out.println("hello--------------------");
             errorMessage = "This username already exists.";
         } catch (Exception e) {
-			System.out.println(e);
             errorMessage = "This username can't be taken. Please change it...";
+			System.out.println(e);
         }
 	    
-		model.addAttribute("Customer", Customer);
+		model.addAttribute("student", student);
         toastService.displayErrorToast(model, errorMessage);
-        return "register";
+        return "studentregister";
 		
 	}
 
 	// @GetMapping("/confirm-account")
 	//  public String confirmAccountRegister(@RequestParam("token")String token,Model model,HttpSession session, RedirectAttributes redirectAttributes) {
 
-	// 	Customer Customer = customerDAO.findByConfirmationToken(token);
+	// 	Student user = studentDAO.findByConfirmationToken(token);
 
-	// 	if(Customer != null)
+	// 	if(user != null)
 	//     {
-	//     	 customerDAO.updateActivity(Customer.getUsername(), 1);
+	//     	 studentDAO.updateActivity(user.getUsername(), 1);
 	// 		 toastService.redirectWithSuccessToast(redirectAttributes, "Account Confirmed Successfully...");
 
 	//     	 return "redirect:/login";
