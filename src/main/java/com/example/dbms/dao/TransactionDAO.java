@@ -24,11 +24,11 @@ import com.example.dbms.model.Transaction;
 public class TransactionDAO {
     @Autowired
 	private JdbcTemplate jt;
-    public List<Transaction> alltransactions(int id, int sorc) {
-        String sql;
-        if(sorc==1){
-		sql = "select * from Transactions where roll_no='" + id + "'";}
-        else {
+    public List<Transaction> alltransactions(int id, int isStudent) {
+        String sql = "";
+        if(isStudent == 1) {
+            sql = "select * from Transactions where roll_no='" + id + "'";}
+        else{
             sql = "select * from Transactions where C_id='" + id + "'";}
 
 		return jt.query(sql, new BeanPropertyRowMapper<>(Transaction.class));
