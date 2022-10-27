@@ -23,7 +23,8 @@ import com.example.dbms.model.Transaction;
 @Repository
 public class TransactionDAO {
     @Autowired
-	private JdbcTemplate jt;
+	private JdbcTemplate temp;
+
     public List<Transaction> alltransactions(int id, int isStudent) {
         String sql = "";
         if(isStudent == 1) {
@@ -31,7 +32,7 @@ public class TransactionDAO {
         else{
             sql = "select * from Transactions where C_id='" + id + "'";}
 
-		return jt.query(sql, new BeanPropertyRowMapper<>(Transaction.class));
+		return temp.query(sql, new BeanPropertyRowMapper<>(Transaction.class));
 	}
 
 }
