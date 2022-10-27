@@ -32,7 +32,7 @@ public class StudentController {
 	@Autowired
 	private StudentDAO studentDAO; 
     @Autowired
-	private AnnouncementsDAO AnnouncementsDAO;
+	private AnnouncementsDAO announcementsDAO;
     @Autowired
 	private TransactionDAO transactionDAO;      
     @Autowired
@@ -106,12 +106,12 @@ public class StudentController {
         Integer mess_no = student.getMess_id();
         Integer section_no = student.getSection_id();
 
-        Announcements announce = AnnouncementsDAO.findAnnouncements(mess_no, section_no); 
-        String announce_text = announce.getAnnounce_text();
-        String date_and_time = announce.getDate_and_time();
+        List<Announcements> announce = announcementsDAO.findByAnnouncements(mess_no, section_no); 
+        // String announce_text = announce.getAnnounce_text();
+        // String date_and_time = announce.getDate_and_time();
 
         
-        model.addAttribute("announcements", announce_text);
+        //model.addAttribute("announcements", announce_text);
 
         return "studentannouncement";
     }

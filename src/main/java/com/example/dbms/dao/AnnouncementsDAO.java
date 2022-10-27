@@ -22,9 +22,9 @@ public class AnnouncementsDAO {
     @Autowired
 	private JdbcTemplate temp;
 
-    public Announcements findAnnouncements(int mess_no,  int section_no) {
+    public List<Announcements> findByAnnouncements(int mess_no,  int section_no) {
         String sql = "select * from Announcements where mess_id =? AND section_id = ?;";
 
-        return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Announcements.class), mess_no,section_no); 
+        return temp.query(sql, new BeanPropertyRowMapper<>(Announcements.class), mess_no,section_no); 
     }
 }
