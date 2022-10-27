@@ -3,6 +3,13 @@ drop database mess;
 create database mess;
 use mess;
 
+select * from customer;
+select * from student;
+insert into Mess values (2,NULL,200,"lanka","sariya");
+insert into section values(2,2,1,"breakfast","lunch","dinner");
+insert into employees values("adfa","adfh","sadf","asdfas",2,123,2,2,1,1,1,123,'1999-11-11',"asdf","asdf","234","firstn","adfa","cook","saf@asdf","asfd","asdf");
+update Mess set Head_id = 123 where mess_id=2;
+
 CREATE TABLE IF NOT EXISTS student
 (
     roll_no INT NOT NULL AUTO_INCREMENT,
@@ -77,6 +84,7 @@ Create table IF NOT EXISTS employees(
     constraint fk_3 foreign key(mess_Id,section_id) references Section(mess_Id,section_id)
 );
 
+
 Create table IF NOT EXISTS customer(
     username VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255),
@@ -104,6 +112,8 @@ Create table IF NOT EXISTS customer(
 );
 
 
+
+
 Alter table Section 
 add constraint fk_1 foreign key (Mess_Id) references Mess(Mess_Id);
 Alter table student
@@ -127,11 +137,12 @@ Create table IF NOT EXISTS Announcements(
     mess_id int,
     section_id int,
     Date_time datetime,
-    text VARCHAR(255),
+    announce_text VARCHAR(255),
     date_and_time VARCHAR(255),
     constraint pk_7 primary key(A_id),
     constraint fk_6 foreign key (mess_id,section_id) references Section(mess_id,section_id)
 );
+insert into Announcements values(1,2,2,12/12/2002,"announcementssss","12232010");
 
 Create table Inventory(
     item_id int NOT NULL,

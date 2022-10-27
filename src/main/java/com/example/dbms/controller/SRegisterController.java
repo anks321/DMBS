@@ -90,10 +90,8 @@ public class SRegisterController {
 				toastService.displayErrorToast(model, errorMessage);
 				return "/studentregister";
 			}
-			System.out.println("dxrdexcftrdctr");
-			if (!studentDAO.userExists(username)) {
-				System.out.println("laaaaaaaaaa");
-				student.setRole("Patient");
+            if (!studentDAO.userExists(username)) {
+				student.setRole("Student");
 				student.setActive(0);
 				System.out.println(student.getUsername());
 				System.out.println("#4#");

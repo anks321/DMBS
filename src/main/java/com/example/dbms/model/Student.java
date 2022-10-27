@@ -34,5 +34,7 @@ public class Student {
     private String aadhar_no;
     private String s_account_no;
     private String s_ifsc;
+    private int mess_id;
+    private int section_id;
     
 }
