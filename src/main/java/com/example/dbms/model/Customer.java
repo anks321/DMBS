@@ -31,4 +31,5 @@ public class Customer {
     private String street;
     private int mess_id;
     private int section_id;
+    
 }
