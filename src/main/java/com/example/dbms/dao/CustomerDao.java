@@ -20,7 +20,7 @@ import com.example.dbms.model.Customer;
 
 @Lazy
 @Repository
-public class CustomerDAO {
+public class CustomerDao {
 
 	@Autowired
 	private JdbcTemplate jt;

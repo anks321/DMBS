@@ -1,11 +1,11 @@
 package com.example.dbms.controller;
 
-
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.dbms.dao.CustomerDAO;
+// import com.example.dbms.dao.CustomerDAO;
+import com.example.dbms.dao.CustomerDao;
 import com.example.dbms.dao.StudentDAO;
 //import com.example.dbms.Utils.HostName;
 import com.example.dbms.dao.UserDAO;
@@ -29,66 +29,75 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class SRegisterController {
 
-    @Autowired
-	 private UserDAO userDAO;
-	 @Autowired
-	 private CustomerDAO customerDAO;
-	 @Autowired
-	 private StudentDAO studentDAO;
-	 @Autowired
-	 private ToastService toastService;
-	 @Autowired
-	 private UserValidator userValidator;
-	 @Autowired
-	 private AuthenticateService authenticateService;
-	//  @Autowired
-	//  EmailSenderService emailSenderService;
+	@Autowired
+	private UserDAO userDAO;
+	@Autowired
+	private CustomerDao customerDAO;
+	@Autowired
+	private StudentDAO studentDAO;
+	@Autowired
+	private ToastService toastService;
+	@Autowired
+	private UserValidator userValidator;
+	@Autowired
+	private AuthenticateService authenticateService;
+	// @Autowired
+	// EmailSenderService emailSenderService;
 
-    @GetMapping("/studentregister")
-	 public String showForm(Model model,HttpSession session) {
+	@GetMapping("/studentregister")
+	public String showForm(Model model, HttpSession session) {
 
 		if (authenticateService.isAuthenticated(session)) {
-			return "redirect:/welcome";
+
+			
+			
+
+			return "redirect:/loggedin";
 		}
-		Student student = new Student();		 
-	 	model.addAttribute("student", student);
-	    return "studentregister";
-	 }
+		Student student = new Student();
+		model.addAttribute("student", student);
+		return "studentregister";
+	}
 
-	 @PostMapping("/studentregister")
-	 public String submitForm(@ModelAttribute("student") Student student, Model model, BindingResult bindingResult,HttpSession session, RedirectAttributes redirectAttributes) {
-		
+	@GetMapping("/sidebar")
+	public String subm(){
+		return "sidebar";
+	}
+
+	@PostMapping("/studentregister")
+	public String submitForm(@ModelAttribute("student") Student student, Model model, BindingResult bindingResult,
+			HttpSession session, RedirectAttributes redirectAttributes) {
+
 		// userValidator.validate(userForm, bindingResult);
-	    
-		// if (bindingResult.hasErrors()) {
-	    	
-	    //     return "register";
-	    // }
 
-		String username=student.getUsername();
-        String errorMessage = null;
-		
-		//System.out.println(username);
+		// if (bindingResult.hasErrors()) {
+
+		// return "register";
+		// }
+
+		String username = student.getUsername();
+		String errorMessage = null;
+
+		// System.out.println(username);
 
 		try {
-			
-			if(!(student.getPassword().equals(student.getPasswordConfirm()))) {
-				
+
+			if (!(student.getPassword().equals(student.getPasswordConfirm()))) {
+
 				errorMessage = "Password and Confirm Password do not match...";
 
 				model.addAttribute("student", student);
-       	 		toastService.displayErrorToast(model, errorMessage);
-        		return "/studentregister";
+				toastService.displayErrorToast(model, errorMessage);
+				return "/studentregister";
 			}
 			System.out.println("dxrdexcftrdctr");
-            if (!studentDAO.userExists(username)) {
+			if (!studentDAO.userExists(username)) {
 				System.out.println("laaaaaaaaaa");
 				student.setRole("Patient");
 				student.setActive(0);
 				System.out.println(student.getUsername());
 				System.out.println("#4#");
 				System.out.println(student.getUsername());
-
 
 				// ////////////////////////Email-Verification/////////////////////
 				String token = UUID.randomUUID().toString();
@@ -99,48 +108,52 @@ public class SRegisterController {
 				// mailMessage.setTo(user.getEmailID());
 				// mailMessage.setSubject("Complete Registration!");
 				// mailMessage.setFrom("guptacare18@gmail.com");
-				// mailMessage.setText("Your account has been registered on Gupta-Care. To confirm your account, please click here : "
-				// 		+HostName.getHost()+"confirm-account?token="+token);
-				
+				// mailMessage.setText("Your account has been registered on Gupta-Care. To
+				// confirm your account, please click here : "
+				// +HostName.getHost()+"confirm-account?token="+token);
+
 				// ///////////////////////Email-Verification/////////////////////
-				
+
 				// emailSenderService.sendEmail(mailMessage);
 
-                toastService.redirectWithSuccessToast(redirectAttributes, "Successfully Registered...");
-                return "redirect:/login";
+				toastService.redirectWithSuccessToast(redirectAttributes, "Successfully Registered...");
+				return "redirect:/login";
 
-            }
+			}
 			System.out.println("hello--------------------");
-            errorMessage = "This username already exists.";
-        } catch (Exception e) {
-            errorMessage = "This username can't be taken. Please change it...";
+			errorMessage = "This username already exists.";
+		} catch (Exception e) {
+			errorMessage = "This username can't be taken. Please change it...";
 			System.out.println(e);
-        }
-	    
+		}
+
 		model.addAttribute("student", student);
-        toastService.displayErrorToast(model, errorMessage);
-        return "studentregister";
-		
+		toastService.displayErrorToast(model, errorMessage);
+		return "studentregister";
+
 	}
 
 	// @GetMapping("/confirm-account")
-	//  public String confirmAccountRegister(@RequestParam("token")String token,Model model,HttpSession session, RedirectAttributes redirectAttributes) {
+	// public String confirmAccountRegister(@RequestParam("token")String token,Model
+	// model,HttpSession session, RedirectAttributes redirectAttributes) {
 
-	// 	Student user = studentDAO.findByConfirmationToken(token);
+	// Student user = studentDAO.findByConfirmationToken(token);
 
-	// 	if(user != null)
-	//     {
-	//     	 studentDAO.updateActivity(user.getUsername(), 1);
-	// 		 toastService.redirectWithSuccessToast(redirectAttributes, "Account Confirmed Successfully...");
+	// if(user != null)
+	// {
+	// studentDAO.updateActivity(user.getUsername(), 1);
+	// toastService.redirectWithSuccessToast(redirectAttributes, "Account Confirmed
+	// Successfully...");
 
-	//     	 return "redirect:/login";
-	//     }
-	//     else
-	//     {	
-	// 		toastService.redirectWithErrorToast(redirectAttributes, "Account Confirmed Not Successfull...");	
-	//         return "redirect:/welcome";
-	//     }
+	// return "redirect:/login";
+	// }
+	// else
+	// {
+	// toastService.redirectWithErrorToast(redirectAttributes, "Account Confirmed
+	// Not Successfull...");
+	// return "redirect:/welcome";
+	// }
 
 	// }
-    
+
 }

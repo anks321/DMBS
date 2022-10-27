@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.dbms.dao.CustomerDAO;
+import com.example.dbms.dao.CustomerDao;
 import com.example.dbms.dao.StudentDAO;
 //import com.example.dbms.Utils.HostName;
 import com.example.dbms.model.*;
@@ -28,7 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class RegisterController {
 
 	 @Autowired
-	 private CustomerDAO customerDAO;
+	 private CustomerDao customerDAO;
 	 @Autowired
 	 private StudentDAO studentDAO;
 	 @Autowired
@@ -44,7 +44,7 @@ public class RegisterController {
 	 public String showForm(Model model,HttpSession session) {
 
 		if (authenticateService.isAuthenticated(session)) {
-			return "redirect:/welcome";
+			return "redirect:/loggedin";
 		}
 		
 		Customer customer = new Customer();		 

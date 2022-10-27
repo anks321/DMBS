@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
 <head>asf</head>
 <!-- <head th:replace="header :: header"></head> -->
 <body text-align="center">
 
 <!-- div th:replace="navbar :: navbar"></div> -->
 
-
+<section>
 <div class="row register-form" style="margin-top: 100px; width: 100%;">
     <div class="col-md-8 offset-md-2" style="background-color: aliceblue;">
         <form display="inline" class="custom-form" style="background-color: aliceblue;" method="post" model="student" th:action="@{/studentregister}" th:object="${student}">
@@ -75,16 +75,22 @@
                 <div class="col-sm-4 label-column"><label class="col-form-label" for="parent-input-field">Parent </label></div>
                 <div class="col-sm-5 input-column"><input type="text" class="form-control" placeholder="Parent" required="required" th:field="*{parent}"></div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-4 label-column" style="margin-left:-18px;"><label class="col-form-label" for="sex-input-field">Gender </label></div>
-                <div class="form-check form-check-inline" style="margin-left: -240px;">
-                    <input class="form-check-input" style="margin-top:-25px;" type="radio" required="required" th:field="*{sex}" id="option1" value="Male">
-                    <label class="form-check-label" for="option1" style="margin-left:-23px;">Male</label>
+            <div class="row form-group">
+                <div class="col-sm-4 label-column" >
+                    <label class="col-form-label" for="sex-input-field">Gender </label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" style="margin-top:-25px;" required="required" th:field="*{sex}" id="option2" value="Female">
-                    <label class="form-check-label" for="option2" style="margin-left:-23px;">Female</label>
+                <div class="col-sm-4 label-column" >
+                    <div class="form-check "   >
+                        <input class="form-check-input"  type="radio" required="required" th:field="*{sex}" id="option1" value="Male">
+                        <label class="form-check-label" for="option1" >Male</label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio"  required="required" th:field="*{sex}" id="option2" value="Female">
+                        <label class="form-check-label" for="option2" >Female</label>
+                    </div>
                 </div>
+                
+               
             </div>
             <div class="row form-group">
                 <div class="col-sm-4 label-column"><label class="col-form-label" for="username-input-field">Username </label></div>
@@ -105,6 +111,7 @@
         </form>
     </div>
 </div>
+</section>
 
 </body>
 </html>

@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
 <head>Register Customer</head>
 <!-- <head th:replace="header :: header"></head> -->
 <body text-align="center">
 
 <!-- div th:replace="navbar :: navbar"></div> -->
 
-
+<section>
 <div class="row register-form" style="margin-top: 100px; width: 100%;">
-    <h1>This is faltu!</h1>
+    <th:block th:if=${student}><h1> Welcome <span th:text="${student.f_name}"></span> </h1>
+    </th:block>
+    <th:block th:if=${customer}><h1> Welcome <span th:text="${customer.first_name}"></span> </h1>
+    </th:block>
 </div>
-
+</section>
 </body>
 </html>

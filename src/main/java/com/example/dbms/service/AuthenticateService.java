@@ -2,7 +2,8 @@ package com.example.dbms.service;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.dbms.dao.CustomerDAO;
+import com.example.dbms.dao.CustomerDao;
+// import com.example.dbms.dao.CustomerDao;
 import com.example.dbms.dao.StudentDAO;
 import com.example.dbms.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class AuthenticateService {
     @Autowired
     private StudentDAO students;
     @Autowired
-    private CustomerDAO customers;
+    private CustomerDao customers;
 
     @Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
