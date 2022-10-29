@@ -74,8 +74,8 @@ public class RegisterController {
        	 		toastService.displayErrorToast(model, errorMessage);
         		return "/register";
 			}
-            if (!studentDAO.userExists(username)&&!customerDAO.userExists(username)) {
-				Customer.setRole("Patient");
+            if (!studentDAO.userExists(username) && !customerDAO.userExists(username)) {
+				Customer.setRole("Customer");
 				Customer.setActive(0);
 				System.out.println(Customer.getUsername());
 				System.out.println("#4#");
