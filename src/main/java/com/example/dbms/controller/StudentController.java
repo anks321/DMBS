@@ -97,7 +97,7 @@ public class StudentController {
         }
 
         String curr_user = auth_Service.getCurrentUser(session);
-
+        model.addAttribute("loggedinusername", curr_user);
         Student student = studentDAO.findByUsername(curr_user);
 
         Integer mess_no = student.getMess_id();

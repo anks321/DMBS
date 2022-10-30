@@ -3,6 +3,8 @@ package com.example.dbms.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.time.LocalDate;
+import java.util.Date;
 
 // import org.springframework.transaction.annotation.Transactional;
 
@@ -27,16 +29,27 @@ public class ForumDAO {
 
 	}
 
+	public void deleteforumbyid(int id) {
+		String sql = "delete from forum where C_id=?;";
+		temp.update(sql, id);
+	}
+
+	public Forum getforumbyid(int id) {
+		String sql = "select * from forum where C_id=?";
+		return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Forum.class), id);
+	}
+
 	public List<Forum> getmyforum(int roll_no) {
 		String sql = "select * from forum where roll_no=? ;";
 
 		return temp.query(sql, new BeanPropertyRowMapper<>(Forum.class), roll_no);
 
 	}
-	public void insertforum(int roll_no, String Datetime, String text, int resolved ) {
-		String sql = "insert into forum(roll_no,text,date_time,resolved) values (?,?,?,?) ;";
 
-		temp.update(sql, new BeanPropertyRowMapper<>(Forum.class), roll_no,text,Datetime, resolved);
+	public void insertforum(int roll_no, String Datetime, String text, int resolved) {
+		String sql = "insert into forum(roll_no,complaint,date_time,resolved) values (?,?,?,?) ;";
+		
+		temp.update(sql, roll_no, text, Datetime, resolved);
 
 	}
 

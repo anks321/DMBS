@@ -11,21 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.dbms.dao.OptionsDAO;
-import com.example.dbms.dao.QuestionsDAO;
+import com.example.dbms.dao.ForumDAO;
 import com.example.dbms.dao.StudentDAO;
-import com.example.dbms.model.Options;
-import com.example.dbms.model.Questions;
+import com.example.dbms.model.Forum;
 import com.example.dbms.model.Student;
-import com.example.dbms.model.answered;
 import com.example.dbms.service.AuthenticateService;
 import com.example.dbms.service.ToastService;
 
 @Controller
-public class PollCotroller {
+public class ForumContorller {
     @Autowired
     private AuthenticateService auth_Service;
     @Autowired
@@ -33,13 +29,10 @@ public class PollCotroller {
     @Autowired
     private ToastService toastService;
     @Autowired
-    public QuestionsDAO questionsDAO;
+    public ForumDAO forumDAO;
 
-    @Autowired
-    public OptionsDAO optionsDAO;
-
-    @GetMapping("/polls")
-    public String mypolls(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    @GetMapping("/forum")
+    public String getmyfor(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
@@ -52,15 +45,14 @@ public class PollCotroller {
         Integer mess_no = student.getMess_id();
         Integer section_no = student.getSection_id();
 
-        List<Questions> questions = questionsDAO.getnotanswerdquestion(student.getRoll_no(), section_no);
+        List<Forum> forums = forumDAO.getmyforum(student.getRoll_no());
 
-        model.addAttribute("questions", questions);
-
-        return "studentpolls";
+        model.addAttribute("forum", forums);
+        return "stforum";
     }
 
-    @GetMapping("/polls/answered")
-    public String myansweredpolls(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    @GetMapping("/forum/add")
+    public String addforumpage(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
@@ -70,18 +62,29 @@ public class PollCotroller {
         model.addAttribute("loggedinusername", curr_user);
         Student student = studentDAO.findByUsername(curr_user);
 
-        Integer mess_no = student.getMess_id();
-        Integer section_no = student.getSection_id();
+        model.addAttribute("newfor", new Forum());
 
-        List<answered> questions = questionsDAO.getanswerdquestion(student.getRoll_no(), section_no);
-        System.out.println(questions.get(0));
-        model.addAttribute("questions", questions);
-
-        return "stansque";
+        return "addforpage";
     }
 
-    @GetMapping("/polls/{id}")
-    public String pollformshow(@PathVariable("id") int questionid, Model model, HttpSession session,
+    @PostMapping("/forum/add")
+    public String addforum(@ModelAttribute("newfor") Forum newforum, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String loginMessage = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Student student = studentDAO.findByUsername(curr_user);
+
+        forumDAO.insertforum(student.getRoll_no(), "new", newforum.getComplaint(), 0);
+        return "redirect:/forum";
+    }
+
+    @GetMapping("/forum/delete/{id}")
+    public String deleteforum(@PathVariable("id") int forumid, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session)) {
@@ -90,52 +93,13 @@ public class PollCotroller {
         }
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("loggedinusername", curr_user);
-
-        // Student student = studentDAO.findByUsername(curr_user);
-
-        // Integer mess_no = student.getMess_id();
-        // Integer section_no = student.getSection_id();
-
-        Questions question = questionsDAO.getQuestionbyId(questionid);
-
-        List<Options> options = optionsDAO.getOptions(questionid);
-
-        System.out.println(question.getQuestionid());
-        if (options.size() == 0) {
-            return "redirect:/polls";
-        }
-        model.addAttribute("question", question);
-        model.addAttribute("options", options);
-        Options ans = new Options();
-        model.addAttribute("ans", ans);
-
-        return "pollans";
-
-    }
-
-    @PostMapping("/polls/answer")
-    public String submit(@ModelAttribute("ans") Options ans, @ModelAttribute("qid") int qid, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-        String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
-        String curr_user = auth_Service.getCurrentUser(session);
-        
         Student student = studentDAO.findByUsername(curr_user);
-
-        // Integer mess_no = student.getMess_id();
-        // Integer section_no = student.getSection_id();
-        // System.out.println(ans.getOptionid());
-        // System.out.println(ans.getQ_id());
-        // System.out.println(student.getRoll_no());
-
-        optionsDAO.chooseOption(ans.getOptionid(), qid,
-                student.getRoll_no());
-
-        return "redirect:/polls";
+        Forum form = forumDAO.getforumbyid(forumid);
+        if (form == null) {
+            return "redirect:/forum";
+        }
+        forumDAO.deleteforumbyid(forumid);
+        return "redirect:/forum";
 
     }
-
 }

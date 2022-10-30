@@ -15,8 +15,9 @@
   
   <div class="row">
       <div class="col-lg-3">
-        <a th:href="@{/polls/answered}" class="btn btn-primary btn-sm mb-3">Previously Answered</a>
+        <a th:href="@{/polls}" class="btn btn-primary btn-sm mb-3">Unanswered</a>
           <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+          
       </div>
   </div>
   
@@ -24,8 +25,8 @@
       <thead class="table-dark"> 
         <tr >
           <th >#</th>
-          <th >Text</th>
-          <th >Action</th>
+          <th >Question</th>
+          <th >Answer</th>
         </tr>
       </thead>
       <tbody>
@@ -33,12 +34,7 @@
           <tr th:each="ques:${questions}">
               <td th:text="${ques.questionid}"></td>
               <td th:text="${ques.text}"></td>
-              <td>
-                  
-                  <a th:href="@{/polls/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
-                      Answer
-                  </a>
-              </td>
+              <td th:text="${ques.OptionText}"></td>
 
           </tr>
       </tbody>

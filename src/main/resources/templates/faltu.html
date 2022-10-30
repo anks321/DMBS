@@ -7,27 +7,26 @@
 <!-- div th:replace="navbar :: navbar"></div> -->
 
 <section>
-<div class="row register-form" style="margin-top: 100px; width: 100%;">
-    <th:block th:if=${student}><h1> Welcome <span th:text="${student.f_name}"></span> </h1>
+<div class="container">
+    <div class="row">
+        <th:block th:if=${student}><h1> Welcome <span th:text="${student.f_name}"></span> </h1>
     </th:block>
     <th:block th:if=${customer}><h1> Welcome <span th:text="${customer.first_name}"></span> </h1>
     </th:block>
+    </div>
+    
+    <div class="row">
+        <div class="row-lg-3">
+            <a th:href="@{/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+            <a th:href="@{/studentmenu} " class="btn btn-primary btn-sm mb-3">Menue</a>
+            <a th:href="@{/studentannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
+            <a th:href="@{/polls}" class="btn btn-primary btn-sm mb-3">Polls</a>
+            <a th:href="@{/forum}" class="btn btn-primary btn-sm mb-3">Forum</a>
+            <a th:href="@{/Transactions}" class="btn btn-primary btn-sm mb-3">My Transactions</a>
+            <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
+        </div>
+    </div>
 </div>
-
-<div>
-<a th:href="@{/studentmenu}">Menue</a>
-</div>
-
-<div>
-    <a th:href="@{/studentannouncement}">Announcement</a>
-    </div>
-
-    <div>
-        <a th:href="@{/polls}">Polls</a>
-    </div>
-    <div>
-        <a th:href="@{/forum}">Forum</a>
-    </div>
 </section>
 </body>
 </html>

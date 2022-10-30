@@ -42,4 +42,9 @@ public class SectionDAO {
 		}
 	}
     
+	public void updateMenue(int sectionid,int messid,String breakfast,String lunch,String dinner){
+		String sql="Update section set breakfast=?,set lunch=?,set dinner=? where section_id=? and mess_id=?";
+		temp.update(sql,breakfast,lunch,dinner,sectionid,messid);
+	}
+
 }

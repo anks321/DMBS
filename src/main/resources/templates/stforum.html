@@ -11,31 +11,42 @@
     <section>
 
 
-        <div class="row register-form" style="margin-top: 100px; width: 100%;">
-            <h1>This is Student Forum</h1>
-        
+        <div class="container">
+            <div class="row">
+                <h1>Forum</h1>
+            </div>
             
+            <div class="row">
+                <div class="col-lg-3">
+                    <a th:href="@{/forum/add}" class="btn btn-primary btn-sm mb-3">Add Query</a>
+                    <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+                </div>
+            </div>
             
-             
-            <table class="table">
-                <thead class="thead-dark">
-                  <tr >
-                    <th scope="col">#</th>
-                    <th scope="col">Text</th>
-                  </tr>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark"> 
+                    <tr>
+                        <th>Date</th>
+                        <th>Complaint</th>
+                        <th>Resolved</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="for: ${forums}">
-                    <th scope="row"><span th:text="${for.C_id}"></span></th>
-                    <td> <span th:text="${for.text}"></span></td>
-                    
-                  </tr>
-                
-                    
+                    <tr th:each="for:${forum}">
+                        <td th:text="${for.date_time}"></td>
+                        <td th:text="${for.complaint}"></td>
+                        <td th:text="${for.resolved}"></td>
+                        <td>
+                            
+                            <a th:href="@{/forum/delete/{id}(id=${for.C_id})}" class="btn btn-danger">
+                                Delete
+                            </a>
+                        </td>
+    
+                    </tr>
                 </tbody>
-              </table>
-        <a th:href="@{/loggedin}"> Back</a>
-        
+            </table>
         </div>
 
 

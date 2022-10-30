@@ -128,7 +128,7 @@ drop table forum;
 
 
 Create table IF NOT EXISTS forum(
-    C_id int  NOT NULL,
+    C_id int  NOT NULL auto_increment,
     date_time VARCHAR(255),
     roll_no INT,
     resolved INT,
