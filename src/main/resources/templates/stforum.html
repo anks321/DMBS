@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <section>
+
+
+        <div class="row register-form" style="margin-top: 100px; width: 100%;">
+            <h1>This is Student Forum</h1>
+        
+            
+            
+             
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr >
+                    <th scope="col">#</th>
+                    <th scope="col">Text</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="for: ${forums}">
+                    <th scope="row"><span th:text="${for.C_id}"></span></th>
+                    <td> <span th:text="${for.text}"></span></td>
+                    
+                  </tr>
+                
+                    
+                </tbody>
+              </table>
+        <a th:href="@{/loggedin}"> Back</a>
+        
+        </div>
+
+
+    </section>
+    
+</body>
+</html>

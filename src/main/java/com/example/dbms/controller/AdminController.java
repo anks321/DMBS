@@ -25,7 +25,7 @@ public class AdminController {
 	@Autowired
 	private StudentDAO studentDAO;
 	@Autowired
-	private CustomerDAO customerDAO; 
+	private CustomerDao customerDAO; 
     @Autowired
 	private EmployeeDAO employeeDAO; 
 	@Autowired

@@ -8,7 +8,7 @@
 <section>
 
 <div class="row register-form" style="margin-top: 100px; width: 100%;">
-    <h1>This is Student Announcement</h1>
+    <h1>This is Student Polls</h1>
 
     
     
@@ -21,9 +21,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="ann: ${announcements}">
-            <th scope="row"><span th:text="${ann.A_id}"></span></th>
-            <td> <span th:text="${ann.announce_text}"></span></td>
+          <tr th:each="ques: ${questions}">
+            <th scope="row"><span th:text="${ques.questionid}"></span></th>
+            <td> <span th:text="${ques.text}"></span></td>
+            <td><a class="button button-primary" th:href="@{/polls/{id}(id=${ques.getQuestionid()})}">Answer This</a></td>
             
           </tr>
         

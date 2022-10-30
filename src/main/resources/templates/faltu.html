@@ -13,6 +13,21 @@
     <th:block th:if=${customer}><h1> Welcome <span th:text="${customer.first_name}"></span> </h1>
     </th:block>
 </div>
+
+<div>
+<a th:href="@{/studentmenu}">Menue</a>
+</div>
+
+<div>
+    <a th:href="@{/studentannouncement}">Announcement</a>
+    </div>
+
+    <div>
+        <a th:href="@{/polls}">Polls</a>
+    </div>
+    <div>
+        <a th:href="@{/forum}">Forum</a>
+    </div>
 </section>
 </body>
 </html>

@@ -3,6 +3,7 @@ drop database mess;
 create database mess;
 use mess;
 
+
 select * from customer;
 select * from student;
 insert into Mess values (2,NULL,200,"lanka","sariya");
@@ -121,12 +122,17 @@ add constraint fk_2 foreign key(Mess_Id,Section_id) references Section(Mess_Id,S
 Alter table Mess 
 add constraint fk_7 foreign key (Head_id) references Employees(eid);
 
+
+use mess;
+drop table forum;
+
+
 Create table IF NOT EXISTS forum(
     C_id int  NOT NULL,
     date_time VARCHAR(255),
     roll_no INT,
     resolved INT,
-    expiry_date DATE,
+   
     complaint VARCHAR(255),
     constraint pk_6 primary key(C_id),
     constraint fk_5 foreign key (roll_no) references student(roll_no)
@@ -143,6 +149,11 @@ Create table IF NOT EXISTS Announcements(
     constraint fk_6 foreign key (mess_id,section_id) references Section(mess_id,section_id)
 );
 insert into Announcements values(1,2,2,12/12/2002,"announcementssss","12232010");
+insert into Announcements values(2,2,2,12/12/2002,"announce 2","12232"); 
+Insert into questions values (1,2,2,"adfa","afaag","How are you?");
+Insert into options  values(1,1,"Good");
+Insert into options  values(2,1,"Not Good");
+
 
 Create table Inventory(
     item_id int NOT NULL,

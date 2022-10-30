@@ -29,7 +29,7 @@ public class QuestionsDAO {
 	private JdbcTemplate temp;
 
 
-    public void insertQuestion(int mess_id,int section_id,Time start_time, Time end_time,String text){
+    public void insertQuestion(int mess_id,int section_id,String start_time, String end_time,String text){
         String sql = "Insert into Questions(mess_id,section_id,StarTime,EndTime,text) values(?,?,?,?,?)";
         temp.update(sql,mess_id,section_id,start_time,end_time,text);
     }
@@ -44,7 +44,7 @@ public class QuestionsDAO {
         return temp.query(sql,new BeanPropertyRowMapper<>(Questions.class),section_id);
     }
     public Questions getQuestionbyId(int id){
-        String sql = "Select * from Questions where section_id = ?";
+        String sql = "Select * from Questions where questionid = ?";
 
         return temp.queryForObject(sql,new BeanPropertyRowMapper<>(Questions.class),id);
 
