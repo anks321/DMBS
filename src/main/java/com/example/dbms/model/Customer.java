@@ -3,21 +3,22 @@ package com.example.dbms.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Customer {
-	private String username;
-	private String password;
-	private String passwordConfirm;
-	private String oldPassword;
-	private String role;
+    private String username;
+    private String password;
+    private String passwordConfirm;
+    private String oldPassword;
+    private String role;
     private String token;
-	private int active;
-    private int cid;
-    private int balance;
-    private int pin;
+    private Integer active;
+    private Integer cid;
+    private Integer balance;
+    private Integer pin;
     private String phone_no;
     private String c_aadhar_number;
     private String account_no;
@@ -29,7 +30,7 @@ public class Customer {
     private String email;
     private String city;
     private String street;
-    private int mess_id;
-    private int section_id;
-    
+    private Integer mess_id;
+    private Integer section_id;
+
 }

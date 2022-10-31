@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+<Section>
+    <div class="container-fluid p-4 mt-3">
+    <div class="p-3 bg-white shadow rounded border border-secondary w-75 mx-auto">
+        <h3>Create Poll</h3>
+        <form action="/polls/create" id="generatebillform" method="POST">
+            
+            <div class="mb-3">
+                <label for="patientNumberInput" class="form-label">Patient Id:</label>
+                <input type="Text" class="form-control" id="patientNumberInput" placeholder="Question" name="patno" required>
+            </div>
+            <h4>Items</h4>
+            <div id="billItems">
+            <div class="billItem">
+                <div class="row">
+                    <div class="mb-3 col-sm-6">
+                        <label class="form-label">Select Item 1</label>
+                        <input type="Text" class="form-control" id="patientNumberInput" placeholder="Option" name="patno" required>
+                    </div>
+                    
+                </div>
+            </div>
+            </div>
+
+
+            <button class="btn btn-success" type="button" id="addfieldbutton">Add Field</button>
+            <button class="btn btn-danger" type="button" id="removefieldbutton">Remove Field</button>
+            <hr>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+
+<!-- ===================SCRIPT============================= -->
+
+<script>
+    const form = document.getElementById('generatebillform');
+    const billitemsdiv = document.getElementById('billItems')
+    const addfieldbutton = document.getElementById('addfieldbutton');
+    const removefieldbutton = document.getElementById('removefieldbutton');
+    
+    var fieldnos = 1;
+    
+    addfieldbutton.addEventListener("click", addfield);
+    removefieldbutton.addEventListener("click", removefield);
+    
+    function addfield() {
+        fieldnos = fieldnos+1;
+        var newitemdiv = document.createElement('div')
+        newitemdiv.setAttribute('class', 'billItem');
+        newitemdiv.innerHTML = `
+        <div class="row">
+        <div class="mb-3 col-sm-6">
+            <label class="form-label">Select Item ${fieldnos}</label>
+            
+                <input type="Text" class="form-control" id="patientNumberInput" placeholder="Option" name="patno" required>
+            
+        </div>
+        </div>
+        `;
+        billitemsdiv.appendChild(newitemdiv);
+    }
+    
+    function removefield() {
+        if(fieldnos>1) {
+            itemdivs = document.querySelectorAll('.billItem');
+            billitemsdiv.removeChild(itemdivs[fieldnos-1]);
+            fieldnos = fieldnos - 1
+        }
+    }
+    
+
+</script>
+</Section>
+
+    
+</body>
+</html>

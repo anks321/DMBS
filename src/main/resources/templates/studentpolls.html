@@ -15,7 +15,8 @@
   
   <div class="row">
       <div class="col-lg-3">
-        <a th:href="@{/polls/answered}" class="btn btn-primary btn-sm mb-3">Previously Answered</a>
+        <a th:href="@{/student/polls/answered}" class="btn btn-primary btn-sm mb-3">Previously Answered</a>
+        <a th:href="@{/student/polls/create}" class="btn btn-primary btn-sm mb-3">Create a poll</a>
           <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
       </div>
   </div>
@@ -35,7 +36,7 @@
               <td th:text="${ques.text}"></td>
               <td>
                   
-                  <a th:href="@{/polls/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                  <a th:href="@{/student/polls/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
                       Answer
                   </a>
               </td>

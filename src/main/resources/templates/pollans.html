@@ -16,7 +16,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
                     <h3 class="text-center" th:text="${question.text}" />
                     <div class="card-body">
-                        <form method="post" th:object="${ans}" th:action="@{/polls/answer}" >
+                        <form method="post" th:object="${ans}" th:action="@{/student/polls/answer}" >
 
                             <div class="form-check mb-2" th:each="option : ${options}">
                                 <input class="form-check-input" type="radio" th:field="*{optionid}" th:value="${option.optionid}" name="exampleForm" id="radioExample" />

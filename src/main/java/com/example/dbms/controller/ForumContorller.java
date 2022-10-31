@@ -31,10 +31,10 @@ public class ForumContorller {
     @Autowired
     public ForumDAO forumDAO;
 
-    @GetMapping("/forum")
+    @GetMapping("/student/forum")
     public String getmyfor(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -51,10 +51,10 @@ public class ForumContorller {
         return "stforum";
     }
 
-    @GetMapping("/forum/add")
+    @GetMapping("/student/forum/add")
     public String addforumpage(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -67,11 +67,11 @@ public class ForumContorller {
         return "addforpage";
     }
 
-    @PostMapping("/forum/add")
+    @PostMapping("/student/forum/add")
     public String addforum(@ModelAttribute("newfor") Forum newforum, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -80,14 +80,14 @@ public class ForumContorller {
         Student student = studentDAO.findByUsername(curr_user);
 
         forumDAO.insertforum(student.getRoll_no(), "new", newforum.getComplaint(), 0);
-        return "redirect:/forum";
+        return "redirect:/student/forum";
     }
 
-    @GetMapping("/forum/delete/{id}")
+    @GetMapping("/student/forum/delete/{id}")
     public String deleteforum(@PathVariable("id") int forumid, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -96,10 +96,10 @@ public class ForumContorller {
         Student student = studentDAO.findByUsername(curr_user);
         Forum form = forumDAO.getforumbyid(forumid);
         if (form == null) {
-            return "redirect:/forum";
+            return "redirect:/student/forum";
         }
         forumDAO.deleteforumbyid(forumid);
-        return "redirect:/forum";
+        return "redirect:/student/forum";
 
     }
 }

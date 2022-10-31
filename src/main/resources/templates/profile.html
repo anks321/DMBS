@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<Section>
+   
+    
+    <div class="container-fluid p-4 mt-3">
+        <div class="p-3 bg-white shadow rounded border border-secondary w-75 mx-auto">
+            <h2 th:text="${student.f_name}+' '+${student.l_name}">{{patient}}</h2>
+            <hr>
+            <p th:text="'Roll no.:'+ ${student.roll_no}">Patient Number: {{patient.id}}</p>
+            <p th:text="'Hostel:'+ ${student.hostel_name}">Name: {{patient.first_name}} {{patient.last_name}}</p>
+            <p th:text="'Room no:'+ ${student.room_no}">Gender: {{patient.gender}}</p>
+            <p th:text="'Date of Birth:' + ${student.DOB}">Date of Birth: {{patient.dob}}</p>
+            <p  th:text="'Sex:'+ ${student.sex}">Mobile: {{patient.phone}}</p>
+            <p  th:text="'Parent name :' + ${student.room_no}">Email: {{patient.email}}</p>
+            <p  th:text="'Gaurdina name :' + ${student.room_no}">Address: {{patient.address}}</p>
+            <a class="btn btn-primary" th:href="@{/loggedin}">Back</a> 
+        </div>
+        
+    </div>
+    
+</Section>
+</body>
+</html>

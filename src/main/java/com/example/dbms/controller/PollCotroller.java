@@ -38,10 +38,11 @@ public class PollCotroller {
     @Autowired
     public OptionsDAO optionsDAO;
 
-    @GetMapping("/polls")
+    @GetMapping("/student/polls")
     public String mypolls(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        
+        if (!auth_Service.isAuthenticated(session)|| !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -59,10 +60,10 @@ public class PollCotroller {
         return "studentpolls";
     }
 
-    @GetMapping("/polls/answered")
+    @GetMapping("/student/polls/answered")
     public String myansweredpolls(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -80,14 +81,15 @@ public class PollCotroller {
         return "stansque";
     }
 
-    @GetMapping("/polls/{id}")
+    @GetMapping("/student/polls/{id}")
     public String pollformshow(@PathVariable("id") int questionid, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session)  || !auth_Service.isstudent(session) ) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
+        
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("loggedinusername", curr_user);
 
@@ -113,11 +115,11 @@ public class PollCotroller {
 
     }
 
-    @PostMapping("/polls/answer")
+    @PostMapping("/student/polls/answer")
     public String submit(@ModelAttribute("ans") Options ans, @ModelAttribute("qid") int qid, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -136,6 +138,19 @@ public class PollCotroller {
 
         return "redirect:/polls";
 
+    }
+    @GetMapping("/polls/create")
+    public String createpoll(HttpSession session,RedirectAttributes redirectAttributes){
+        String loginMessage = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        
+        Student student = studentDAO.findByUsername(curr_user);
+        // model.addAttribute("newpoll",new())
+        return "Createpoll";
     }
 
 }

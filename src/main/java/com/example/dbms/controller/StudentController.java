@@ -41,21 +41,24 @@ public class StudentController {
     private ToastService toastService;
 
     // Forum, Poll, Announcements, Menu, Balance, Transactions
-    @GetMapping("/studentprofile")
-    public String profile(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+    
 
+    @GetMapping("/student/profile")
+    public String profile(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
 
-        String username = auth_Service.getCurrentUser(session);
+        String curr_user = auth_Service.getCurrentUser(session);
 
-        Student student = studentDAO.findByUsername(username);
-
+        Student student = studentDAO.findByUsername(curr_user);
+        model.addAttribute("loggedinusername", curr_user);
         model.addAttribute("student", student);
-        return "studentprofile";
+        return "profile";
+
     }
 
     @GetMapping("/studentmenu")
@@ -63,7 +66,7 @@ public class StudentController {
 
         String loginMessage = "Please Sign in to proceed!!!";
 
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session) ) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -91,7 +94,7 @@ public class StudentController {
     public String Announce(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session) ) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -120,7 +123,7 @@ public class StudentController {
 
         String loginMessage = "Please Sign in to proceed!!!";
 
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session) ) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
