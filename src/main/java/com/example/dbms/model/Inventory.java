@@ -14,5 +14,7 @@ public class Inventory {
     private int quantity;
     private Date expiry_date;
     private String name;
+    private int mess_id;
+    private int section_id;
     
 }

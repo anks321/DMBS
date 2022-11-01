@@ -1,8 +1,8 @@
 package com.example.dbms.dao;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 // import org.springframework.transaction.annotation.Transactional;
@@ -50,12 +50,6 @@ public class EmployeeDAO {
 		temp.update(sql, username);
 	}
 
-	public void updateActivity(String username,int active) {
-
-		String sql = "update employees set active = ? where username = ?";
-		temp.update(sql, active, username);
-	}
-
 	public Employee findByUsername(String username) {
 		String sql = "select * from employees where username='" + username + "'";
 		try {
@@ -69,43 +63,7 @@ public class EmployeeDAO {
 			return null;
 		}
 	}
-
-	// public Employee findByID(int userID) {
-	// 	String sql = "select * from employees where userID = ?";
-	// 	return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Employee.class), userID);
-
-	// }
-
-	// public void updateProfile(String username, String filename) {
-	// 	String query = "update employees set photo = ? where username = ?";
-	// 	temp.update(query, filename, username);
-	// }
-
-	public boolean userExists(String username) {
-
-		String sql = "select count(*) from employees where username='" + username + "'";
-
-		int found = temp.queryForObject(sql, Integer.class);
-
-		if (found == 1)
-			return true;
-		else
-			return false;
-	}
-
-	// public boolean updatePassword(String username,String oldPassword,String oldPasswordEntered, String newPassword) {
-		
-	// 	if(bCryptPasswordEncoder.matches(oldPasswordEntered,oldPassword)) {
-	// 		String sql="update employees set password=? where username=?;";
-	// 		String encodedNewPassword=bCryptPasswordEncoder.encode(newPassword);
-	// 		temp.update(sql,encodedNewPassword,username);
-	// 		return true;
-	// 	}
-	// 	else {
-	// 		return false;
-	// 	}	
-	// }
-
+	
 	public List<Employee> allEmployees() {
 
 		String sql = "select * from employee;";
@@ -113,23 +71,5 @@ public class EmployeeDAO {
 		return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class));
 	}
 
-	public Employee findByConfirmationToken(String token) {
-        String sql = "select * from employees where token='" + token + "'";
-        try{
-        	return temp.queryForObject(sql, new RowMapper<Employee>() {
-                public Employee mapRow(ResultSet row, int rowNum) throws SQLException {                	
-                	Employee employee = (new BeanPropertyRowMapper<>(Employee.class)).mapRow(row,rowNum);
-                	return employee;
-                }
-            });        
-        }catch(EmptyResultDataAccessException e){
-        	return null;
-        }         
-    }
-
-	public void update(int eid, int salary, int age, int pin, java.util.Date dob, String ifsc, String account_no,
-			String e_aadhar_number, String first_name, String last_name, String designation, String email, String city,
-			String street, int mess_id, int section_id, String username) {
-	}
 
 }
