@@ -91,28 +91,15 @@ public class SRegisterController {
 				return "/studentregister";
 			}
             if (!studentDAO.userExists(username)) {
-				student.setRole("Student");
-				student.setActive(0);
 				System.out.println(student.getUsername());
 				System.out.println("#4#");
 				System.out.println(student.getUsername());
 
-				// ////////////////////////Email-Verification/////////////////////
-				String token = UUID.randomUUID().toString();
-				student.setToken(token);
+				
+				
 				studentDAO.save(student);
 
-				// SimpleMailMessage mailMessage = new SimpleMailMessage();
-				// mailMessage.setTo(user.getEmailID());
-				// mailMessage.setSubject("Complete Registration!");
-				// mailMessage.setFrom("guptacare18@gmail.com");
-				// mailMessage.setText("Your account has been registered on Gupta-Care. To
-				// confirm your account, please click here : "
-				// +HostName.getHost()+"confirm-account?token="+token);
-
-				// ///////////////////////Email-Verification/////////////////////
-
-				// emailSenderService.sendEmail(mailMessage);
+				
 
 				toastService.redirectWithSuccessToast(redirectAttributes, "Successfully Registered...");
 				return "redirect:/login";
@@ -131,27 +118,6 @@ public class SRegisterController {
 
 	}
 
-	// @GetMapping("/confirm-account")
-	// public String confirmAccountRegister(@RequestParam("token")String token,Model
-	// model,HttpSession session, RedirectAttributes redirectAttributes) {
-
-	// Student user = studentDAO.findByConfirmationToken(token);
-
-	// if(user != null)
-	// {
-	// studentDAO.updateActivity(user.getUsername(), 1);
-	// toastService.redirectWithSuccessToast(redirectAttributes, "Account Confirmed
-	// Successfully...");
-
-	// return "redirect:/login";
-	// }
-	// else
-	// {
-	// toastService.redirectWithErrorToast(redirectAttributes, "Account Confirmed
-	// Not Successfull...");
-	// return "redirect:/welcome";
-	// }
-
-	// }
+	
 
 }

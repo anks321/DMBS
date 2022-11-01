@@ -75,28 +75,16 @@ public class RegisterController {
         		return "/register";
 			}
             if (!studentDAO.userExists(username) && !customerDAO.userExists(username)) {
-				Customer.setRole("Customer");
-				Customer.setActive(0);
+				
 				System.out.println(Customer.getUsername());
 				System.out.println("#4#");
 				System.out.println(Customer.getUsername());
 
 
-				// ////////////////////////Email-Verification/////////////////////
-				String token = UUID.randomUUID().toString();
-				Customer.setToken(token);
+				
 				customerDAO.save(Customer);
 
-				// SimpleMailMessage mailMessage = new SimpleMailMessage();
-				// mailMessage.setTo(Customer.getEmailID());
-				// mailMessage.setSubject("Complete Registration!");
-				// mailMessage.setFrom("guptacare18@gmail.com");
-				// mailMessage.setText("Your account has been registered on Gupta-Care. To confirm your account, please click here : "
-				// 		+HostName.getHost()+"confirm-account?token="+token);
 				
-				// ///////////////////////Email-Verification/////////////////////
-				
-				// emailSenderService.sendEmail(mailMessage);
 
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully Registered...");
                 return "redirect:/login";
@@ -115,24 +103,6 @@ public class RegisterController {
 		
 	}
 
-	// @GetMapping("/confirm-account")
-	//  public String confirmAccountRegister(@RequestParam("token")String token,Model model,HttpSession session, RedirectAttributes redirectAttributes) {
-
-	// 	Customer Customer = customerDAO.findByConfirmationToken(token);
-
-	// 	if(Customer != null)
-	//     {
-	//     	 customerDAO.updateActivity(Customer.getUsername(), 1);
-	// 		 toastService.redirectWithSuccessToast(redirectAttributes, "Account Confirmed Successfully...");
-
-	//     	 return "redirect:/login";
-	//     }
-	//     else
-	//     {	
-	// 		toastService.redirectWithErrorToast(redirectAttributes, "Account Confirmed Not Successfull...");	
-	//         return "redirect:/welcome";
-	//     }
-
-	// }
+	
     
 }
