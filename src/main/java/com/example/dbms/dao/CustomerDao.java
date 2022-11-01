@@ -58,12 +58,6 @@ public class CustomerDao {
 		temp.update(sql, username);
 	}
 
-	public void updateActivity(String username, int active) {
-
-		String sql = "update customer set active = ? where username = ?";
-		temp.update(sql, active, username);
-	}
-
 	public Customer findByUsername(String username) {
 		String sql = "select * from customer where username='" + username + "'";
 		try {
@@ -78,28 +72,13 @@ public class CustomerDao {
 		}
 	}
 
-	// public Customer findByID(int userID) {
-	// String sql = "select * from customer where userID = ?";
-	// return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Customer.class),
-	// userID);
-
-	// }
-
-	// public void updateProfile(String username, String filename) {
-	// String query = "update customer set photo = ? where username = ?";
-	// temp.update(query, filename, username);
-	// }
-
 	public boolean userExists(String username) {
 
 		String sql = "select count(*) from customer where username='" + username + "'";
 
 		int found = temp.queryForObject(sql, Integer.class);
 
-		if (found == 1)
-			return true;
-		else
-			return false;
+		return (found == 1);
 	}
 
 	// public boolean updatePassword(String username,String oldPassword,String
