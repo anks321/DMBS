@@ -8,7 +8,7 @@ select * from customer;
 select * from student;
 insert into Mess values (2,NULL,200,"lanka","sariya");
 insert into section values(2,2,1,"breakfast","lunch","dinner");
-insert into employees values("adfa","adfh","sadf","asdfas",2,123,2,2,1,1,1,123,'1999-11-11',"asdf","asdf","234","firstn","adfa","cook","saf@asdf","asfd","asdf");
+insert into employees values("sectionhead","1234","sadf","asdfas",2,123,2,2,1,1,1,123,'1999-11-11',"asdf","asdf","234","firstn","adfa","section head","saf@asdf","asfd","asdf");
 update Mess set Head_id = 123 where mess_id=2;
 
 CREATE TABLE IF NOT EXISTS student

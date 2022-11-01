@@ -40,9 +40,9 @@ public class AuthenticateService {
     }
 
     public Boolean checkglobaladmin(String username, String password) {
-
+        System.out.println(username);
         if (username.equals("admin") && password.equals("1234")) {
-            System.out.println(username);
+
             return true;
         } else
             return false;
@@ -70,7 +70,17 @@ public class AuthenticateService {
     public Boolean checkEmployeeCredentials(String username, String password) {
         Employee employee = employees.findByUsername(username);
         if (employee != null) {
-            return (bCryptPasswordEncoder.matches(password, employee.getPassword()));
+            return (password.equals(employee.getPassword()) && employee.getDesignation().equals("mess_head"));
+        }
+        return false;
+    }
+
+    public Boolean checkSectionHeadCredentials(String username, String password) {
+        Employee employee = employees.findByUsername(username);
+        System.out.println("Checking");
+        if (employee != null) {
+            System.out.println("Checking");
+            return (password.equals(employee.getPassword()) && employee.getDesignation().equals("section head"));
         }
         return false;
     }
@@ -94,6 +104,11 @@ public class AuthenticateService {
         session.setAttribute("role", "admin");
     }
 
+    public void loginsectionAdmin(HttpSession session, String username) {
+        session.setAttribute(loggedUser, username);
+        session.setAttribute("role", "section admin");
+    }
+
     public void loginGlobalAdmin(HttpSession session, String username) {
         session.setAttribute(loggedUser, username);
         session.setAttribute("role", "Gadmin");
@@ -115,6 +130,13 @@ public class AuthenticateService {
 
     public Boolean isadmin(HttpSession session) {
         if (session.getAttribute("role").equals("admin"))
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean issectionadmin(HttpSession session) {
+        if (session.getAttribute("role").equals("section admin"))
             return true;
         else
             return false;

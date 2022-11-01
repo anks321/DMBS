@@ -123,6 +123,13 @@ public class CustomerDao {
 		return temp.query(sql, new BeanPropertyRowMapper<>(Customer.class));
 	}
 
+	public List<Customer> allCustomersbySection(int mess_id, int section_id) {
+
+		String sql = "select * from customer where mess_id = ? and section_id =?;";
+
+		return temp.query(sql, new BeanPropertyRowMapper<>(Customer.class), mess_id, section_id);
+	}
+
 	public Customer findByConfirmationToken(String token) {
 		String sql = "select * from customer where token='" + token + "'";
 		try {
@@ -135,6 +142,12 @@ public class CustomerDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+
+	public List<Customer> findbymess(int mess_id) {
+		String sql = "select * from customer where mess_id = ? ";
+
+		return temp.query(sql, new BeanPropertyRowMapper<>(Customer.class), mess_id);
 	}
 
 }

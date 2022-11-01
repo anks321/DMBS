@@ -108,6 +108,18 @@ public class StudentDAO {
 		else
 			return false;
 	}
+	public List<Student> findstudentsbymess(int mess_id){
+		String sql = "select * from student where mess_id=?;";
+
+		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id);
+
+	}
+	public List<Student> findstudents(int mess_id, int section_id){
+		String sql = "select * from student where mess_id=? and section_id=?;";
+
+		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id,section_id);
+		
+	}
 
 	// public boolean updatePassword(String username,String oldPassword,String oldPasswordEntered, String newPassword) {
 		

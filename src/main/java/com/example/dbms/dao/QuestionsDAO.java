@@ -57,7 +57,7 @@ public class QuestionsDAO {
     }
 
     public List<answered> getanswerdquestion(int roll_no, int section_id) {
-        String sql = "Select questions.questionid,options.optionid,questions.text,options.OptionText from questions ,opt_student,options where section_id = ? AND questions.questionid=opt_student.Q_id and opt_id=optionid and opt_student.roll_no=? ;";
+        String sql = "Select distinct questions.questionid,options.optionid,questions.text,options.OptionText from questions ,opt_student,options where section_id = ? AND questions.questionid=opt_student.Q_id and opt_id=optionid and opt_student.roll_no=? ;";
 
         return temp.query(sql, new BeanPropertyRowMapper<>(answered.class), section_id, roll_no);
     }

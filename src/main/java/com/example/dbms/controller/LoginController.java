@@ -1,35 +1,25 @@
 package com.example.dbms.controller;
 
-import java.security.Principal;
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import com.example.dbms.dao.StudentDAO;
 
 import com.example.dbms.dao.CustomerDao;
 import com.example.dbms.dao.EmployeeDAO;
-//import com.example.dbms.Utils.FileUploadUtil;
-// import com.example.dbms.Utils.FileUploadUtil;
-import com.example.dbms.dao.UserDAO;
+
 import com.example.dbms.model.User;
 import com.example.dbms.service.AuthenticateService;
 import com.example.dbms.service.ToastService;
-import com.example.dbms.validator.UserValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -48,8 +38,7 @@ public class LoginController {
 
     @Autowired
     private ToastService toastService;
-    @Autowired
-    private UserValidator userValidator;
+
     @Autowired
     private AuthenticateService authenticateService;
 
@@ -76,8 +65,6 @@ public class LoginController {
 
         String username = userForm.getUsername();
         String password = userForm.getPassword();
-        System.out.println(username);
-        System.out.println(password);
 
         String errorMessage = null;
 
@@ -85,33 +72,47 @@ public class LoginController {
             System.out.println("Global Admin");
             if (authenticateService.checkglobaladmin(username, password)) {
                 authenticateService.loginGlobalAdmin(session, username);
-                System.out.println("Global Admin");
+
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
 
                 return "redirect:/loggedin";
             }
-            if (authenticateService.checkCredentials(username, password)) {
 
-                if (authenticateService.checkStudentCredentials(username, password)
-                        && studentDAO.userExists(username)) {
-                    authenticateService.loginStudent(session, username);
-                    System.out.println(username);
-                } else if (authenticateService.checkCustomerCredentials(username, password)
-                        && customerDAO.userExists(username)) {
-                    authenticateService.loginCustomer(session, username);
-                    System.out.println(username);
-                } else if (authenticateService.checkEmployeeCredentials(username, password)
-                        && employeeDAO.userExists(username)) {
-                    authenticateService.loginAdmin(session, username);
-                    System.out.println(username);
-                }
-
+            if (authenticateService.checkStudentCredentials(username, password)
+                    && studentDAO.userExists(username)) {
+                authenticateService.loginStudent(session, username);
+                System.out.println(username);
                 // authenticateService.loginUser(session, username);
                 // System.out.println(username);
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
                 return "redirect:/loggedin";
-
+            } else if (authenticateService.checkCustomerCredentials(username, password)
+                    && customerDAO.userExists(username)) {
+                authenticateService.loginCustomer(session, username);
+                System.out.println(username);
+                // authenticateService.loginUser(session, username);
+                // System.out.println(username);
+                toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
+                return "redirect:/loggedin";
+            } else if (authenticateService.checkEmployeeCredentials(username, password)
+                    && employeeDAO.userExists(username)) {
+                authenticateService.loginAdmin(session, username);
+                System.out.println(username);
+                // authenticateService.loginUser(session, username);
+                // System.out.println(username);
+                toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
+                return "redirect:/loggedin";
+            } else if (authenticateService.checkSectionHeadCredentials(username, password)
+                    && employeeDAO.userExists(username)) {
+                authenticateService.loginsectionAdmin(session, username);
+                System.out.println(username);
+                System.out.println("here");
+                // authenticateService.loginUser(session, username);
+                // System.out.println(username);
+                toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
+                return "redirect:/loggedin";
             }
+            System.out.println("Global Admin");
             errorMessage = "Incorrect password.";
 
         } catch (Exception e) {
@@ -130,16 +131,34 @@ public class LoginController {
 
         // model.addAttribute("loggedinUser",
         // authenticateService.getCurrentUser(session));
+        String username = authenticateService.getCurrentUser(session);
         if (authenticateService.isGadmin(session)) {
             model.addAttribute("Gadmin", "Yes");
+            model.addAttribute("loggedinusername", username);
             return "faltu";
         }
-        String username = authenticateService.getCurrentUser(session);
+
+        
         if (authenticateService.isstudent(session)) {
             model.addAttribute("student", studentDAO.findByUsername(username));
+            model.addAttribute("loggedinusername", username);
+            return "faltu";
         }
         if (authenticateService.iscustomer(session)) {
             model.addAttribute("customer", customerDAO.findByUsername(username));
+            model.addAttribute("loggedinusername", username);
+            return "faltu";
+        }
+        if (authenticateService.isadmin(session)) {
+            model.addAttribute("employee", employeeDAO.findByUsername(username));
+            model.addAttribute("loggedinusername", username);
+            return "faltu";
+        }
+        if (authenticateService.issectionadmin(session)) {
+            System.out.println("check");
+            model.addAttribute("section_head", employeeDAO.findByUsername(username));
+            model.addAttribute("loggedinusername", username);
+            return "faltu";
         }
         // if (authenticateService.isadmin(session)) {
         // model.addAttribute("admin", customerDAO.findByUsername(username));
@@ -148,9 +167,13 @@ public class LoginController {
         model.addAttribute("loggedinusername", username);
         if (studentDAO.userExists(username)) {
             model.addAttribute("student", studentDAO.findByUsername(username));
+            model.addAttribute("loggedinusername", username);
+            return "faltu";
         }
         if (customerDAO.userExists(username)) {
             model.addAttribute("customer", customerDAO.findByUsername(username));
+            model.addAttribute("loggedinusername", username);
+            return "faltu";
         }
         return "faltu";
     }

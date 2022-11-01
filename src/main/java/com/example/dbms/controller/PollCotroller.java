@@ -41,8 +41,8 @@ public class PollCotroller {
     @GetMapping("/student/polls")
     public String mypolls(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        
-        if (!auth_Service.isAuthenticated(session)|| !auth_Service.isstudent(session)) {
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -85,11 +85,11 @@ public class PollCotroller {
     public String pollformshow(@PathVariable("id") int questionid, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)  || !auth_Service.isstudent(session) ) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
-        
+
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("loggedinusername", curr_user);
 
@@ -124,7 +124,7 @@ public class PollCotroller {
             return "redirect:/login";
         }
         String curr_user = auth_Service.getCurrentUser(session);
-        
+
         Student student = studentDAO.findByUsername(curr_user);
 
         // Integer mess_no = student.getMess_id();
@@ -136,18 +136,19 @@ public class PollCotroller {
         optionsDAO.chooseOption(ans.getOptionid(), qid,
                 student.getRoll_no());
 
-        return "redirect:/polls";
+        return "redirect:/student/polls";
 
     }
+
     @GetMapping("/polls/create")
-    public String createpoll(HttpSession session,RedirectAttributes redirectAttributes){
+    public String createpoll(HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
         String curr_user = auth_Service.getCurrentUser(session);
-        
+
         Student student = studentDAO.findByUsername(curr_user);
         // model.addAttribute("newpoll",new())
         return "Createpoll";
