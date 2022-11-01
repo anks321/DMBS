@@ -15,9 +15,6 @@ public class Student {
     private String password;
 	private String passwordConfirm;
 	private String oldPassword;
-	private String role;
-    private String token;
-	private int active;
     private int roll_no;
     private int room_no;
     private int Age;

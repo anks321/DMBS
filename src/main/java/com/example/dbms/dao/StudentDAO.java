@@ -33,8 +33,8 @@ public class StudentDAO {
 
 		student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
 		// System.out.println(student.getUsername());
-		String sql = "insert into student(username,password,role,token,active,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		jt.update(sql, student.getUsername(), student.getPassword(), student.getRole(), student.getToken(), student.getActive(),
+		String sql = "insert into student(username,password,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		jt.update(sql, student.getUsername(), student.getPassword(),
 				student.getRoll_no(), student.getRoom_no(), student.getAge(), student.getBalance(), student.getDOB(),
 				student.getF_name(), student.getL_name(), student.getHostel_name(), student.getSex(), student.getParent(),
 				student.getPhone_no(),student.getS_email(),student.getLocalGaurdian(),student.getAadhar_no(),
@@ -49,11 +49,7 @@ public class StudentDAO {
 		jt.update(sql , roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id);
 	}
 
-	public void updateActivity(String username,int active) {
-
-		String sql = "update student set active = ? where username = ?";
-		jt.update(sql, active, username);
-	}
+	
 
 	public void delete(String username) {
 
@@ -120,33 +116,6 @@ public class StudentDAO {
 		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id,section_id);
 		
 	}
-
-	// public boolean updatePassword(String username,String oldPassword,String oldPasswordEntered, String newPassword) {
-		
-	// 	if(bCryptPasswordEncoder.matches(oldPasswordEntered,oldPassword)) {
-	// 		String sql="update student set password=? where username=?;";
-	// 		String encodedNewPassword=bCryptPasswordEncoder.encode(newPassword);
-	// 		jt.update(sql,encodedNewPassword,username);
-	// 		return true;
-	// 	}
-	// 	else {
-	// 		return false;
-	// 	}	
-	// }
-
-	public Student findByConfirmationToken(String token) {
-        String sql = "select * from student where token='" + token + "'";
-        try{
-        	return jt.queryForObject(sql, new RowMapper<>() {
-                public Student mapRow(ResultSet row, int rowNum) throws SQLException {                	
-                	Student student = (new BeanPropertyRowMapper<>(Student.class)).mapRow(row,rowNum);
-                	return student;
-                }
-            });        
-        }catch(EmptyResultDataAccessException e){
-        	return null;
-        }         
-    }
 
 	public List<Student> allStudents() {
 

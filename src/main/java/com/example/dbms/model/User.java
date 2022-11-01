@@ -14,7 +14,6 @@ public class User {
 	private String password;
 	private String passwordConfirm;
 	private String oldPassword;
-	private String role;
 	private String photo;
 	private String birthDate;
 	private String gender;
@@ -28,7 +27,6 @@ public class User {
 	private String state;
 	private String country;
 	private String phone;
-	private String token;
-	private int active;
+	
 }
 

@@ -31,11 +31,11 @@ public class UserDAO {
 
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		// System.out.println(user.getUsername());
-		String sql = "insert into user(username,password,role,photo,birthDate,gender,adhaarNumber,emailID,firstName,middleName,lastName,street,city,state,country,phone,token,active) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		jt.update(sql, user.getUsername(), user.getPassword(), user.getRole(), user.getPhoto(), user.getBirthDate(),
+		String sql = "insert into user(username,password,photo,birthDate,gender,adhaarNumber,emailID,firstName,middleName,lastName,street,city,state,country,phone) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		jt.update(sql, user.getUsername(), user.getPassword(), user.getPhoto(), user.getBirthDate(),
 				user.getGender(), user.getAdhaarNumber(), user.getEmailID(), user.getFirstName(), user.getMiddleName(),
 				user.getLastName(), user.getStreet(), user.getCity(), user.getState(), user.getCountry(),
-				user.getPhone(),user.getToken(),user.getActive());
+				user.getPhone());
 		// System.out.println(user.getUsername());
 
 	}
@@ -48,12 +48,7 @@ public class UserDAO {
 	}
 
 
-	public void updateActivity(String username,int active) {
-
-		String sql = "update user set active = ? where username = ?";
-		jt.update(sql, active, username);
-	}
-
+	
 	public void delete(String username) {
 
 		String sql = "delete from user where username = ?";
@@ -117,19 +112,7 @@ public class UserDAO {
 		}	
 	}
 
-	public User findByConfirmationToken(String token) {
-        String sql = "select * from user where token='" + token + "'";
-        try{
-        	return jt.queryForObject(sql, new RowMapper<User>() {
-                public User mapRow(ResultSet row, int rowNum) throws SQLException {                	
-                	User user = (new BeanPropertyRowMapper<>(User.class)).mapRow(row,rowNum);
-                	return user;
-                }
-            });        
-        }catch(EmptyResultDataAccessException e){
-        	return null;
-        }         
-    }
+	
 	
 }
 

@@ -84,28 +84,13 @@ public class CRegisterController {
             System.out.println("dxrdexcftrdctr");
             if (!customerDao.userExists(username)) {
                 System.out.println("laaaaaaaaaa");
-                customer.setRole("Patient");
-                customer.setActive(0);
                 System.out.println(customer.getUsername());
                 System.out.println("#4#");
                 System.out.println(customer.getUsername());
 
-                // ////////////////////////Email-Verification/////////////////////
-                String token = UUID.randomUUID().toString();
-                customer.setToken(token);
+               
                 customerDao.save(customer);
 
-                // SimpleMailMessage mailMessage = new SimpleMailMessage();
-                // mailMessage.setTo(user.getEmailID());
-                // mailMessage.setSubject("Complete Registration!");
-                // mailMessage.setFrom("guptacare18@gmail.com");
-                // mailMessage.setText("Your account has been registered on Gupta-Care. To
-                // confirm your account, please click here : "
-                // +HostName.getHost()+"confirm-account?token="+token);
-
-                // ///////////////////////Email-Verification/////////////////////
-
-                // emailSenderService.sendEmail(mailMessage);
 
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully Registered...");
                 return "redirect:/login";
@@ -124,27 +109,6 @@ public class CRegisterController {
 
     }
 
-    // @GetMapping("/confirm-account")
-    // public String confirmAccountRegister(@RequestParam("token")String token,Model
-    // model,HttpSession session, RedirectAttributes redirectAttributes) {
-
-    // Student user = customerDAO.findByConfirmationToken(token);
-
-    // if(user != null)
-    // {
-    // customerDAO.updateActivity(user.getUsername(), 1);
-    // toastService.redirectWithSuccessToast(redirectAttributes, "Account Confirmed
-    // Successfully...");
-
-    // return "redirect:/login";
-    // }
-    // else
-    // {
-    // toastService.redirectWithErrorToast(redirectAttributes, "Account Confirmed
-    // Not Successfull...");
-    // return "redirect:/welcome";
-    // }
-
-    // }
+    
 
 }

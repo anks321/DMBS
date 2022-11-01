@@ -30,9 +30,9 @@ public class EmployeeDAO {
 	public void save(Employee employee) {
 
 		employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
-		String sql = "insert into employees(username,password,role,token,active,eid,salary,age,phone_no,pin,dob,ifsc,account_no,e_aadhar_number,first_name,last_name,Designation,email,city,street,mess_id,section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		temp.update(sql, employee.getUsername(), employee.getPassword(), employee.getRole(), employee.getToken(),
-				employee.getActive(),
+		String sql = "insert into employees(username,password,eid,salary,age,phone_no,pin,dob,ifsc,account_no,e_aadhar_number,first_name,last_name,Designation,email,city,street,mess_id,section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		temp.update(sql, employee.getUsername(), employee.getPassword(), 
+				
 				employee.getEid(), employee.getSalary(), employee.getAge(), employee.getPin(), employee.getDob(),
 				employee.getIfsc(), employee.getAccount_no(), employee.getE_aadhar_number(), employee.getFirst_name(),
 				employee.getLast_name(),

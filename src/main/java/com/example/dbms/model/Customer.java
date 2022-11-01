@@ -13,9 +13,6 @@ public class Customer {
     private String password;
     private String passwordConfirm;
     private String oldPassword;
-    private String role;
-    private String token;
-    private Integer active;
     private Integer cid;
     private Integer balance;
     private Integer pin;
