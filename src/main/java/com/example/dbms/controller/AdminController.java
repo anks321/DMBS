@@ -24,13 +24,10 @@ public class AdminController {
     private AuthenticateService auth_Service;
     @Autowired
     private StudentDAO studentDAO;
-	
-    
-
 
     @Autowired
-	private InventoryDAO inventoryDAO; 
-	
+    private InventoryDAO inventoryDAO;
+
     @Autowired
     private MessDAO messDAO;
     @Autowired
@@ -145,8 +142,8 @@ public class AdminController {
 
         String curr_user = auth_Service.getCurrentUser(session);
         Employee employee = employeeDAO.findByid(id);
-        int mess_id=employee.getMess_id();
-        if(messDAO.getmess(mess_id).get(0).getHead_id()!=null || !employee.getDesignation().equals("mess_head")){
+        int mess_id = employee.getMess_id();
+        if (messDAO.getmess(mess_id).get(0).getHead_id() != null || !employee.getDesignation().equals("mess_head")) {
             return "redirect:/gadmin/allemployees";
         }
         messDAO.makeMesshead(employee.getMess_id(), id);
@@ -159,18 +156,16 @@ public class AdminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -234,18 +229,16 @@ public class AdminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -277,18 +270,16 @@ public class AdminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -315,18 +306,16 @@ public class AdminController {
     public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -461,18 +450,16 @@ public class AdminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -497,18 +484,16 @@ public class AdminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -539,18 +524,16 @@ public class AdminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -577,18 +560,16 @@ public class AdminController {
     public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -630,65 +611,46 @@ public class AdminController {
         return "listemployees";
     }
 
-    @GetMapping("/dashboard/manage/employee/{username}")
-    public String employeeDashboard(@PathVariable("username") String username, Model model, HttpSession session,
+    @GetMapping("/gadmin/manage/employee/{id}")
+    public String employeeDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
-
         String Message = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session)) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, Message);
             return "redirect:/login";
         }
 
-       String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String curr_user = auth_Service.getCurrentUser(session);
 
-        if(curr_user != "admin")
-        {
-
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
-
-        Employee employee = employeeDAO.findByUsername(username);
+        Employee employee = employeeDAO.findByid(id);
 
         model.addAttribute("employee", employee);
 
-        model.addAttribute("curr_user", curr_user);
+        model.addAttribute("loggedinuser", curr_user);
 
-        return "dashboard/employee";
+        return "updateemployee";
     }
 
-    @PostMapping("/dashboard/manage/employee/{username}")
-    public String employeeDashboardPost(@PathVariable("username") String username, Model model, HttpSession session) {
+    
 
-        return "redirect:/dashboard/manage/employee/edit/" + username;
-    }
-
-    @GetMapping("/dashboard/manage/employee/edit/{username}")
-    public String employeeEditDashboard(@PathVariable("username") String username, Model model, HttpSession session,
+    @GetMapping("/gadmin/manage/employee/edit/{id}")
+    public String employeeEditDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
-
-		String curr_user = auth_Service.getCurrentUser(session);
-
-        if(curr_user != "admin")
-        {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
             return "redirect:/login";
         }
 
-        Employee employee = employeeDAO.findByUsername(username);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee employee = employeeDAO.findByid(id);
 
         model.addAttribute("employee", employee);
 
@@ -697,41 +659,35 @@ public class AdminController {
         return "dashboard/updateEmployee";
     }
 
-    @PostMapping("/dashboard/manage/employee/edit/{username}")
-    public String employeeEditDashboardPost(@PathVariable("username") String username,
+    @PostMapping("/gadmin/manage/employee/edit/{id}")
+    public String employeeEditDashboardPost(@PathVariable("id") int id,
             @ModelAttribute("employee") Employee employee, Model model, HttpSession session) {
-		employeeDAO.update(employee.getEid(), employee.getSalary(), employee.getAge(), employee.getPhone_no(), employee.getPin(), employee.getDob(),
-				employee.getIfsc(), employee.getAccount_no(), employee.getE_aadhar_number(), employee.getFirst_name(), employee.getLast_name(),
-				employee.getDesignation(),employee.getEmail(),employee.getCity(),employee.getStreet(),employee.getMess_id(),employee.getSection_id(),username);
-        return "redirect:/dashboard/manage/employee/" + username;
+        employeeDAO.update(id, employee.getSalary(), employee.getAge(), employee.getPhone_no(),
+                employee.getPin(), employee.getDob(),
+                employee.getIfsc(), employee.getAccount_no(), employee.getE_aadhar_number(), employee.getFirst_name(),
+                employee.getLast_name(),
+                employee.getDesignation(), employee.getEmail(), employee.getCity(), employee.getStreet(),
+                employee.getMess_id(), employee.getSection_id(), employee.getUsername());
+        return "redirect:/gadmin/allemployees";
     }
 
-    @GetMapping("/dashboard/employee/delete/{username}")
-    public String employeeDeleteDashboard(@PathVariable("username") String username, Model model, HttpSession session,
+    @GetMapping("/gadmin/manage/employee/delete/{id}")
+    public String employeeDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-
-		String curr_user = auth_Service.getCurrentUser(session);
-
-        if(curr_user != "admin")
-        {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
             return "redirect:/login";
         }
 
-        employeeDAO.delete(username);
+        String curr_user = auth_Service.getCurrentUser(session);
 
-        model.addAttribute("curr_user", curr_user);
+        employeeDAO.delete(id);
 
-        return "redirect:/dashboard/manage/employees";
+        model.addAttribute("loggedinuser", curr_user);
+
+        return "redirect:/gadmin/allemployees";
     }
 
     @GetMapping("/gadmin/employee/add")
@@ -756,7 +712,7 @@ public class AdminController {
         return "addemployee";
     }
 
-    @PostMapping("/dashboard/employee/add")
+    @PostMapping("/gadmin/employee/add")
     public String employeeAddDashboardPost(@ModelAttribute("employee") Employee employee, Model model,
             HttpSession session) {
 
@@ -765,23 +721,22 @@ public class AdminController {
         return "redirect:/gadmin/allemployees";
     }
 
-    // INVENTORIES -------------------------------------------------------------------------------------
-	@GetMapping("/dashboard/manage/inventories")
+    // INVENTORIES
+    // -------------------------------------------------------------------------------------
+    @GetMapping("/dashboard/manage/inventories")
     public String inventoriesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String username = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(username != "admin")
-        {
+        String username = auth_Service.getCurrentUser(session);
+
+        if (username != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -795,26 +750,25 @@ public class AdminController {
     }
 
     @GetMapping("/dashboard/manage/inventory/{item_id}")
-    public String inventoryDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String inventoryDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
 
-		Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
+        Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
 
         model.addAttribute("inventory", inventory);
 
@@ -830,30 +784,29 @@ public class AdminController {
     }
 
     @GetMapping("/dashboard/manage/inventory/edit/{Item_Id}")
-    public String inventoryEditDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String inventoryEditDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
 
-		Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
+        Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
 
         model.addAttribute("inventory", inventory);
 
-		model.addAttribute("curr_user", curr_user);
+        model.addAttribute("curr_user", curr_user);
 
         return "dashboard/updateInventory";
     }
@@ -861,33 +814,33 @@ public class AdminController {
     @PostMapping("/dashboard/manage/inventory/edit/{Item_Id}")
     public String inventoryEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession session) {
-		inventoryDAO.update(inventory.getCost(), inventory.getQuantity(), inventory.getExpiry_date(), inventory.getName(), inventory.getMess_id(), inventory.getSection_id(), Item_Id);
+        inventoryDAO.update(inventory.getCost(), inventory.getQuantity(), inventory.getExpiry_date(),
+                inventory.getName(), inventory.getMess_id(), inventory.getSection_id(), Item_Id);
         return "redirect:/dashboard/manage/inventory/" + Item_Id;
     }
 
     @GetMapping("/dashboard/inventory/delete/{Item_Id}")
-    public String inventoryDeleteDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String inventoryDeleteDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
 
-		inventoryDAO.delete(Item_Id);
+        inventoryDAO.delete(Item_Id);
 
-		model.addAttribute("curr_user", curr_user);
+        model.addAttribute("curr_user", curr_user);
 
         return "redirect:/dashboard/manage/inventories";
     }
@@ -896,18 +849,16 @@ public class AdminController {
     public String inventoryAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed .......";
-		if(!auth_Service.isAuthenticated(session))
-		{
-			toastService.redirectWithErrorToast(redirectAttributes, Message);
-			return "redirect:/login";
-		}
-		
-		String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-		String curr_user = auth_Service.getCurrentUser(session);
+        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
 
-        if(curr_user != "admin")
-        {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        if (curr_user != "admin") {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -921,12 +872,12 @@ public class AdminController {
     }
 
     @PostMapping("/dashboard/inventory/add")
-    public String inventoryAddDashboardPost(@ModelAttribute("inventory") Inventory inventory, Model model, HttpSession session) {
+    public String inventoryAddDashboardPost(@ModelAttribute("inventory") Inventory inventory, Model model,
+            HttpSession session) {
 
         inventoryDAO.save(inventory);
 
         return "redirect:/dashboard/manage/inventories";
     }
 
-    
 }

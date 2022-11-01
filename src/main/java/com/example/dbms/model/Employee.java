@@ -5,23 +5,24 @@ import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Employee {
     private String username;
-	private String password;
-	private String passwordConfirm;
-	private String oldPassword;
-	private String role;
+    private String password;
+    private String passwordConfirm;
+    private String oldPassword;
+    private String role;
     private String token;
-	private int active;
-    private int eid; 
-    private int salary;
-    private int age;
-    private int phone_no;
-    private int pin;
+    private Integer active;
+    private Integer eid;
+    private Integer salary;
+    private Integer age;
+    private Integer phone_no;
+    private Integer pin;
     private Date dob;
     private String ifsc;
     private String account_no;
@@ -32,6 +33,6 @@ public class Employee {
     private String email;
     private String city;
     private String street;
-    private int mess_id;
-    private int section_id;
+    private Integer mess_id;
+    private Integer section_id;
 }

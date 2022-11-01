@@ -30,10 +30,9 @@ public class EmployeeDAO {
 	public void save(Employee employee) {
 
 		employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
-		String sql = "insert into employees(username,password,role,token,active,eid,salary,age,phone_no,pin,dob,ifsc,account_no,e_aadhar_number,first_name,last_name,Designation,email,city,street,mess_id,section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		temp.update(sql, employee.getUsername(), employee.getPassword(), employee.getRole(), employee.getToken(),
-				employee.getActive(),
-				employee.getEid(), employee.getSalary(), employee.getAge(), employee.getPin(), employee.getDob(),
+		String sql = "insert into employees(username,password,eid,salary,phone_no,pin,dob,ifsc,account_no,e_aadhar_number,first_name,last_name,Designation,email,city,street,mess_id,section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		temp.update(sql, employee.getUsername(), employee.getPassword(),
+				employee.getEid(), employee.getSalary(), employee.getPhone_no(), employee.getPin(), employee.getDob(),
 				employee.getIfsc(), employee.getAccount_no(), employee.getE_aadhar_number(), employee.getFirst_name(),
 				employee.getLast_name(),
 				employee.getDesignation(), employee.getEmail(), employee.getCity(), employee.getStreet(),
@@ -47,13 +46,13 @@ public class EmployeeDAO {
 
 		String sql = "update employees set eid = ?,salary = ?,age = ?,phone_no = ?,pin = ?,dob = ?,ifsc = ?,account_no = ?,e_aadhar_number = ?,first_name = ?,last_name = ?,Designation = ?,email = ?,city = ?,street = ?,mess_id = ?,section_id = ? where username = ?";
 		temp.update(sql, eid, salary, age, phone_no, pin, dob, ifsc, account_no, e_aadhar_number, first_name, last_name,
-				Designation, email, city, street, mess_id, section_id);
+				Designation, email, city, street, mess_id, section_id, username);
 	}
 
-	public void delete(String username) {
+	public void delete(int id) {
 
-		String sql = "delete from employees where username = ?";
-		temp.update(sql, username);
+		String sql = "delete from employees where eid=?";
+		temp.update(sql, id);
 	}
 
 	public Employee findByUsername(String username) {
@@ -69,10 +68,11 @@ public class EmployeeDAO {
 			return null;
 		}
 	}
+
 	public Employee findByid(int id) {
-		String sql = "select * from employees where eid=?;" ;
+		String sql = "select * from employees where eid=?;";
 		try {
-			return temp.queryForObject(sql,new BeanPropertyRowMapper<>(Employee.class),id);
+			return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Employee.class), id);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -122,6 +122,5 @@ public class EmployeeDAO {
 
 		return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class));
 	}
-
 
 }

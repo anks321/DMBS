@@ -40,10 +40,19 @@
             <td th:text="${emp.section_id}"></td>
            
             <td>
-              <th:block th:if="${role=='Gadmin'}"><a th:href="@{/gadmin/makemesshead/{id}(id=${emp.eid})}" class="btn btn-danger">
+              <th:block th:if="${role=='Gadmin'}"><a th:href="@{/gadmin/manage/employee/{id}(id=${emp.eid})}" class="btn btn-danger">
+                  Update
+              </a>
+            </th:block>
+            <th:block th:if="${role=='Gadmin'}"><a th:href="@{/gadmin/makemesshead/{id}(id=${emp.eid})}" class="btn btn-danger">
                   Make mess head
               </a>
             </th:block>
+            <th:block th:if="${role=='Gadmin'}">
+            <a th:href="@{/gadmin/manage/employee/delete/{id}(id=${emp.eid})}" class="btn btn-danger">
+              Delete
+            </a>
+        </th:block>
             </td>
 
         </tr>

@@ -49,12 +49,6 @@ public class StudentDAO {
 		jt.update(sql , roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id);
 	}
 
-	public void updateActivity(String username,int active) {
-
-		String sql = "update student set active = ? where username = ?";
-		jt.update(sql, active, username);
-	}
-
 	public void delete(String username) {
 
 		String sql = "delete from student where username = ?";
@@ -85,28 +79,13 @@ public class StudentDAO {
 		return jt.queryForObject(sql, Integer.class);
 	}
 
-
-	// public User findByID(int userID) {
-	// 	String sql = "select * from student where userID = ?";
-	// 	return jt.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userID);
-
-	// }
-
-	// public void updateProfile(String username, String filename) {
-	// 	String query = "update student set photo = ? where username = ?";
-	// 	jt.update(query, filename, username);
-	// }
-
 	public boolean userExists(String username) {
 
 		String sql = "select count(*) from student where username='" + username + "'";
 
 		int found = jt.queryForObject(sql, Integer.class);
 
-		if (found == 1)
-			return true;
-		else
-			return false;
+		return (found == 1);
 	}
 	public List<Student> findstudentsbymess(int mess_id){
 		String sql = "select * from student where mess_id=?;";
@@ -153,10 +132,6 @@ public class StudentDAO {
 		String sql = "select * from student;";
 
 		return jt.query(sql, new BeanPropertyRowMapper<>(Student.class));
-	}
-
-	public List<Transaction> alltransactions(int roll, int i) {
-		return null;
 	}
 	
 }
