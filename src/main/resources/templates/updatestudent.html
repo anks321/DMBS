@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>Tis is Heading</head>
+
+<body id="page-top">
+    <h1 class="h3 mb-0 text-gray-800">Add Employee</h1>
+
+    <h6 class="m-0 font-weight-bold text-primary">
+        Employee creation form
+    </h6>
+
+    <div class="card-body">
+        <form method="post" th:action="@{/gadmin/manage/student/edit/{id}(id=${student.roll_no})}" th:object="${student}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" required="required" placeholder="Username"
+                    th:field="*{username}" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" id="password" class="form-control" required="required" placeholder="password"
+                    th:field="*{password}" />
+            </div>
+            <div class="form-group">
+                <label for="room_no">Room Number</label>
+                <input type="number" id="room_no" class="form-control" required="required" placeholder="Room Number"
+                    th:field="*{room_no}" />
+            </div>
+            <div class="form-group">
+                <label for="Balance">Balance</label>
+                <input type="number" id="Balance" class="form-control" required="required" placeholder="Balance"
+                    th:field="*{Balance}" />
+            </div>
+            <div class="form-group">
+                <label for="f_name">First name</label>
+                <input type="text" id="f_name" class="form-control" required="required" placeholder="First name"
+                    th:field="*{f_name}" />
+            </div>
+            <div class="form-group">
+                <label for="l_name">Last name</label>
+                <input type="text" id="l_name" class="form-control" required="required" placeholder="Last name"
+                    th:field="*{l_name}" />
+            </div>
+            <div class="form-group">
+                <label for="hostel_name">Hostel name</label>
+                <input type="text" id="hostel_name" class="form-control" required="required" placeholder="Hostel name"
+                    th:field="*{hostel_name}" />
+            </div>
+            <div class="form-group">
+                <label for="sex">Gender</label>
+                <input type="text" id="sex" class="form-control" required="required" placeholder="Gender"
+                    th:field="*{sex}" />
+            </div>
+            <div class="form-group">
+                <label for="parent">Parent Name</label>
+                <input type="text" id="parent" class="form-control" required="required" placeholder="Parent Name"
+                    th:field="*{parent}" />
+            </div> 
+            <div class="form-group">
+                <label for="phone_no">Phone Number</label>
+                <input type="text" id="phone_no" class="form-control" required="required" placeholder="Phone Number"
+                    th:field="*{phone_no}" />
+            </div>
+            <div class="form-group">
+                <label for="s_email">Email Id</label>
+                <input type="text" id="s_email" class="form-control" required="required" placeholder="Email Id"
+                    th:field="*{s_email}" />
+            </div>
+            <div class="form-group">
+                <label for="localGaurdian">Local Gaurdian</label>
+                <input type="text" id="localGaurdian" class="form-control" required="required" placeholder="Local Gaurdian"
+                    th:field="*{localGaurdian}" />
+            </div>
+            <div class="form-group">
+                <label for="aadhar_no">Aadhaar Number</label>
+                <input type="text" id="aadhar_no" class="form-control" required="required"
+                    placeholder="Aadhaar Number" th:field="*{aadhar_no}" />
+            </div>
+            <div class="form-group">
+                <label for="s_account_no">Account Number</label>
+                <input type="text" id="s_account_no" class="form-control" required="required" placeholder="Account Number"
+                    th:field="*{s_account_no}" />
+            </div>
+            <div class="form-group">
+                <label for="s_ifsc">IFSC Number</label>
+                <input type="text" id="s_ifsc" class="form-control" required="required" placeholder="IFSC Number"
+                    th:field="*{s_ifsc}" />
+            </div>
+            <div class="form-group">
+                <label for="mess_id">Mess Id</label>
+                <input type="number" id="mess_id" class="form-control" required="required" placeholder="Mess Id"
+                    th:field="*{mess_id}" />
+            </div>
+            <div class="form-group">
+                <label for="section_id">Section Id</label>
+                <input type="number" id="section_id" class="form-control" required="required" placeholder="Section Id"
+                    th:field="*{section_id}" />
+            </div>
+            <div class="form-group">
+                <label for="roll_no">Roll Number</label>
+                <input type="number" id="roll_no" class="form-control" required="required" placeholder="Roll Number"
+                    th:field="*{roll_no}" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

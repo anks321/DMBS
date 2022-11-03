@@ -44,7 +44,7 @@ public class EmployeeDAO {
 			String e_aadhar_number, String first_name, String last_name, String Designation, String email, String city,
 			String street, int mess_id, int section_id, String username) {
 
-		String sql = "update employees set eid = ?,salary = ?,age = ?,phone_no = ?,pin = ?,dob = ?,ifsc = ?,account_no = ?,e_aadhar_number = ?,first_name = ?,last_name = ?,Designation = ?,email = ?,city = ?,street = ?,mess_id = ?,section_id = ? where username = ?";
+		String sql = "update employees set salary = ?,age = ?,phone_no = ?,pin = ?,dob = ?,ifsc = ?,account_no = ?,e_aadhar_number = ?,first_name = ?,last_name = ?,Designation = ?,email = ?,city = ?,street = ?,mess_id = ?,section_id = ?, username = ? where eid = ?";
 		temp.update(sql, eid, salary, age, phone_no, pin, dob, ifsc, account_no, e_aadhar_number, first_name, last_name,
 				Designation, email, city, street, mess_id, section_id, username);
 	}
@@ -77,19 +77,7 @@ public class EmployeeDAO {
 			return null;
 		}
 	}
-
-	// public Employee findByID(int userID) {
-	// String sql = "select * from employees where userID = ?";
-	// return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Employee.class),
-	// userID);
-
-	// }
-
-	// public void updateProfile(String username, String filename) {
-	// String query = "update employees set photo = ? where username = ?";
-	// temp.update(query, filename, username);
-	// }
-
+	
 	public boolean userExists(String username) {
 
 		String sql = "select count(*) from employees where username='" + username + "'";
@@ -101,20 +89,6 @@ public class EmployeeDAO {
 		else
 			return false;
 	}
-
-	// public boolean updatePassword(String username,String oldPassword,String
-	// oldPasswordEntered, String newPassword) {
-
-	// if(bCryptPasswordEncoder.matches(oldPasswordEntered,oldPassword)) {
-	// String sql="update employees set password=? where username=?;";
-	// String encodedNewPassword=bCryptPasswordEncoder.encode(newPassword);
-	// temp.update(sql,encodedNewPassword,username);
-	// return true;
-	// }
-	// else {
-	// return false;
-	// }
-	// }
 
 	public List<Employee> allEmployees() {
 
