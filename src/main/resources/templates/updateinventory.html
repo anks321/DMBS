@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>Tis is Heading</head>
+
+<body id="page-top">
+    <h1 class="h3 mb-0 text-gray-800">Update Inventories</h1>
+
+    <h6 class="m-0 font-weight-bold text-primary">
+        Update Inventory form
+    </h6>
+
+    <div class="card-body">
+        <form method="post" th:action="@{/localadmin/manage/inventory/edit/{id}(id=${inventory.item_id})}"
+            th:object="${inventory}">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" required="required" placeholder="Name"
+                    th:field="*{name}" />
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input type="number" id="cost" class="form-control" required="required" placeholder="Cost"
+                    th:field="*{cost}" />
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="form-control" required="required" placeholder="Quantity"
+                    th:field="*{quantity}" />
+            </div>
+            <div class="form-group">
+                <label for="mess_id">Mess Id</label>
+                <input type="number" id="mess_id" class="form-control" required="required" placeholder="Mess Id"
+                    th:field="*{mess_id}" />
+            </div>
+            <div class="form-group">
+                <label for="section_id">Section Id</label>
+                <input type="number" id="section_id" class="form-control" required="required" placeholder="Section Id"
+                    th:field="*{section_id}" />
+            </div>
+            <div class="form-group">
+                <label for="item_id">Item Id</label>
+                <input type="number" id="item_id" class="form-control" required="required" placeholder="Item Id"
+                    th:field="*{item_id}" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
