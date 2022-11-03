@@ -1,0 +1,87 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>Register Customer</head>
+<!-- <head th:replace="header :: header"></head> -->
+<body text-align="center">
+
+<!-- div th:replace="navbar :: navbar"></div> -->
+
+<section>
+<div class="container">
+    <div class="row">
+        <th:block th:if=${student}><h1> Welcome <span th:text="${student.f_name}"></span> </h1>
+    </th:block>
+    <th:block th:if=${customer}><h1> Welcome <span th:text="${customer.first_name}"></span> </h1>
+    </th:block>
+    <th:block th:if=${Gadmin}><h1> Welcome <span th:text="Gadmin"></span> </h1>
+    </th:block>
+    <th:block th:if=${section_head}><h1> Welcome <span th:text="Section_admin"></span> </h1>
+    </th:block>
+    <th:block th:if=${employee}><h1> Welcome <span th:text="admin"></span> </h1>
+    </th:block>
+    <!-- <th:block th:if=${admin}><h1> Welcome <span th:text="${empl.first_name}"></span> </h1>
+    </th:block> -->
+    </div>
+    
+    <th:block th:if=${student}>
+        <div class="row">
+            <div class="row-lg-3">
+                <a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                <a th:href="@{/studentmenu} " class="btn btn-primary btn-sm mb-3">Menue</a>
+                <a th:href="@{/studentannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
+                
+                <a th:href="@{/student/polls}" class="btn btn-primary btn-sm mb-3">Polls</a>
+                <a th:href="@{/student/forum}" class="btn btn-primary btn-sm mb-3">Forum</a>
+                <a th:href="@{/Transactions}" class="btn btn-primary btn-sm mb-3">My Transactions</a>
+                <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if=${customer}>
+        <div class="row">
+            <div class="row-lg-3">
+                <a th:href="@{/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                <a th:href="@{/customermenu} " class="btn btn-primary btn-sm mb-3">Menue</a>
+                <a th:href="@{/customerannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
+                <a th:href="@{/customertransactions}" class="btn btn-primary btn-sm mb-3">Transactions</a>
+                
+                <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if=${employee}>
+        <div class="row">
+            <div class="row-lg-3">
+                <a th:href="@{/admin/customers}" class="btn btn-primary btn-sm mb-3">Customers</a>
+                <a th:href="@{/admin/students} " class="btn btn-primary btn-sm mb-3">Students</a>
+                
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if=${section_head}>
+        <div class="row">
+            <div class="row-lg-3">
+                
+                
+                <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if=${Gadmin}>
+        <div class="row">
+            <div class="row-lg-3">
+                <a th:href="@{/gadmin/allmess}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                <a th:href="@{/gadmin/allemployees}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                <a th:href="@{/gadmin/allcustomers}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                <a th:href="@{/gadmin/allstudents}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
+            </div>
+        </div>
+    </th:block>
+
+    
+   
+</div>
+</section>
+</body>
+</html>

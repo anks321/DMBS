@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <section>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                    <h1 class="text-center">Add to forum</h1>
+                    <div class="card-body">
+                        <form th:action="@{/student/forum/add}" th:object="${newfor}" method="POST" >
+                            <div class="form-group">
+                                <label>Complaint</label>
+                                <input 
+                                type="text"
+                                name="Complaint"
+                                th:field="*{complaint}"
+                                class="form-control"
+                                />
+                            </div>
+                           
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    
+</body>
+</html>
