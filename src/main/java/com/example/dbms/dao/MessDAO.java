@@ -46,4 +46,9 @@ public class MessDAO {
         temp.update(sql, Head_id, mess_id);
     }
 
+    public void deletemess(int mess_id) {
+        String sql = "Delete from mess where mess_id=?;";
+        temp.update(sql, mess_id);
+    }
+
 }

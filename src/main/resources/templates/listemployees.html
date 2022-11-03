@@ -18,6 +18,9 @@
           <th:block th:if="${role=='Gadmin'}">
             <a th:href="@{/gadmin/employee/add}" class="btn btn-primary btn-sm mb-3">Add employee</a>
           </th:block>
+          <th:block th:if="${role=='mess_head'}">
+            <a th:href="@{/admin/employee/add}" class="btn btn-primary btn-sm mb-3">Add employee</a>
+          </th:block>
           <th:block th:each="sec:${sections}">
             <a th:href="@{/admin/employee/{id}(id=${sec.getSection_id()})}" Th:text="'Section '+${sec.getSection_id()}"class="btn btn-primary btn-sm mb-3">
 
@@ -34,7 +37,9 @@
           <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Designation</th>
             <th>Mess</th>
+            
             <th>Section</th>
             <th>Actions</th>
           </tr>
@@ -43,6 +48,7 @@
         <tr th:each="emp: ${employees}">
             <td th:text="${emp.eid}"></td>
             <td th:text="${emp.first_name} + ' ' + ${emp.last_name}"></td>
+            <td th:text="${emp.designation}"></td>
             <td th:text="${emp.mess_id}"></td>
             <td th:text="${emp.section_id}"></td>
            
@@ -58,6 +64,17 @@
             <th:block th:if="${role=='Gadmin'}">
             <a th:href="@{/gadmin/manage/employee/delete/{id}(id=${emp.eid})}" class="btn btn-danger">
               Delete
+            </a>
+        </th:block>
+        <th:block th:if="${role=='mess_head'}">
+            <a th:href="@{/admin/employee/makesectionhead/{id}(id=${emp.eid})}" class="btn btn-danger">
+              Make section head
+            </a>
+            <a th:href="@{/gadmin/manage/employee/{id}(id=${emp.eid})}" class="btn btn-danger">
+              Update
+            </a>
+            <a th:href="@{/admin/employee/makesectionhead/{id}(id=${emp.eid})}" class="btn btn-danger">
+              View
             </a>
         </th:block>
             </td>

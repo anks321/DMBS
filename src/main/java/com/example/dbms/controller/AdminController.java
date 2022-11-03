@@ -70,9 +70,6 @@ public class AdminController {
         return "studentprofile";
     }
 
-    
-
-   
     @GetMapping("/admin/addmess")
     public String saddmess(Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
@@ -197,8 +194,10 @@ public class AdminController {
         List<Employee> employees = employeeDAO.findBymess(employee.getMess_id());
         System.out.println(employees.get(0));
         model.addAttribute("employees", employees);
+        List<Section> sections = messDAO.getSectionsbyMess(employee.getMess_id());
+        model.addAttribute("loggedinusername", username);
 
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("sections", sections);
         return "listemployees";
     }
 
@@ -220,8 +219,11 @@ public class AdminController {
         // yaha ana haii section wise employee banan hai
 
         // System.out.println(employees.get(0));
+        List<Section> sections = messDAO.getSectionsbyMess(employee.getMess_id());
         model.addAttribute("employees", employees);
         model.addAttribute("loggedinUser", username);
+        model.addAttribute("sections", sections);
+
         return "listemployees";
     }
 
@@ -250,54 +252,66 @@ public class AdminController {
     @PostMapping("/admin/employee/add")
     public String gadminemployeeAddDashboardPost(@ModelAttribute("employee") Employee employee, Model model,
             HttpSession session) {
+        String username = auth_Service.getCurrentUser(session);
+        Employee admin = employeeDAO.findByUsername(username);
 
+        employee.setMess_id(admin.getMess_id());
         employeeDAO.save(employee);
+
+        return "redirect:/admin/allemployees";
+    }
+
+    @GetMapping("/admin/employee/makesectionhead/{id}")
+    public String makesectionhead(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes,
+            HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "mess_head");
+        String username = auth_Service.getCurrentUser(session);
+        model.addAttribute("loggedinusername", username);
+        employeeDAO.makesectionhead(id);
 
         return "redirect:/admin/allemployees";
     }
 
     // EMPLOYEES
 
-    
-
-
     // STUDENTS
 
-    
-
-   
-
-    
-
     // @GetMapping("/dashboard/student/delete/{id}")
-    // public String studentDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
-    //         RedirectAttributes redirectAttributes) {
+    // public String studentDeleteDashboard(@PathVariable("id") int id, Model model,
+    // HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-    //     String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-    //     if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
-    //         toastService.redirectWithErrorToast(redirectAttributes, Message);
-    //         return "redirect:/login";
-    //     }
-    //     String curr_user = auth_Service.getCurrentUser(session);
-    //     Student student = studentDAO.findByid(id);
-    //     int roll = student.getRoll_no();
-
-    //     List<Transaction> transactions = transactionDAO.alltransactions(roll, 1);
-
-    //     String TranMessage = "Sorry, Student has some transactions!";
-    //     if (transactions.isEmpty()) {
-    //         toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
-    //         return "redirect:/dashboard/manage/students";
-    //     }
-
-    //     studentDAO.delete(id);
-
-    //     model.addAttribute("role", "Gadmin");
-    //     model.addAttribute("loggedinUser", curr_user);
-
-    //     return "redirect:/dashboard/manage/students";
+    // String Message = "Sorry, You are not authorized to view this page!. Please
+    // Sign in as admin to proceed .......";
+    // if (!auth_Service.isAuthenticated(session) ||
+    // !auth_Service.isGadmin(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
     // }
-    
+    // String curr_user = auth_Service.getCurrentUser(session);
+    // Student student = studentDAO.findByid(id);
+    // int roll = student.getRoll_no();
+
+    // List<Transaction> transactions = transactionDAO.alltransactions(roll, 1);
+
+    // String TranMessage = "Sorry, Student has some transactions!";
+    // if (transactions.isEmpty()) {
+    // toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
+    // return "redirect:/dashboard/manage/students";
+    // }
+
+    // studentDAO.delete(id);
+
+    // model.addAttribute("role", "Gadmin");
+    // model.addAttribute("loggedinUser", curr_user);
+
+    // return "redirect:/dashboard/manage/students";
+    // }
 
     // CUSTOMERS
 
@@ -364,7 +378,7 @@ public class AdminController {
         Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
         List<Student> students = studentDAO.findstudents(mess_id, section_id);
 
-        List<Section> sections = messDAO.getSectionsbyMess(section_id);
+        List<Section> sections = messDAO.getSectionsbyMess(mess_id);
         model.addAttribute("students", students);
         model.addAttribute("sections", sections);
 
@@ -395,7 +409,6 @@ public class AdminController {
         model.addAttribute("loggedinUser", username);
         return "liststudents";
     }
-
 
     // INVENTORIES
     // -------------------------------------------------------------------------------------

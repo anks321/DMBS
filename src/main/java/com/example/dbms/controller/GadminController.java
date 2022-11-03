@@ -45,8 +45,6 @@ public class GadminController {
 
     // LINE 846-----------------------------
 
-  
-
     @GetMapping("/gadmin/allmess")
     public String messDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -121,11 +119,10 @@ public class GadminController {
         System.out.println(mess);
         messDAO.insertMess(mess.getMess_id(), mess.getM_name(), mess.getHead_id(),
                 mess.getHostel_name());
-
+        sectionDAO.insert(1, mess.getMess_id(), 0, "Null", "Null", "Null");
         return "redirect:/gadmin/allmess";
     }
 
-   
     // EMPLOYEES
 
     @GetMapping("/gadmin/allemployees")
@@ -142,7 +139,7 @@ public class GadminController {
         System.out.println(employees.get(0));
         model.addAttribute("employees", employees);
 
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "listemployees";
     }
 
@@ -151,9 +148,14 @@ public class GadminController {
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+        if (!auth_Service.isAuthenticated(session) || (!auth_Service.isGadmin(session)
+                && !auth_Service.isadmin(session))) {
+            System.out.println("fin");
             toastService.redirectWithErrorToast(redirectAttributes, Message);
             return "redirect:/login";
+        }
+        if (auth_Service.isGadmin(session)) {
+            model.addAttribute("role", "Gadmin");
         }
 
         String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
@@ -172,12 +174,20 @@ public class GadminController {
     @PostMapping("/gadmin/manage/employee/edit/{id}")
     public String employeeEditDashboardPost(@PathVariable("id") Integer id,
             @ModelAttribute("employee") Employee employee, Model model, HttpSession session) {
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee curremployee = employeeDAO.findByid(id);
+        Integer mess_id = employee.getMess_id();
+        if (curremployee.getMess_id() != null) {
+            mess_id = curremployee.getMess_id();
+        }
         employeeDAO.update(id, employee.getSalary(), employee.getAge(), employee.getPhone_no(),
                 employee.getPin(), employee.getDob(),
                 employee.getIfsc(), employee.getAccount_no(), employee.getE_aadhar_number(), employee.getFirst_name(),
                 employee.getLast_name(),
                 employee.getDesignation(), employee.getEmail(), employee.getCity(), employee.getStreet(),
-                employee.getMess_id(), employee.getSection_id(), employee.getUsername());
+                mess_id, employee.getSection_id(), employee.getUsername());
         return "redirect:/gadmin/allemployees";
     }
 
@@ -195,7 +205,7 @@ public class GadminController {
 
         employeeDAO.delete(id);
 
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "redirect:/gadmin/allemployees";
     }
@@ -314,6 +324,7 @@ public class GadminController {
 
         return "redirect:/dashboard/manage/students";
     }
+
     @GetMapping("/gadmin/student/add")
     public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -332,6 +343,7 @@ public class GadminController {
 
         return "addstudent";
     }
+
     @PostMapping("/gadmin/student/add")
     public String studentAddDashboardPost(@ModelAttribute("student") Student student, Model model,
             HttpSession session) {
@@ -342,7 +354,6 @@ public class GadminController {
     }
 
     // CUSTOMERS
-
 
     @GetMapping("/gadmin/allcustomers")
     public String getAllCustomers(Model model, HttpSession session,
@@ -394,6 +405,21 @@ public class GadminController {
         return "redirect:/gadmin/allcustomers";
     }
 
+    @GetMapping("/gadmin/mess/delete/{id}")
+    public String deletemess(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+        messDAO.deletemess(id);
+        return "redirect:/gadmin/allmess";
+
+    }
+
     @GetMapping("/gadmin/manage/customer/delete/{id}")
     public String customerDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
@@ -425,8 +451,6 @@ public class GadminController {
         return "redirect:/gadmin/allcustomers";
     }
 
-   
-
     @GetMapping("/gadmin/customer/add")
     public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -437,7 +461,6 @@ public class GadminController {
         }
         model.addAttribute("role", "Gadmin");
         String curr_user = auth_Service.getCurrentUser(session);
-
 
         Customer customer = new Customer();
 
@@ -455,7 +478,5 @@ public class GadminController {
 
         return "redirect:/gadmin/allcustomers";
     }
-
-    
 
 }

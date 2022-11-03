@@ -70,7 +70,8 @@ public class AuthenticateService {
     public Boolean checkEmployeeCredentials(String username, String password) {
         Employee employee = employees.findByUsername(username);
         if (employee != null) {
-            return (password.equals(employee.getPassword()) && employee.getDesignation().equals("mess_head"));
+            return (bCryptPasswordEncoder.matches(password, employee.getPassword()))
+                    && employee.getDesignation().equals("mess_head");
         }
         return false;
     }
@@ -80,7 +81,8 @@ public class AuthenticateService {
         System.out.println("Checking");
         if (employee != null) {
             System.out.println("Checking");
-            return (password.equals(employee.getPassword()) && employee.getDesignation().equals("section head"));
+            return (bCryptPasswordEncoder.matches(password, employee.getPassword()))
+                    && employee.getDesignation().equals("section head");
         }
         return false;
     }
@@ -129,9 +131,11 @@ public class AuthenticateService {
     }
 
     public Boolean isadmin(HttpSession session) {
-        if (session.getAttribute("role").equals("admin"))
+
+        if (session.getAttribute("role").equals("admin")) {
+            System.out.println(session.getAttribute("role"));
             return true;
-        else
+        } else
             return false;
     }
 

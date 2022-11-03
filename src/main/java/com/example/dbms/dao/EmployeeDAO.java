@@ -89,7 +89,15 @@ public class EmployeeDAO {
 	public List<Employee> findBymessandsection(int mess_id, int section_id) {
 		String sql = "select * from employees where mess_id=? and section_id=?;";
 
-		return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class), mess_id);
+		return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class), mess_id, section_id);
+
+	}
+
+	public void makesectionhead(Integer id) {
+		String section = "section_head";
+		String sql = "update employees set designation = ? where eid=?";
+
+		temp.update(sql, section, id);
 
 	}
 
