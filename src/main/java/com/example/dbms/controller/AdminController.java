@@ -218,7 +218,6 @@ public class AdminController {
         return "redirect:/admin/allsections";
     }
 
-
     @GetMapping("/admin/allemployees")
     public String secemployeesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -229,7 +228,7 @@ public class AdminController {
         }
         model.addAttribute("role", "mess_head");
         String username = auth_Service.getCurrentUser(session);
-        Employee employee =employeeDAO.findByUsername(username);
+        Employee employee = employeeDAO.findByUsername(username);
 
         List<Employee> employees = employeeDAO.findBymess(employee.getMess_id());
         System.out.println(employees.get(0));
@@ -238,8 +237,10 @@ public class AdminController {
         model.addAttribute("loggedinUser", username);
         return "listemployees";
     }
+
     @GetMapping("/admin/employee/{id}")
-    public String employeebysecDashboard(@PathVariable("id") Integer id,Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String employeebysecDashboard(@PathVariable("id") Integer id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
@@ -248,20 +249,48 @@ public class AdminController {
         }
         model.addAttribute("role", "mess_head");
         String username = auth_Service.getCurrentUser(session);
-        Employee employee =employeeDAO.findByid(username);
+        Employee employee = employeeDAO.findByUsername(username);
 
-        List<Employee> employees = employeeDAO.find(employee.getMess_id());
+        // List<Employee> employees = employeeDAO.findby (employee.getMess_id(),id);
 
         // yaha ana haii section wise employee banan hai
 
-        System.out.println(employees.get(0));
-        model.addAttribute("employees", employees);
+        // System.out.println(employees.get(0));
+        // model.addAttribute("employees", employees);
         model.addAttribute("loggedinUser", username);
         return "listemployees";
     }
+    @GetMapping("/admin/employee/add")
+    public String adminemployeeAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "mess_head");
 
-    
+        String username = auth_Service.getCurrentUser(session);
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee employee = new Employee();
+
+        model.addAttribute("employee", employee);
+        model.addAttribute("loggedinUser", curr_user);
+
+        return "addemployee";
+    }
+
+    @PostMapping("/gadmin/employee/add")
+    public String gadminemployeeAddDashboardPost(@ModelAttribute("employee") Employee employee, Model model,
+            HttpSession session) {
+
+        employeeDAO.save(employee);
+
+        return "redirect:/gadmin/allemployees";
+    }
+
     // EMPLOYEES
 
     @GetMapping("/gadmin/allemployees")
@@ -419,7 +448,7 @@ public class AdminController {
                 student.getPhone_no(), student.getS_email(), student.getLocalGaurdian(), student.getAadhar_no(),
                 student.getS_account_no(), student.getS_ifsc(), student.getMess_id(), student.getSection_id(),
                 student.getUsername());
-                return "redirect:/gadmin/allstudents";
+        return "redirect:/gadmin/allstudents";
     }
 
     @GetMapping("/dashboard/student/delete/{id}")
@@ -449,26 +478,6 @@ public class AdminController {
         model.addAttribute("loggedinUser", curr_user);
 
         return "redirect:/dashboard/manage/students";
-    }
-
-    @GetMapping("/gadmin/student/add")
-    public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        model.addAttribute("role", "Gadmin");
-
-        String curr_user = auth_Service.getCurrentUser(session);
-
-        Student student = new Student();
-
-        model.addAttribute("student", student);
-        model.addAttribute("loggedinUser", curr_user);
-
-        return "addstudent";
     }
 
     @PostMapping("/gadmin/student/add")
@@ -624,7 +633,7 @@ public class AdminController {
                 customer.getAccount_no(), customer.getSex(), customer.getIfsc(), customer.getFirst_name(),
                 customer.getLast_name(), customer.getEmail(), customer.getCity(), customer.getStreet(),
                 customer.getMess_id(), customer.getSection_id(), id);
-            return "redirect:/gadmin/allcustomers";
+        return "redirect:/gadmin/allcustomers";
     }
 
     @GetMapping("/gadmin/manage/customer/delete/{id}")
@@ -658,7 +667,6 @@ public class AdminController {
         return "redirect:/gadmin/allcustomers";
     }
 
-
     @GetMapping("/gadmin/student/add")
     public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -670,14 +678,13 @@ public class AdminController {
         model.addAttribute("role", "Gadmin");
         String curr_user = auth_Service.getCurrentUser(session);
 
-
         Student student = new Student();
 
         model.addAttribute("student", student);
         model.addAttribute("loggedinuser", curr_user);
 
         return "addstudent";
-    }   
+    }
 
     @PostMapping("/gadmin/customer/add")
     public String customerAddDashboardPost(@ModelAttribute("customer") Customer customer, Model model,
