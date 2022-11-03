@@ -335,7 +335,7 @@ public class AdminController {
         return "redirect:/dashboard/manage/students";
     }
 
-    @GetMapping("/gadmin/employee/add")
+    @GetMapping("/gadmin/student/add")
     public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
