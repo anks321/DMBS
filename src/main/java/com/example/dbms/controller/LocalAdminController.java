@@ -96,7 +96,7 @@ public class LocalAdminController {
         return "redirect:/localadmin/allstudents";
     }
 
-    @GetMapping("/dashboard/student/delete/{id}")
+    @GetMapping("/localadmin/manage/student/delete/{id}")
     public String studentDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -124,6 +124,7 @@ public class LocalAdminController {
 
         return "redirect:/dashboard/manage/students";
     }
+
     @GetMapping("/localadmin/student/add")
     public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 

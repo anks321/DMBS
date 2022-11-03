@@ -4,11 +4,124 @@
 <head>Tis is Heading</head>
 
 <body id="page-top">
-<h1 class="h3 mb-0 text-gray-800">Add Announcement</h1>
-
-<h6 class="m-0 font-weight-bold text-primary">
-    Announcement creation form
-</h6>
+    <body id="page-top">
+        <style>
+        * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                background-color: #4b4d50;
+                text-align: center;
+            }
+            
+            h3 {
+                font-size: 18px;
+                font-weight: 500;
+                color: #33363b;
+            }
+            
+            p{
+                font-size: 14px;
+                color: #868d9b;
+            }
+            
+            .card-body {
+          position: relative;
+          width: 500px;
+          height: auto;
+          border-radius: 20px;
+          margin: 0 auto;
+            margin-top: 80px;
+        
+          padding: 40px;
+          box-sizing: border-box;
+          background: #ecf0f3;
+          box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+        }
+        input {
+          caret-color: red;
+        }
+        
+        .inputs {
+          text-align: left;
+          margin-top: 30px;
+        }
+        
+        label, input, button {
+          display: block;
+          width: 100%;
+          padding: 0;
+          border: none;
+          outline: none;
+          box-sizing: border-box;
+        }
+        
+        label {
+          margin-bottom: 4px;
+          margin-top: 15px;
+          color: #be0cf9;
+          font-size: large;
+        }
+        
+        label:nth-of-type(2) {
+          margin-top: 20px;
+        }
+        
+        input::placeholder {
+          color: gray;
+        }
+        
+        input {
+          background: #ecf0f3;
+          padding: 10px;
+          padding-left: 20px;
+          height: 50px;
+          font-size: 14px;
+          border-radius: 50px;
+          box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        }
+        
+        button {
+          color: white;
+          margin-top: 20px;
+          background: #1DA1F2;
+          height: 40px;
+          border-radius: 20px;
+          cursor: pointer;
+          font-weight: 900;
+          box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+          transition: 0.5s;
+        }
+        .glow{
+            font-size: 60px;
+            color: #fff;
+            text-align: center;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+        
+        button:hover {
+          box-shadow: none;
+        }
+        
+        a {
+          position: absolute;
+          font-size: 8px;
+          bottom: 4px;
+          right: 4px;
+          text-decoration: none;
+          color: black;
+          background: yellow;
+          border-radius: 10px;
+          padding: 2px;
+        }
+        
+            
+        </style>
+        <h1 class="" style="text-align: center;color: #f50d0d;font-size: 50px;">Add Announcement</h1>
+    
 
 <div class="card-body">
     <form method="post" action:th="{@{/gadmin/announcement/add}}" th:object="${announcement}">
