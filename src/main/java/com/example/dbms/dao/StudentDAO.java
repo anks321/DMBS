@@ -33,7 +33,7 @@ public class StudentDAO {
 
 		student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
 		// System.out.println(student.getUsername());
-		String sql = "insert into student(username,password,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into student(username,password,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		jt.update(sql, student.getUsername(), student.getPassword(),
 				student.getRoll_no(), student.getRoom_no(), student.getAge(), student.getBalance(), student.getDOB(),
 				student.getF_name(), student.getL_name(), student.getHostel_name(), student.getSex(), student.getParent(),
@@ -43,16 +43,16 @@ public class StudentDAO {
 
 	}
 
-	public void update(int roll_no ,int room_no ,int Age ,int Balance ,Date DOB ,String f_name ,String l_name ,String hostel_name ,String sex ,String parent ,String phone_no ,String s_email ,String localGaurdian ,String aadhar_no ,String s_account_no ,String s_ifsc ,int mess_id ,int section_id, String username) {
+	public void update(int roll_no ,int room_no ,int Balance ,String f_name ,String l_name ,String hostel_name ,String sex ,String parent ,String phone_no ,String s_email ,String localGaurdian ,String aadhar_no ,String s_account_no ,String s_ifsc ,int mess_id ,int section_id, String username) {
 
-		String sql = "update student set roll_no = ?,room_no = ?,Age = ?,Balance = ?,DOB = ?,f_name = ?,l_name = ?,hostel_name = ?,sex = ?,parent = ?,phone_no = ?,s_email = ?,localGaurdian = ?,aadhar_no = ?,s_account_no = ?,s_ifsc = ?, mess_id = ?, section_id = ? where username = ?";
-		jt.update(sql , roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id);
+		String sql = "update student set room_no = ?,Balance = ?,f_name = ?,l_name = ?,hostel_name = ?,sex = ?,parent = ?,phone_no = ?,s_email = ?,localGaurdian = ?,aadhar_no = ?,s_account_no = ?,s_ifsc = ?, mess_id = ?, section_id = ?, username = ? where roll_no = ?";
+		jt.update(sql , roll_no,room_no,Balance,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id, username);
 	}
 
-	public void delete(String username) {
+	public void delete(int roll_no) {
 
-		String sql = "delete from student where username = ?";
-		jt.update(sql, username);
+		String sql = "delete from student where roll_no = ?";
+		jt.update(sql, roll_no);
 	}
 
 	public Student findByUsername(String username) {
@@ -87,17 +87,28 @@ public class StudentDAO {
 
 		return (found == 1);
 	}
+
 	public List<Student> findstudentsbymess(int mess_id){
 		String sql = "select * from student where mess_id=?;";
 
 		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id);
 
 	}
+	
 	public List<Student> findstudents(int mess_id, int section_id){
 		String sql = "select * from student where mess_id=? and section_id=?;";
 
 		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id,section_id);
 		
+	}
+
+	public Student findByid(int id) {
+		String sql = "select * from student where roll_no=?;";
+		try {
+			return jt.queryForObject(sql, new BeanPropertyRowMapper<>(Student.class), id);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	public List<Student> allStudents() {
