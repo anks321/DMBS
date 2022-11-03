@@ -114,7 +114,7 @@ public class LocalAdminController {
         String TranMessage = "Sorry, Student has some transactions!";
         if (transactions.isEmpty()) {
             toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
-            return "redirect:/dashboard/manage/students";
+            return "redirect:/localadmin/allstudents";
         }
 
         studentDAO.delete(id);
@@ -122,7 +122,7 @@ public class LocalAdminController {
         model.addAttribute("role", "section admin");
         model.addAttribute("loggedinUser", curr_user);
 
-        return "redirect:/dashboard/manage/students";
+        return "redirect:/localadmin/allstudents";
     }
 
     @GetMapping("/localadmin/student/add")
@@ -225,7 +225,7 @@ public class LocalAdminController {
         String TranMessage = "Sorry, Customer has some transactions!";
         if (transactions.isEmpty()) {
             toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
-            return "redirect:/dashboard/manage/customers";
+            return "redirect:/loggedin";
         }
 
         customerDAO.delete(id);
@@ -309,7 +309,7 @@ public class LocalAdminController {
         return "updateinventory";
     }
 
-    @PostMapping("/dashboard/manage/inventory/edit/{Item_Id}")
+    @PostMapping("/localadmin/manage/inventory/edit/{Item_Id}")
     public String inventoryEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession session) {
         inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),
@@ -406,7 +406,7 @@ public class LocalAdminController {
         return "updateannouncement";
     }
 
-    @PostMapping("/dashboard/manage/announcement/edit/{Item_Id}")
+    @PostMapping("/localadmin/manage/announcement/edit/{Item_Id}")
     public String announcementEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("announcement") Announcements announcement, Model model, HttpSession session) {
         announcementsDAO.update(announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time(), announcement.getA_id());

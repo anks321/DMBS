@@ -210,6 +210,23 @@ public class GadminController {
         return "redirect:/gadmin/allemployees";
     }
 
+    @GetMapping("/gadmin/mess/profile/{id}")
+    public String messprofile(@PathVariable("id") Integer id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "Gadmin");
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("loggedinusername", curr_user);
+        Mess mess = messDAO.getmessbyid(id);
+        model.addAttribute("mess", mess);
+        return "messprofile";
+
+    }
+
     @GetMapping("/gadmin/employee/add")
     public String employeeAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -227,7 +244,7 @@ public class GadminController {
         Employee employee = new Employee();
 
         model.addAttribute("employee", employee);
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "addemployee";
     }

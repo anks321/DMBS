@@ -412,161 +412,176 @@ public class AdminController {
 
     // INVENTORIES
     // -------------------------------------------------------------------------------------
-    @GetMapping("/dashboard/manage/inventories")
-    public String inventoriesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    // @GetMapping("/dashboard/manage/inventories")
+    // public String inventoriesDashboard(Model model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed .......";
-        if (!auth_Service.isAuthenticated(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
+    // String Message = "Please Sign in to proceed .......";
+    // if (!auth_Service.isAuthenticated(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
 
-        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+    // String loginMessage = "Sorry, You are not authorized to view this page!.
+    // Please Sign in as admin to proceed .......";
 
-        String username = auth_Service.getCurrentUser(session);
+    // String username = auth_Service.getCurrentUser(session);
 
-        if (username != "admin") {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
+    // if (username != "admin") {
+    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+    // return "redirect:/login";
+    // }
 
-        List<Inventory> inventories = inventoryDAO.allInventories();
+    // List<Inventory> inventories = inventoryDAO.allInventories();
 
-        model.addAttribute("inventories", inventories);
+    // model.addAttribute("inventories", inventories);
 
-        model.addAttribute("UserLoggedIn", username);
-        return "dashboard/inventories";
-    }
+    // model.addAttribute("UserLoggedIn", username);
+    // return "dashboard/inventories";
+    // }
 
-    @GetMapping("/dashboard/manage/inventory/{item_id}")
-    public String inventoryDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    // @GetMapping("/dashboard/manage/inventory/{item_id}")
+    // public String inventoryDashboard(@PathVariable("Item_Id") int Item_Id, Model
+    // model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed .......";
-        if (!auth_Service.isAuthenticated(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
+    // String Message = "Please Sign in to proceed .......";
+    // if (!auth_Service.isAuthenticated(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
 
-        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+    // String loginMessage = "Sorry, You are not authorized to view this page!.
+    // Please Sign in as admin to proceed .......";
 
-        String curr_user = auth_Service.getCurrentUser(session);
+    // String curr_user = auth_Service.getCurrentUser(session);
 
-        if (curr_user != "admin") {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
+    // if (curr_user != "admin") {
+    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+    // return "redirect:/login";
+    // }
 
-        Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
+    // Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
 
-        model.addAttribute("inventory", inventory);
+    // model.addAttribute("inventory", inventory);
 
-        model.addAttribute("curr_user", curr_user);
+    // model.addAttribute("curr_user", curr_user);
 
-        return "dashboard/inventory";
-    }
+    // return "dashboard/inventory";
+    // }
 
-    @PostMapping("/dashboard/manage/inventory/{Item_Id}")
-    public String inventoryDashboardPost(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session) {
+    // @PostMapping("/dashboard/manage/inventory/{Item_Id}")
+    // public String inventoryDashboardPost(@PathVariable("Item_Id") int Item_Id,
+    // Model model, HttpSession session) {
 
-        return "redirect:/dashboard/manage/inventory/edit/" + Item_Id;
-    }
+    // return "redirect:/dashboard/manage/inventory/edit/" + Item_Id;
+    // }
 
-    @GetMapping("/dashboard/manage/inventory/edit/{Item_Id}")
-    public String inventoryEditDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    // @GetMapping("/dashboard/manage/inventory/edit/{Item_Id}")
+    // public String inventoryEditDashboard(@PathVariable("Item_Id") int Item_Id,
+    // Model model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed .......";
-        if (!auth_Service.isAuthenticated(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
+    // String Message = "Please Sign in to proceed .......";
+    // if (!auth_Service.isAuthenticated(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
 
-        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+    // String loginMessage = "Sorry, You are not authorized to view this page!.
+    // Please Sign in as admin to proceed!";
 
-        String curr_user = auth_Service.getCurrentUser(session);
+    // String curr_user = auth_Service.getCurrentUser(session);
 
-        if (curr_user != "admin") {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
+    // if (curr_user != "admin") {
+    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+    // return "redirect:/login";
+    // }
 
-        Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
+    // Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
 
-        model.addAttribute("inventory", inventory);
+    // model.addAttribute("inventory", inventory);
 
-        model.addAttribute("curr_user", curr_user);
+    // model.addAttribute("curr_user", curr_user);
 
-        return "dashboard/updateInventory";
-    }
+    // return "dashboard/updateInventory";
+    // }
 
-    @PostMapping("/dashboard/manage/inventory/edit/{Item_Id}")
-    public String inventoryEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
-            @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession session) {
-        inventoryDAO.update(inventory.getCost(), inventory.getQuantity(), inventory.getExpiry_date(),
-                inventory.getName(), inventory.getMess_id(), inventory.getSection_id(), Item_Id);
-        return "redirect:/dashboard/manage/inventory/" + Item_Id;
-    }
+    // @PostMapping("/dashboard/manage/inventory/edit/{Item_Id}")
+    // public String inventoryEditDashboardPost(@PathVariable("Item_Id") int
+    // Item_Id,
+    // @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession
+    // session) {
+    // inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),
+    // inventory.getName(), inventory.getMess_id(), inventory.getSection_id(),
+    // Item_Id);
+    // return "redirect:/dashboard/manage/inventory/" + Item_Id;
+    // }
 
-    @GetMapping("/dashboard/inventory/delete/{Item_Id}")
-    public String inventoryDeleteDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    // @GetMapping("/dashboard/inventory/delete/{Item_Id}")
+    // public String inventoryDeleteDashboard(@PathVariable("Item_Id") int Item_Id,
+    // Model model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed .......";
-        if (!auth_Service.isAuthenticated(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
+    // String Message = "Please Sign in to proceed .......";
+    // if (!auth_Service.isAuthenticated(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
 
-        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+    // String loginMessage = "Sorry, You are not authorized to view this page!.
+    // Please Sign in as admin to proceed .......";
 
-        String curr_user = auth_Service.getCurrentUser(session);
+    // String curr_user = auth_Service.getCurrentUser(session);
 
-        if (curr_user != "admin") {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
+    // if (curr_user != "admin") {
+    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+    // return "redirect:/login";
+    // }
 
-        inventoryDAO.delete(Item_Id);
+    // inventoryDAO.delete(Item_Id);
 
-        model.addAttribute("curr_user", curr_user);
+    // model.addAttribute("curr_user", curr_user);
 
-        return "redirect:/dashboard/manage/inventories";
-    }
+    // return "redirect:/dashboard/manage/inventories";
+    // }
 
-    @GetMapping("/dashboard/inventory/add")
-    public String inventoryAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    // @GetMapping("/dashboard/inventory/add")
+    // public String inventoryAddDashboard(Model model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed .......";
-        if (!auth_Service.isAuthenticated(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
+    // String Message = "Please Sign in to proceed .......";
+    // if (!auth_Service.isAuthenticated(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
 
-        String loginMessage = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed!";
+    // String loginMessage = "Sorry, You are not authorized to view this page!.
+    // Please Sign in as admin to proceed!";
 
-        String curr_user = auth_Service.getCurrentUser(session);
+    // String curr_user = auth_Service.getCurrentUser(session);
 
-        if (curr_user != "admin") {
-            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-            return "redirect:/login";
-        }
+    // if (curr_user != "admin") {
+    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+    // return "redirect:/login";
+    // }
 
-        Inventory inventory = new Inventory();
+    // Inventory inventory = new Inventory();
 
-        model.addAttribute("employee", inventory);
-        model.addAttribute("loggedinUser", curr_user);
+    // model.addAttribute("employee", inventory);
+    // model.addAttribute("loggedinUser", curr_user);
 
-        return "dashboard/addInventory";
-    }
+    // return "dashboard/addInventory";
+    // }
 
-    @PostMapping("/dashboard/inventory/add")
-    public String inventoryAddDashboardPost(@ModelAttribute("inventory") Inventory inventory, Model model,
-            HttpSession session) {
+    // @PostMapping("/dashboard/inventory/add")
+    // public String inventoryAddDashboardPost(@ModelAttribute("inventory")
+    // Inventory inventory, Model model,
+    // HttpSession session) {
 
-        inventoryDAO.save(inventory);
+    // inventoryDAO.save(inventory);
 
-        return "redirect:/dashboard/manage/inventories";
-    }
+    // return "redirect:/dashboard/manage/inventories";
+    // }
 
 }

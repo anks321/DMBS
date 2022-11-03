@@ -30,6 +30,10 @@ public class MessDAO {
         String sql = "Select * from mess where mess_id=?";
         return temp.query(sql, new BeanPropertyRowMapper<>(Mess.class), mess_id);
     }
+    public Mess getmessbyid(int mess_id) {
+        String sql = "Select * from mess where mess_id=?";
+        return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Mess.class), mess_id);
+    }
 
     public void insertMess(int mess_id, String m_name, Integer Head_id, String hostel_name) {
         String sql = "Insert into mess(mess_id,Head_id,m_name,hostel_name) values(?,?,?,?)";

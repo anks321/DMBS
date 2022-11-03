@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Employee Profile</title>
+    <title>Mess Profile</title>
 </head>
 
 <body>
@@ -113,21 +113,21 @@
             <div class="card_background_img"></div>
             <div class="card_profile_img"></div>
             <div class="user_details">
-                <h2 th:text="${employee.first_name}+' '+${employee.last_name}"></h2>
-                <p>Employee Name</p>
+                <h2 th:text="${mess.m_name}"></h2>
+                <p>Mess Name</p>
             </div>
             <div class="card_count">
                 <div class="count">
                     <div class="fans">
-                        <h2 th:text="${employee.mess_id}"></h2>
+                        <h2 th:text="${mess.mess_id}"></h2>
                         <p>Mess Id</p>
                     </div>
                     <div class="following">
-                        <h2 th:text="${employee.Head_id}"></h2>
+                        <h2 th:text="${mess.Head_id}"></h2>
                         <p>Head Employee Id</p>
                     </div>
                     <div class="post">
-                        <h2 th:text="${employee.hostel_name}"></h2>
+                        <h2 th:text="${mess.hostel_name}"></h2>
                         <p>Hostel Name</p>
                     </div>
                 </div>
