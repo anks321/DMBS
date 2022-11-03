@@ -86,6 +86,13 @@ public class EmployeeDAO {
 
 	}
 
+	public List<Employee> findBymessandsection(int mess_id, int section_id) {
+		String sql = "select * from employees where mess_id=? and section_id=?;";
+
+		return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class), mess_id);
+
+	}
+
 	// public Employee findByID(int userID) {
 	// String sql = "select * from employees where userID = ?";
 	// return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Employee.class),
