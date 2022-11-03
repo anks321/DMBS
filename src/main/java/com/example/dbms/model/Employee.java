@@ -12,14 +12,14 @@ import lombok.AllArgsConstructor;
 
 public class Employee {
     private String username;
-	private String password;
-	private String passwordConfirm;
-	private String oldPassword;
-	private int eid; 
-    private int salary;
-    private int age;
-    private int phone_no;
-    private int pin;
+    private String password;
+    private String passwordConfirm;
+    private String oldPassword;
+    private Integer eid;
+    private Integer salary;
+    private Integer age;
+    private String phone_no;
+    private Integer pin;
     private Date dob;
     private String ifsc;
     private String account_no;

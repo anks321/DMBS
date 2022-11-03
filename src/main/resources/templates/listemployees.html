@@ -18,6 +18,13 @@
           <th:block th:if="${role=='Gadmin'}">
             <a th:href="@{/gadmin/employee/add}" class="btn btn-primary btn-sm mb-3">Add employee</a>
           </th:block>
+          <th:block th:each="sec:${sections}">
+            <a th:href="@{/admin/employee/{id}(id=${sec.getSection_id()})}" Th:text="'Section '+${sec.getSection_id()}"class="btn btn-primary btn-sm mb-3">
+
+            </a>
+        </th:block>
+
+          <a th:href="@{/admin/allemployees}"></a>
           <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
       </div>
   </div>

@@ -27,6 +27,8 @@ public class AdminController {
 
     @Autowired
     private InventoryDAO inventoryDAO;
+    @Autowired
+    private SectionDAO sectionDAO;
 
     @Autowired
     private MessDAO messDAO;
@@ -130,6 +132,119 @@ public class AdminController {
         return "listmess";
     }
 
+    @GetMapping("/admin/allsections")
+    public String sectionDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "mess_head");
+        String username = auth_Service.getCurrentUser(session);
+        Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
+        List<Section> sections = messDAO.getSectionsbyMess(mess_id);
+        System.out.println(sections.get(0));
+        model.addAttribute("sections", sections);
+        model.addAttribute("loggedinusername", username);
+
+        return "listsections";
+    }
+
+    @GetMapping("/admin/addsection")
+    public String addsection(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "mess_head");
+        String username = auth_Service.getCurrentUser(session);
+
+        model.addAttribute("section", new Section());
+        model.addAttribute("loggedinusername", username);
+
+        return "addsection";
+    }
+
+    @PostMapping("/admin/addsection")
+    public String addsectionDashboard(@ModelAttribute("section") Section section, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String username = auth_Service.getCurrentUser(session);
+        Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
+        model.addAttribute("role", "mess_head");
+        sectionDAO.insert(section.getSection_id(), mess_id, section.getHall_no(), section.getBreakfast(),
+                section.getLunch(), section.getDinner());
+
+        return "redirect:/admin/allsections";
+    }
+
+    @GetMapping("/admin/deletesection/{id}")
+    public String deletesectionDashboard(@PathVariable("id") Integer id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String username = auth_Service.getCurrentUser(session);
+
+        model.addAttribute("role", "mess_head");
+        sectionDAO.delete(id);
+        return "redirect:/admin/allsections";
+    }
+
+
+    @GetMapping("/admin/allemployees")
+    public String secemployeesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "mess_head");
+        String username = auth_Service.getCurrentUser(session);
+        Employee employee =employeeDAO.findByUsername(username);
+
+        List<Employee> employees = employeeDAO.findBymess(employee.getMess_id());
+        System.out.println(employees.get(0));
+        model.addAttribute("employees", employees);
+
+        model.addAttribute("loggedinUser", username);
+        return "listemployees";
+    }
+    @GetMapping("/admin/employee/{id}")
+    public String employeebysecDashboard(@PathVariable("id") Integer id,Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "mess_head");
+        String username = auth_Service.getCurrentUser(session);
+        Employee employee =employeeDAO.findByUsername(username);
+
+        List<Employee> employees = employeeDAO.find(employee.getMess_id());
+
+        // yaha ana haii section wise employee banan hai
+
+        System.out.println(employees.get(0));
+        model.addAttribute("employees", employees);
+        model.addAttribute("loggedinUser", username);
+        return "listemployees";
+    }
+
+
     @GetMapping("/gadmin/makemesshead/{id}")
     public String makemesshead(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
@@ -179,7 +294,7 @@ public class AdminController {
         return "dashboard/student";
     }
 
-    @GetMapping("/admin/addmess")
+    @GetMapping("/gadmin/addmess")
     public String saddmess(Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -199,7 +314,7 @@ public class AdminController {
         return "createmess";
     }
 
-    @PostMapping("/admin/addmess")
+    @PostMapping("/gadmin/addmess")
     public String addmess(@ModelAttribute("mess") Mess mess, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -379,6 +494,7 @@ public class AdminController {
         Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
         List<Customer> customers = customerDAO.findbymess(mess_id);
         List<Section> sections = messDAO.getSectionsbyMess(mess_id);
+        model.addAttribute("role", "mess_head");
         model.addAttribute("customers", customers);
         model.addAttribute("sections", sections);
         model.addAttribute("loggedinUser", username);
@@ -425,6 +541,8 @@ public class AdminController {
         Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
         List<Student> students = studentDAO.findstudentsbymess(mess_id);
         List<Section> sections = messDAO.getSectionsbyMess(mess_id);
+        model.addAttribute("role", "mess_head");
+
         model.addAttribute("students", students);
         model.addAttribute("sections", sections);
         model.addAttribute("loggedinUser", username);
@@ -633,8 +751,6 @@ public class AdminController {
 
         return "updateemployee";
     }
-
-    
 
     @GetMapping("/gadmin/manage/employee/edit/{id}")
     public String employeeEditDashboard(@PathVariable("id") int id, Model model, HttpSession session,
