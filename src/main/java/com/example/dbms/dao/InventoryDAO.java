@@ -26,10 +26,10 @@ public class InventoryDAO {
 	}
     
  
-	public void update(int cost, int quantity, Date expiry_date, String name, int mess_id, int section_id, int item_id) {
+	public void update(int cost, int quantity, String name, int mess_id, int section_id, int item_id) {
 
-		String sql = "update inventories set cost = ? quantity = ? expiry_date = ? name = ? mess_id = ? section_id = ? where item_id = ?";
-		temp.update(sql, cost, quantity, expiry_date, name, mess_id, section_id);
+		String sql = "update inventories set cost = ?, quantity = ?, name = ?, mess_id = ?, section_id = ? where item_id = ?";
+		temp.update(sql, cost, quantity, name, mess_id, section_id, item_id);
 	} 
 
 	public void delete(int itemID) {

@@ -296,7 +296,7 @@ public class GadminController {
         return "redirect:/gadmin/allstudents";
     }
 
-    @GetMapping("/dashboard/student/delete/{id}")
+    @GetMapping("/gadmin/manage/student/delete/{id}")
     public String studentDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -322,7 +322,7 @@ public class GadminController {
         model.addAttribute("role", "Gadmin");
         model.addAttribute("loggedinUser", curr_user);
 
-        return "redirect:/dashboard/manage/students";
+        return "redirect:/localadmin/allstudents";
     }
 
     @GetMapping("/gadmin/student/add")
