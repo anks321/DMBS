@@ -8,9 +8,9 @@
 
 <section>
 <div class="row register-form" style="margin-top: 100px; width: 100%;">
-    <div class="col-md-8 offset-md-2" style="background-color: aliceblue;">
-        <form display="inline" class="custom-form" style="background-color: aliceblue;" method="post" model="customer" th:action="@{/customerregister}" th:object="${customer}">
-            <h1>Registration Form</h1>
+    <div class="col-md-8 offset-md-2" style="background-color: whitesmoke;">
+        <form display="inline" class="custom-form" style="background-color: whitesmoke;" method="post" model="customer" th:action="@{/customerregister}" th:object="${customer}">
+            <div style="margin:20px; background-color:rgb(240, 246, 234)"><h1 style="color: rgb(20, 173, 175); text-align:center ;">Registration Form</h1></div>
             <div class="row form-group">
                 <div class="col-sm-4 label-column"><label class="col-form-label" for="f_name-input-field">First Name </label></div>
                 <div class="col-sm-5 input-column"><input type="text" class="form-control" placeholder="First Name" required="required" th:field="*{first_name}"></div>
@@ -93,7 +93,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-info btn-block btn-lg">Register</button>
+                <center><button type="submit" class="btn btn-success btn-block btn-lg" style="margin:20px ;">Register</button></center>
             </div>
         </form>
     </div>
