@@ -12,12 +12,12 @@
       <div class="form-container" style="padding-left: 400px; padding-right: 400px;">
           <div class="image-holder" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1NRMoIhQrSMwUPIiguW_hWG7RC15ha2j0jA&usqp=CAU');" ></div>
           <form method="POST" th:action="@{/login}" th:object="${user}">
-              <h2 class="text-center" style="color: rgb(20, 173, 175);;"><strong>Login</strong></h2>
+              <h2 class="text-center" style="color: rgb(20, 173, 175);;"><strong>Log in</strong></h2>
               <div class="mb-3"><input class="form-control" type="text" required="required" placeholder="Username" th:field="*{username}"></div>
               <div class="mb-3"><input class="form-control" type="password" required="required" placeholder="Password" th:field="*{password}"></div>
               <div class="mb-3"></div>
               <div class="mb-3"></div>
-              <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit" style="background: linear-gradient(rgb(20, 173, 175) 35%, white), var(--bs-gray-700);">Sign in</button></div>
+              <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit" style="background: linear-gradient(rgb(20, 173, 175) 35%, white), var(--bs-gray-700); color:red ;">Sign in</button></div>
           
               
             </form>
