@@ -36,17 +36,21 @@ public class StudentDAO {
 		String sql = "insert into student(username,password,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		jt.update(sql, student.getUsername(), student.getPassword(),
 				student.getRoll_no(), student.getRoom_no(), student.getAge(), student.getBalance(), student.getDOB(),
-				student.getF_name(), student.getL_name(), student.getHostel_name(), student.getSex(), student.getParent(),
-				student.getPhone_no(),student.getS_email(),student.getLocalGaurdian(),student.getAadhar_no(),
-				student.getS_account_no(),student.getS_ifsc(),student.getMess_id(),student.getSection_id());
+				student.getF_name(), student.getL_name(), student.getHostel_name(), student.getSex(),
+				student.getParent(),
+				student.getPhone_no(), student.getS_email(), student.getLocalGaurdian(), student.getAadhar_no(),
+				student.getS_account_no(), student.getS_ifsc(), student.getMess_id(), student.getSection_id());
 		// System.out.println(student.getUsername());
 
 	}
 
-	public void update(int roll_no ,int room_no ,int Balance ,String f_name ,String l_name ,String hostel_name ,String sex ,String parent ,String phone_no ,String s_email ,String localGaurdian ,String aadhar_no ,String s_account_no ,String s_ifsc ,int mess_id ,int section_id, String username) {
+	public void update(int roll_no, int room_no, int Balance, String f_name, String l_name, String hostel_name,
+			String sex, String parent, String phone_no, String s_email, String localGaurdian, String aadhar_no,
+			String s_account_no, String s_ifsc, int mess_id, int section_id, String username) {
 
 		String sql = "update student set room_no = ?,Balance = ?,f_name = ?,l_name = ?,hostel_name = ?,sex = ?,parent = ?,phone_no = ?,s_email = ?,localGaurdian = ?,aadhar_no = ?,s_account_no = ?,s_ifsc = ?, mess_id = ?, section_id = ?, username = ? where roll_no = ?";
-		jt.update(sql , roll_no,room_no,Balance,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id, username);
+		jt.update(sql, room_no, Balance, f_name, l_name, hostel_name, sex, parent, phone_no, s_email, localGaurdian,
+				aadhar_no, s_account_no, s_ifsc, mess_id, section_id, username, roll_no);
 	}
 
 	public void delete(int roll_no) {
@@ -88,18 +92,18 @@ public class StudentDAO {
 		return (found == 1);
 	}
 
-	public List<Student> findstudentsbymess(int mess_id){
+	public List<Student> findstudentsbymess(int mess_id) {
 		String sql = "select * from student where mess_id=?;";
 
-		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id);
+		return jt.query(sql, new BeanPropertyRowMapper<>(Student.class), mess_id);
 
 	}
-	
-	public List<Student> findstudents(int mess_id, int section_id){
+
+	public List<Student> findstudents(int mess_id, int section_id) {
 		String sql = "select * from student where mess_id=? and section_id=?;";
 
-		return jt.query(sql,new BeanPropertyRowMapper<>(Student.class),mess_id,section_id);
-		
+		return jt.query(sql, new BeanPropertyRowMapper<>(Student.class), mess_id, section_id);
+
 	}
 
 	public Student findByid(int id) {
@@ -117,6 +121,5 @@ public class StudentDAO {
 
 		return jt.query(sql, new BeanPropertyRowMapper<>(Student.class));
 	}
-	
-}
 
+}

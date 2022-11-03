@@ -40,13 +40,14 @@ public class EmployeeDAO {
 
 	}
 
-	public void update(int eid, int salary, int age, int phone_no, int pin, Date dob, String ifsc, String account_no,
+	public void update(Integer eid, Integer salary, Integer age, String phone_no, Integer pin, String dob, String ifsc,
+			String account_no,
 			String e_aadhar_number, String first_name, String last_name, String Designation, String email, String city,
-			String street, int mess_id, int section_id, String username) {
+			String street, Integer mess_id, Integer section_id, String username) {
 
 		String sql = "update employees set salary = ?,age = ?,phone_no = ?,pin = ?,dob = ?,ifsc = ?,account_no = ?,e_aadhar_number = ?,first_name = ?,last_name = ?,Designation = ?,email = ?,city = ?,street = ?,mess_id = ?,section_id = ?, username = ? where eid = ?";
-		temp.update(sql,  salary, age, phone_no, pin, dob, ifsc, account_no, e_aadhar_number, first_name, last_name,
-				Designation, email, city, street, mess_id, section_id,username,eid);
+		temp.update(sql, salary, age, phone_no, pin, dob, ifsc, account_no, e_aadhar_number, first_name, last_name,
+				Designation, email, city, street, mess_id, section_id, username, eid);
 	}
 
 	public void delete(int id) {
@@ -77,11 +78,12 @@ public class EmployeeDAO {
 			return null;
 		}
 	}
+
 	public List<Employee> findBymess(int mess_id) {
 		String sql = "select * from employees where mess_id=?;";
-		
-			return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class), mess_id);
-		
+
+		return temp.query(sql, new BeanPropertyRowMapper<>(Employee.class), mess_id);
+
 	}
 
 	// public Employee findByID(int userID) {

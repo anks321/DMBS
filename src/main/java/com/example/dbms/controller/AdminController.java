@@ -248,7 +248,7 @@ public class AdminController {
         }
         model.addAttribute("role", "mess_head");
         String username = auth_Service.getCurrentUser(session);
-        Employee employee =employeeDAO.findByUsername(username);
+        Employee employee =employeeDAO.findByid(username);
 
         List<Employee> employees = employeeDAO.find(employee.getMess_id());
 
@@ -306,7 +306,7 @@ public class AdminController {
     }
 
     @PostMapping("/gadmin/manage/employee/edit/{id}")
-    public String employeeEditDashboardPost(@PathVariable("id") int id,
+    public String employeeEditDashboardPost(@PathVariable("id") Integer id,
             @ModelAttribute("employee") Employee employee, Model model, HttpSession session) {
         employeeDAO.update(id, employee.getSalary(), employee.getAge(), employee.getPhone_no(),
                 employee.getPin(), employee.getDob(),

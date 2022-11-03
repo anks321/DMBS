@@ -20,7 +20,7 @@ public class Employee {
     private Integer age;
     private String phone_no;
     private Integer pin;
-    private Date dob;
+    private String dob;
     private String ifsc;
     private String account_no;
     private String e_aadhar_number;
