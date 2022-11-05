@@ -16,7 +16,7 @@
   <div class="row">
       <div class="col-lg-3">
           <th:block th:if="${role=='section admin'}">
-            <a th:href="@{/localadmin/announcement/add}" class="btn btn-primary btn-sm mb-3">Add announcement</a>
+            <a th:href="@{/localadmin/inventory/add}" class="btn btn-primary btn-sm mb-3">Add inventory</a>
           </th:block>
 
           <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
@@ -45,13 +45,13 @@
             <td th:text="${inv.section_id}"></td>
            
             <td>
-              <th:block th:if="${role=='section admin'}"><a th:href="@{/localadmin/manage/announcement/{id}(id=${inv.item_id})}" class="btn btn-danger">
+              <th:block th:if="${role=='section admin'}"><a th:href="@{/localadmin/manage/inventory/{id}(id=${inv.item_id})}" class="btn btn-danger">
                   Update
               </a>
             </th:block>
             </th:block>
             <th:block th:if="${role=='section admin'}">
-            <a th:href="@{/localadmin/manage/announcement/delete/{id}(id=${inv.item_id})}" class="btn btn-danger">
+            <a th:href="@{/localadmin/manage/inventory/delete/{id}(id=${inv.item_id})}" class="btn btn-danger">
               Delete
             </a>
         </th:block>

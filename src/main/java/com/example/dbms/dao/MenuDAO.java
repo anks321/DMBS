@@ -16,7 +16,7 @@ import com.example.dbms.model.Announcements;
 
 @Lazy
 @Repository
-public class AnnouncementsDAO {
+public class MenuDAO {
 
     @Autowired
     private JdbcTemplate temp;
@@ -26,9 +26,9 @@ public class AnnouncementsDAO {
 		temp.update(sql, announcement.getA_id(), announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time());
 	}
  
-	public void update(String announce_text, String date_and_time, int A_id) {
-		String sql = "update Announcements set announce_text = ?, date_and_time = ? where A_id = ?";
-		temp.update(sql, announce_text, date_and_time, A_id);
+	public void update(int mess_id, int section_id, String announce_text, String date_and_time, int A_id) {
+		String sql = "update Announcements set mess_id = ?, section_id = ?, announce_text = ?, date_and_time = ? where A_id = ?";
+		temp.update(sql, mess_id, section_id, announce_text, date_and_time, A_id);
 	} 
 
 	public void delete(int itemID) {
@@ -44,11 +44,5 @@ public class AnnouncementsDAO {
 	public List<Announcements> allAnnouncements() {
 		String sql = "select * from Announcements;";
 		return temp.query(sql, new BeanPropertyRowMapper<>(Announcements.class));
-	}
-
-    public List<Announcements> findByAnnouncements(int mess_no, int section_no) {
-        String sql = "select * from Announcements where mess_id =? AND section_id = ?;";
-
-        return temp.query(sql, new BeanPropertyRowMapper<>(Announcements.class), mess_no, section_no);
-    }
+	}   
 }

@@ -163,21 +163,21 @@ public class AdminController {
         return "redirect:/admin/allsections";
     }
 
-    @GetMapping("/admin/deletesection/{id}")
-    public String deletesectionDashboard(@PathVariable("id") Integer id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    // @GetMapping("/admin/deletesection/{id}")
+    // public String deletesectionDashboard(@PathVariable("id") Integer id, Model model, HttpSession session,
+    //         RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        String username = auth_Service.getCurrentUser(session);
+    //     String Message = "Please Sign in to proceed!!!";
+    //     if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+    //         toastService.redirectWithErrorToast(redirectAttributes, Message);
+    //         return "redirect:/login";
+    //     }
+    //     String username = auth_Service.getCurrentUser(session);
 
-        model.addAttribute("role", "mess_head");
-        sectionDAO.delete(id);
-        return "redirect:/admin/allsections";
-    }
+    //     model.addAttribute("role", "mess_head");
+    //     sectionDAO.delete(id);
+    //     return "redirect:/admin/allsections";
+    // }
 
     @GetMapping("/admin/allemployees")
     public String secemployeesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {

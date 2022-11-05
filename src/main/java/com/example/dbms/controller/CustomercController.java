@@ -65,7 +65,7 @@ public class CustomercController {
     }
 
     @GetMapping("/customermenu")
-    public String CUstmenue(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String Custmenue(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String loginMessage = "Please Sign in to proceed!!!";
 

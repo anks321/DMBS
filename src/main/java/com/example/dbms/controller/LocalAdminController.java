@@ -59,98 +59,9 @@ public class LocalAdminController {
         model.addAttribute("students", students);
         model.addAttribute("loggedinUser", username);
 
-        return "liststudents";
+        return "viewstudents";
     }
-
-    @GetMapping("/localadmin/manage/student/{id}")
-    public String studentDashboard(@PathVariable("id") int id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-
-        String curr_user = auth_Service.getCurrentUser(session);
-
-        Student student = studentDAO.findByid(id);
-        model.addAttribute("role", "section admin");
-
-        model.addAttribute("student", student);
-
-        model.addAttribute("loggedinuser", curr_user);
-
-        return "updatestudent";
-    }
-
-    @PostMapping("/localadmin/manage/student/edit/{id}")
-    public String studentEditDashboardPost(@PathVariable("id") int id,
-            @ModelAttribute("student") Student student, Model model, HttpSession session) {
-        studentDAO.update(id, student.getRoom_no(), student.getBalance(),
-                student.getF_name(), student.getL_name(), student.getHostel_name(), student.getSex(),
-                student.getParent(),
-                student.getPhone_no(), student.getS_email(), student.getLocalGaurdian(), student.getAadhar_no(),
-                student.getS_account_no(), student.getS_ifsc(), student.getMess_id(), student.getSection_id(),
-                student.getUsername());
-        return "redirect:/localadmin/allstudents";
-    }
-
-    @GetMapping("/localadmin/manage/student/delete/{id}")
-    public String studentDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        String curr_user = auth_Service.getCurrentUser(session);
-        Student student = studentDAO.findByid(id);
-        int roll = student.getRoll_no();
-
-        List<Transaction> transactions = transactionDAO.alltransactions(roll, 1);
-
-        String TranMessage = "Sorry, Student has some transactions!";
-        if (transactions.isEmpty()) {
-            toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
-            return "redirect:/localadmin/allstudents";
-        }
-
-        studentDAO.delete(id);
-
-        model.addAttribute("role", "section admin");
-        model.addAttribute("loggedinUser", curr_user);
-
-        return "redirect:/localadmin/allstudents";
-    }
-
-    @GetMapping("/localadmin/student/add")
-    public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        model.addAttribute("role", "section admin");
-        String curr_user = auth_Service.getCurrentUser(session);
-
-        Student student = new Student();
-
-        model.addAttribute("student", student);
-        model.addAttribute("loggedinuser", curr_user);
-
-        return "addstudent";
-    }
-    @PostMapping("/localadmin/student/add")
-    public String studentAddDashboardPost(@ModelAttribute("student") Student student, Model model,
-            HttpSession session) {
-
-        studentDAO.save(student);
-
-        return "redirect:/localadmin/allstudents";
-    }
+    
 
     // CUSTOMERS
 
@@ -169,102 +80,7 @@ public class LocalAdminController {
         List<Customer> customers = customerDAO.allCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinUser", username);
-        return "listcustomers";
-    }
-
-    @GetMapping("/localadmin/manage/customer/{id}")
-    public String customerDashboard(@PathVariable("id") int id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-
-        String curr_user = auth_Service.getCurrentUser(session);
-
-        Customer customer = customerDAO.findByid(id);
-        model.addAttribute("role", "section admin");
-
-        model.addAttribute("customer", customer);
-
-        model.addAttribute("loggedinUser", curr_user);
-
-        return "updatecustomer";
-    }
-
-    @PostMapping("/localadmin/manage/customer/edit/{id}")
-    public String customerEditDashboardPost(@PathVariable("id") int id,
-            @ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
-        customerDAO.update(customer.getBalance(), customer.getPin(), customer.getPhone_no(),
-                customer.getC_aadhar_number(),
-                customer.getAccount_no(), customer.getSex(), customer.getIfsc(), customer.getFirst_name(),
-                customer.getLast_name(), customer.getEmail(), customer.getCity(), customer.getStreet(),
-                customer.getMess_id(), customer.getSection_id(), id);
-        return "redirect:/localadmin/allcustomers";
-    }
-
-    @GetMapping("/localadmin/manage/customer/delete/{id}")
-    public String customerDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-
-        String curr_user = auth_Service.getCurrentUser(session);
-
-        Customer customer = customerDAO.findByid(id);
-        int roll = customer.getCid();
-
-        List<Transaction> transactions = transactionDAO.alltransactions(roll, 1);
-
-        String TranMessage = "Sorry, Customer has some transactions!";
-        if (transactions.isEmpty()) {
-            toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
-            return "redirect:/loggedin";
-        }
-
-        customerDAO.delete(id);
-
-        model.addAttribute("role", "section admin");
-        model.addAttribute("loggedinuser", curr_user);
-
-        return "redirect:/localadmin/allcustomers";
-    }
-
-   
-
-    @GetMapping("/localadmin/customer/add")
-    public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        model.addAttribute("role", "section admin");
-        String curr_user = auth_Service.getCurrentUser(session);
-
-
-        Customer customer = new Customer();
-
-        model.addAttribute("customer", customer);
-        model.addAttribute("loggedinuser", curr_user);
-
-        return "addcustomer";
-    }
-
-    @PostMapping("/localadmin/customer/add")
-    public String customerAddDashboardPost(@ModelAttribute("customer") Customer customer, Model model,
-            HttpSession session) {
-
-        customerDAO.save(customer);
-
-        return "redirect:/localadmin/allcustomers";
+        return "viewcustomers";
     }
 
     // INVENTORIES
@@ -280,9 +96,13 @@ public class LocalAdminController {
         model.addAttribute("role", "section admin");
         String username = auth_Service.getCurrentUser(session);
  
-        List<Inventory> inventories = inventoryDAO.allInventories();
+        Employee emp = employeeDAO.findByUsername(username);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+ 
+        List<Inventory> Inventories = inventoryDAO.findByInventories(mess_no, section_no);
 
-        model.addAttribute("inventories", inventories);
+        model.addAttribute("inventories", Inventories);
 
         model.addAttribute("UserLoggedIn", username);
         return "listinventories";
@@ -313,7 +133,7 @@ public class LocalAdminController {
     public String inventoryEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession session) {
         inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),
-                inventory.getName(), inventory.getMess_id(), inventory.getSection_id(), Item_Id);
+                inventory.getName(), Item_Id);
         return "redirect:/localadmin/allemployees";
     }
 
@@ -346,13 +166,18 @@ public class LocalAdminController {
         }
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("role", "section admin");
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
 
         Inventory inventory = new Inventory();
+        inventory.setMess_id(mess_no);
+        inventory.setSection_id(section_no);
 
-        model.addAttribute("employee", inventory);
+        model.addAttribute("inventory", inventory);
         model.addAttribute("loggedinUser", curr_user);
 
-        return "addInventory";
+        return "addinventory";
     }
 
     @PostMapping("/localadmin/inventory/add")
@@ -376,8 +201,12 @@ public class LocalAdminController {
         }
         model.addAttribute("role", "section admin");
         String username = auth_Service.getCurrentUser(session);
+
+        Employee emp = employeeDAO.findByUsername(username);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
  
-        List<Announcements> announcements = announcementsDAO.allAnnouncements();
+        List<Announcements> announcements = announcementsDAO.findByAnnouncements(mess_no, section_no);
 
         model.addAttribute("announcements", announcements);
 
@@ -409,7 +238,7 @@ public class LocalAdminController {
     @PostMapping("/localadmin/manage/announcement/edit/{Item_Id}")
     public String announcementEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("announcement") Announcements announcement, Model model, HttpSession session) {
-        announcementsDAO.update(announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time(), announcement.getA_id());
+        announcementsDAO.update( announcement.getAnnounce_text(), announcement.getDate_and_time(), announcement.getA_id());
         return "redirect:/localadmin/allannouncements";
     }
 
@@ -442,12 +271,20 @@ public class LocalAdminController {
         }
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("role", "section admin");
+        
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
         Announcements announcement = new Announcements();
 
-        model.addAttribute("employee", announcement);
+        announcement.setMess_id(mess_no);
+        announcement.setSection_id(section_no);
+
+        model.addAttribute("announcement", announcement);
         model.addAttribute("loggedinUser", curr_user);
 
-        return "addAnnouncement";
+        return "addannouncement";
     }
 
     @PostMapping("/localadmin/announcement/add")
@@ -458,5 +295,122 @@ public class LocalAdminController {
 
         return "redirect:/localadmin/allannouncements";
     }
+
+    //Menus
+    
+    @GetMapping("/localadmin/allmenues")
+    public String menuesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "section admin");
+        String username = auth_Service.getCurrentUser(session);
+
+        Employee emp = employeeDAO.findByUsername(username);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+ 
+        Section section = sectionDAO.findSection(mess_no, section_no);
+
+        model.addAttribute("section", section);
+
+        model.addAttribute("UserLoggedIn", username);
+        return "listsections";
+    }
+
+    @GetMapping("/localadmin/manage/menue/{id}")
+    public String menueDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "section admin");
+
+        String username = auth_Service.getCurrentUser(session);
+
+        Employee emp = employeeDAO.findByUsername(username);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+ 
+        Section section = sectionDAO.findSection(mess_no, section_no);
+
+        model.addAttribute("section", section);
+
+        model.addAttribute("curr_user", username);
+
+        return "updatesection";
+    }
+
+    @PostMapping("/localadmin/manage/menue/edit/{Item_Id}")
+    public String menueEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
+            @ModelAttribute("section") Section section, Model model, HttpSession session) {
+        sectionDAO.updateMenue(section.getSection_id(), section.getMess_id(), section.getBreakfast(), section.getLunch(), section.getDinner());
+        return "redirect:/localadmin/allmenues";
+    }
+
+    @GetMapping("/localadmin/manage/menue/delete/{Item_Id}")
+    public String menueDeleteDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        sectionDAO.delete(mess_no, section_no);
+
+        model.addAttribute("curr_user", curr_user);
+
+        return "redirect:/localadmin/allmenues";
+    }
+
+    @GetMapping("/localadmin/menue/add")
+    public String menueAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+        
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        Section section = new Section();
+
+        section.setMess_id(mess_no);
+        section.setSection_id(section_no);
+
+        model.addAttribute("section", section);
+        model.addAttribute("loggedinUser", curr_user);
+
+        return "addsection";
+    }
+
+    @PostMapping("/localadmin/menue/add")
+    public String menueAddDashboardPost(@ModelAttribute("section") Section section, Model model,
+            HttpSession session) {
+
+        sectionDAO.save(section);
+
+        return "redirect:/localadmin/allmenues";
+    }
+    
 
 }
