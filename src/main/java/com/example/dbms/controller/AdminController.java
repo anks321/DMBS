@@ -85,7 +85,7 @@ public class AdminController {
 
         model.addAttribute("mess", new Mess());
 
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "createmess";
     }
@@ -164,19 +164,21 @@ public class AdminController {
     }
 
     // @GetMapping("/admin/deletesection/{id}")
-    // public String deletesectionDashboard(@PathVariable("id") Integer id, Model model, HttpSession session,
-    //         RedirectAttributes redirectAttributes) {
+    // public String deletesectionDashboard(@PathVariable("id") Integer id, Model
+    // model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-    //     String Message = "Please Sign in to proceed!!!";
-    //     if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
-    //         toastService.redirectWithErrorToast(redirectAttributes, Message);
-    //         return "redirect:/login";
-    //     }
-    //     String username = auth_Service.getCurrentUser(session);
+    // String Message = "Please Sign in to proceed!!!";
+    // if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session))
+    // {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
+    // String username = auth_Service.getCurrentUser(session);
 
-    //     model.addAttribute("role", "mess_head");
-    //     sectionDAO.delete(id);
-    //     return "redirect:/admin/allsections";
+    // model.addAttribute("role", "mess_head");
+    // sectionDAO.delete(id);
+    // return "redirect:/admin/allsections";
     // }
 
     @GetMapping("/admin/allemployees")
@@ -221,7 +223,7 @@ public class AdminController {
         // System.out.println(employees.get(0));
         List<Section> sections = messDAO.getSectionsbyMess(employee.getMess_id());
         model.addAttribute("employees", employees);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         model.addAttribute("sections", sections);
 
         return "listemployees";
@@ -244,7 +246,7 @@ public class AdminController {
         Employee employee = new Employee();
 
         model.addAttribute("employee", employee);
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "addemployee";
     }
@@ -308,7 +310,7 @@ public class AdminController {
     // studentDAO.delete(id);
 
     // model.addAttribute("role", "Gadmin");
-    // model.addAttribute("loggedinUser", curr_user);
+    // model.addAttribute("loggedinusername", curr_user);
 
     // return "redirect:/dashboard/manage/students";
     // }
@@ -335,7 +337,7 @@ public class AdminController {
         model.addAttribute("customers", customers);
         model.addAttribute("sections", sections);
 
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "listcustomers";
     }
 
@@ -358,7 +360,7 @@ public class AdminController {
         model.addAttribute("role", "mess_head");
         model.addAttribute("customers", customers);
         model.addAttribute("sections", sections);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "listcustomers";
     }
 
@@ -382,7 +384,7 @@ public class AdminController {
         model.addAttribute("students", students);
         model.addAttribute("sections", sections);
 
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "liststudents";
     }
 
@@ -406,7 +408,7 @@ public class AdminController {
 
         model.addAttribute("students", students);
         model.addAttribute("sections", sections);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "liststudents";
     }
 
@@ -460,6 +462,7 @@ public class AdminController {
 
         return "redirect:/admin/students";
     }
+
     @GetMapping("/admin/manage/student/profile/{id}")
     public String studentprofileDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
@@ -471,8 +474,8 @@ public class AdminController {
         }
         String curr_user = auth_Service.getCurrentUser(session);
 
-        Student student=studentDAO.findByid(id);
-        
+        Student student = studentDAO.findByid(id);
+
         model.addAttribute("student", student);
         model.addAttribute("role", "section admin");
         model.addAttribute("loggedinusername", curr_user);
@@ -493,7 +496,7 @@ public class AdminController {
 
         List<Customer> customers = customerDAO.allCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "listcustomers";
     }
 
@@ -514,7 +517,7 @@ public class AdminController {
 
         model.addAttribute("customer", customer);
 
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "updatecustomer";
     }
@@ -561,8 +564,6 @@ public class AdminController {
         return "redirect:/admin/allcustomers";
     }
 
-   
-
     @GetMapping("/admin/customer/add")
     public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -573,7 +574,6 @@ public class AdminController {
         }
         model.addAttribute("role", "section admin");
         String curr_user = auth_Service.getCurrentUser(session);
-
 
         Customer customer = new Customer();
 
@@ -591,6 +591,5 @@ public class AdminController {
 
         return "redirect:/admin/allcustomers";
     }
-
 
 }

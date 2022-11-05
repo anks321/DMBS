@@ -40,7 +40,7 @@ public class CustomercController {
     public String profile(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
 
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.iscustomer(session)) {
+        if (!auth_Service.isAuthenticated(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }

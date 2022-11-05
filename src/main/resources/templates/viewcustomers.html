@@ -27,7 +27,7 @@
               <td th:text="${cus.first_name} + ' ' + ${cus.last_name}"></td>
               <td th:text="${cus.username}"></td>
               <td>
-                <a th:href="@{/customer/profile}" class="btn btn-danger">
+                <a th:href="@{/localadmin/customer/profile/{id}(id=${cus.cid})}" class="btn btn-danger">
                     Check Now
                 </a>
               </td>
