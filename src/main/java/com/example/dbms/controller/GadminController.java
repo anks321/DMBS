@@ -342,33 +342,33 @@ public class GadminController {
         return "redirect:/localadmin/allstudents";
     }
 
-    @GetMapping("/gadmin/student/add")
-    public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    // @GetMapping("/gadmin/student/add")
+    // public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
-        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        model.addAttribute("role", "Gadmin");
-        String curr_user = auth_Service.getCurrentUser(session);
+    //     String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+    //     if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+    //         toastService.redirectWithErrorToast(redirectAttributes, Message);
+    //         return "redirect:/login";
+    //     }
+    //     model.addAttribute("role", "Gadmin");
+    //     String curr_user = auth_Service.getCurrentUser(session);
 
-        Student student = new Student();
+    //     Student student = new Student();
 
-        model.addAttribute("student", student);
-        model.addAttribute("loggedinuser", curr_user);
+    //     model.addAttribute("student", student);
+    //     model.addAttribute("loggedinuser", curr_user);
 
-        return "addstudent";
-    }
+    //     return "addstudent";
+    // }
 
-    @PostMapping("/gadmin/student/add")
-    public String studentAddDashboardPost(@ModelAttribute("student") Student student, Model model,
-            HttpSession session) {
+    // @PostMapping("/gadmin/student/add")
+    // public String studentAddDashboardPost(@ModelAttribute("student") Student student, Model model,
+    //         HttpSession session) {
 
-        studentDAO.save(student);
+    //     studentDAO.save(student);
 
-        return "redirect:/gadmin/allstudents";
-    }
+    //     return "redirect:/gadmin/allstudents";
+    // }
 
     // CUSTOMERS
 

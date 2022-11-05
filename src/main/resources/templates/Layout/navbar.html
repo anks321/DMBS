@@ -34,12 +34,12 @@
               
             </ul>
             <th:block th:unless="${loggedinusername}">
-            <ul class="navbar-nav m l-auto">
+            <ul class="navbar-nav m-auto l-auto">
                 <li class="nav-item">
                     <a class="nav-link"  th:href="@{/login}">Login</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav m-auto ml-auto">
                 <li class="nav-item">
                     <a class="nav-link"  th:href="@{/studentregister}">Student Register</a>
                 </li>
@@ -47,7 +47,7 @@
           
 
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav m-auto ml-auto">
               <li class="nav-item">
                   <a class="nav-link"  th:href="@{/customerregister}">Customer Register</a>
               </li>
@@ -57,7 +57,7 @@
           <th:block th:if="${loggedinusername}">
             
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav m-auto ml-auto">
                 <li class="nav-item">
                     <a class="nav-link"  th:href="@{/logout}">Logout</a>
                 </li>

@@ -122,7 +122,7 @@
     <h1 class="" style="text-align: center;color: #f50d0d;font-size: 50px;">Add Student</h1>
 
 <div class="card-body">
-    <form method="post" action:th="{@{/gadmin/student/add}}" th:object="${student}">
+    <form method="post" action:th="{@{/admin/student/add}}" th:object="${student}">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" class="form-control" required="required" placeholder="Username"
@@ -213,11 +213,11 @@
             <input type="text" id="s_ifsc" class="form-control" required="required" placeholder="IFSC Number"
                 th:field="*{s_ifsc}" />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="mess_id">Mess Id</label>
             <input type="number" id="mess_id" class="form-control" required="required" placeholder="Mess Id"
                 th:field="*{mess_id}" />
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="section_id">Section Id</label>
             <input type="number" id="section_id" class="form-control" required="required" placeholder="Section Id"

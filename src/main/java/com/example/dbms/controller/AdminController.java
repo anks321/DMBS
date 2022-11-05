@@ -410,178 +410,187 @@ public class AdminController {
         return "liststudents";
     }
 
-    // INVENTORIES
-    // -------------------------------------------------------------------------------------
-    // @GetMapping("/dashboard/manage/inventories")
-    // public String inventoriesDashboard(Model model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
+    @GetMapping("/admin/student/add")
+    public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
-    // String Message = "Please Sign in to proceed .......";
-    // if (!auth_Service.isAuthenticated(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "admin");
+        String curr_user = auth_Service.getCurrentUser(session);
 
-    // String loginMessage = "Sorry, You are not authorized to view this page!.
-    // Please Sign in as admin to proceed .......";
+        Student student = new Student();
 
-    // String username = auth_Service.getCurrentUser(session);
+        model.addAttribute("student", student);
+        model.addAttribute("loggedinuser", curr_user);
 
-    // if (username != "admin") {
-    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-    // return "redirect:/login";
-    // }
+        return "addstudent";
+    }
 
-    // List<Inventory> inventories = inventoryDAO.allInventories();
+    @PostMapping("/admin/student/add")
+    public String studentAddDashboardPost(@ModelAttribute("student") Student student, Model model,
+            HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+        Employee employee = employeeDAO.findByUsername(curr_user);
 
-    // model.addAttribute("inventories", inventories);
+        student.setMess_id(employee.getMess_id());
 
-    // model.addAttribute("UserLoggedIn", username);
-    // return "dashboard/inventories";
-    // }
+        studentDAO.save(student);
 
-    // @GetMapping("/dashboard/manage/inventory/{item_id}")
-    // public String inventoryDashboard(@PathVariable("Item_Id") int Item_Id, Model
-    // model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
+        return "redirect:/admin/students";
+    }
 
-    // String Message = "Please Sign in to proceed .......";
-    // if (!auth_Service.isAuthenticated(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
+    @GetMapping("/admin/manage/student/delete/{id}")
+    public String studentDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
-    // String loginMessage = "Sorry, You are not authorized to view this page!.
-    // Please Sign in as admin to proceed .......";
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
 
-    // String curr_user = auth_Service.getCurrentUser(session);
+        studentDAO.delete(id);
 
-    // if (curr_user != "admin") {
-    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-    // return "redirect:/login";
-    // }
+        model.addAttribute("role", "section admin");
+        model.addAttribute("loggedinusername", curr_user);
 
-    // Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
+        return "redirect:/admin/students";
+    }
+    @GetMapping("/admin/manage/student/profile/{id}")
+    public String studentprofileDashboard(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
-    // model.addAttribute("inventory", inventory);
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
 
-    // model.addAttribute("curr_user", curr_user);
+        Student student=studentDAO.findByid(id);
+        
+        model.addAttribute("student", student);
+        model.addAttribute("role", "section admin");
+        model.addAttribute("loggedinusername", curr_user);
 
-    // return "dashboard/inventory";
-    // }
+        return "studentprofile";
+    }
 
-    // @PostMapping("/dashboard/manage/inventory/{Item_Id}")
-    // public String inventoryDashboardPost(@PathVariable("Item_Id") int Item_Id,
-    // Model model, HttpSession session) {
+    @GetMapping("/localadmin/allcustomers")
+    public String getAllCustomers(Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "section admin");
+        String username = auth_Service.getCurrentUser(session);
 
-    // return "redirect:/dashboard/manage/inventory/edit/" + Item_Id;
-    // }
+        List<Customer> customers = customerDAO.allCustomers();
+        model.addAttribute("customers", customers);
+        model.addAttribute("loggedinUser", username);
+        return "listcustomers";
+    }
 
-    // @GetMapping("/dashboard/manage/inventory/edit/{Item_Id}")
-    // public String inventoryEditDashboard(@PathVariable("Item_Id") int Item_Id,
-    // Model model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
+    @GetMapping("/localadmin/manage/customer/{id}")
+    public String customerDashboard(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
-    // String Message = "Please Sign in to proceed .......";
-    // if (!auth_Service.isAuthenticated(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-    // String loginMessage = "Sorry, You are not authorized to view this page!.
-    // Please Sign in as admin to proceed!";
+        String curr_user = auth_Service.getCurrentUser(session);
 
-    // String curr_user = auth_Service.getCurrentUser(session);
+        Customer customer = customerDAO.findByid(id);
+        model.addAttribute("role", "section admin");
 
-    // if (curr_user != "admin") {
-    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-    // return "redirect:/login";
-    // }
+        model.addAttribute("customer", customer);
 
-    // Inventory inventory = inventoryDAO.findByItem_Id(Item_Id);
+        model.addAttribute("loggedinUser", curr_user);
 
-    // model.addAttribute("inventory", inventory);
+        return "updatecustomer";
+    }
 
-    // model.addAttribute("curr_user", curr_user);
+    @PostMapping("/localadmin/manage/customer/edit/{id}")
+    public String customerEditDashboardPost(@PathVariable("id") int id,
+            @ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
+        customerDAO.update(customer.getBalance(), customer.getPin(), customer.getPhone_no(),
+                customer.getC_aadhar_number(),
+                customer.getAccount_no(), customer.getSex(), customer.getIfsc(), customer.getFirst_name(),
+                customer.getLast_name(), customer.getEmail(), customer.getCity(), customer.getStreet(),
+                customer.getMess_id(), customer.getSection_id(), id);
+        return "redirect:/localadmin/allcustomers";
+    }
 
-    // return "dashboard/updateInventory";
-    // }
+    @GetMapping("/localadmin/manage/customer/delete/{id}")
+    public String customerDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
-    // @PostMapping("/dashboard/manage/inventory/edit/{Item_Id}")
-    // public String inventoryEditDashboardPost(@PathVariable("Item_Id") int
-    // Item_Id,
-    // @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession
-    // session) {
-    // inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),
-    // inventory.getName(), inventory.getMess_id(), inventory.getSection_id(),
-    // Item_Id);
-    // return "redirect:/dashboard/manage/inventory/" + Item_Id;
-    // }
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
 
-    // @GetMapping("/dashboard/inventory/delete/{Item_Id}")
-    // public String inventoryDeleteDashboard(@PathVariable("Item_Id") int Item_Id,
-    // Model model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
+        String curr_user = auth_Service.getCurrentUser(session);
 
-    // String Message = "Please Sign in to proceed .......";
-    // if (!auth_Service.isAuthenticated(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
+        Customer customer = customerDAO.findByid(id);
+        int roll = customer.getCid();
 
-    // String loginMessage = "Sorry, You are not authorized to view this page!.
-    // Please Sign in as admin to proceed .......";
+        List<Transaction> transactions = transactionDAO.alltransactions(roll, 1);
 
-    // String curr_user = auth_Service.getCurrentUser(session);
+        String TranMessage = "Sorry, Customer has some transactions!";
+        if (transactions.isEmpty()) {
+            toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
+            return "redirect:/loggedin";
+        }
 
-    // if (curr_user != "admin") {
-    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-    // return "redirect:/login";
-    // }
+        customerDAO.delete(id);
 
-    // inventoryDAO.delete(Item_Id);
+        model.addAttribute("role", "section admin");
+        model.addAttribute("loggedinuser", curr_user);
 
-    // model.addAttribute("curr_user", curr_user);
+        return "redirect:/localadmin/allcustomers";
+    }
 
-    // return "redirect:/dashboard/manage/inventories";
-    // }
+   
 
-    // @GetMapping("/dashboard/inventory/add")
-    // public String inventoryAddDashboard(Model model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
+    @GetMapping("/localadmin/customer/add")
+    public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
-    // String Message = "Please Sign in to proceed .......";
-    // if (!auth_Service.isAuthenticated(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "section admin");
+        String curr_user = auth_Service.getCurrentUser(session);
 
-    // String loginMessage = "Sorry, You are not authorized to view this page!.
-    // Please Sign in as admin to proceed!";
 
-    // String curr_user = auth_Service.getCurrentUser(session);
+        Customer customer = new Customer();
 
-    // if (curr_user != "admin") {
-    // toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
-    // return "redirect:/login";
-    // }
+        model.addAttribute("customer", customer);
+        model.addAttribute("loggedinuser", curr_user);
 
-    // Inventory inventory = new Inventory();
+        return "addcustomer";
+    }
 
-    // model.addAttribute("employee", inventory);
-    // model.addAttribute("loggedinUser", curr_user);
+    @PostMapping("/localadmin/customer/add")
+    public String customerAddDashboardPost(@ModelAttribute("customer") Customer customer, Model model,
+            HttpSession session) {
 
-    // return "dashboard/addInventory";
-    // }
+        customerDAO.save(customer);
 
-    // @PostMapping("/dashboard/inventory/add")
-    // public String inventoryAddDashboardPost(@ModelAttribute("inventory")
-    // Inventory inventory, Model model,
-    // HttpSession session) {
+        return "redirect:/localadmin/allcustomers";
+    }
 
-    // inventoryDAO.save(inventory);
-
-    // return "redirect:/dashboard/manage/inventories";
-    // }
 
 }

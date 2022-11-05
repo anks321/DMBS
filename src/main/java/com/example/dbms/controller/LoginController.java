@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -183,6 +183,7 @@ public class LoginController {
         authenticateService.logoutUser(session);
         return "redirect:/login";
     }
+   
 
     // @PostMapping("/logout")
     // public String logoutPost(HttpSession session, Model model) {

@@ -33,7 +33,7 @@ public class StudentDAO {
 
 		student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
 		// System.out.println(student.getUsername());
-		String sql = "insert into student(username,password,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into student(username,password,roll_no,room_no,Age,Balance,DOB,f_name,l_name,hostel_name,sex,parent,phone_no,s_email,localGaurdian,aadhar_no,s_account_no,s_ifsc, mess_id, section_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		jt.update(sql, student.getUsername(), student.getPassword(),
 				student.getRoll_no(), student.getRoom_no(), student.getAge(), student.getBalance(), student.getDOB(),
 				student.getF_name(), student.getL_name(), student.getHostel_name(), student.getSex(),

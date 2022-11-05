@@ -19,7 +19,7 @@
           <th:block th:each="sec:${sections}"><a th:href="@{/admin/students/{id}(id=${sec.getSection_id()})}" Th:text="'Section '+${sec.getSection_id()}"class="btn btn-primary btn-sm mb-3"></a></th:block>
           <a th:href="@{/admin/students}" class="btn btn-primary btn-sm mb-3">All Sections</a>
         </th:block>
-
+        <a th:href="@{/admin/student/add}" class="btn btn-primary btn-sm mb-3">Add student</a>
           <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
           
       </div>
@@ -39,8 +39,11 @@
               <td th:text="${sus.f_name} + ' ' + ${sus.l_name}"></td>
              
               <td>
-                <a  class="btn btn-danger">
-                    Answer
+                <a  th:href="@{/admin/manage/student/delete/{id}(id=${sus.roll_no})}" class="btn btn-danger">
+                    Delete
+                </a>
+                <a  th:href="@{/admin/manage/student/profile/{id}(id=${sus.roll_no})}" class="btn btn-danger">
+                    View
                 </a>
               </td>
 
