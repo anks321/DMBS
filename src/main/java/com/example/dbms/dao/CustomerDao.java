@@ -31,9 +31,10 @@ public class CustomerDao {
 
 		customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 		// System.out.println(customer.getUsername());
-		String sql = "insert into customer(username,password,cid,balance,pin,phone_no,c_aadhar_number,account_no,sex,ifsc,dob,first_name,last_name,email,city,street) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into customer(username,password,cid,mess_id,section_id,balance,pin,phone_no,c_aadhar_number,account_no,sex,ifsc,dob,first_name,last_name,email,city,street) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		temp.update(sql, customer.getUsername(), customer.getPassword(),
-				customer.getCid(), customer.getBalance(), customer.getPin(), customer.getPhone_no(),
+				customer.getCid(), customer.getMess_id(), customer.getSection_id(), customer.getBalance(),
+				customer.getPin(), customer.getPhone_no(),
 				customer.getC_aadhar_number(),
 				customer.getAccount_no(), customer.getSex(), customer.getIfsc(), customer.getDob(),
 				customer.getFirst_name(),
