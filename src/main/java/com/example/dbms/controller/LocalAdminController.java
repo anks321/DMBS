@@ -318,11 +318,11 @@ public class LocalAdminController {
         model.addAttribute("section", section);
 
         model.addAttribute("UserLoggedIn", username);
-        return "listsections";
+        return "listlocalsections";
     }
 
-    @GetMapping("/localadmin/manage/menue/{id}")
-    public String menueDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+    @GetMapping("/localadmin/manage/menue")
+    public String menueDashboard(Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed!!!";
@@ -344,18 +344,17 @@ public class LocalAdminController {
 
         model.addAttribute("curr_user", username);
 
-        return "updatesection";
+        return "updatelocalsection";
     }
 
-    @PostMapping("/localadmin/manage/menue/edit/{Item_Id}")
-    public String menueEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
-            @ModelAttribute("section") Section section, Model model, HttpSession session) {
+    @PostMapping("/localadmin/manage/menue/edit")
+    public String menueEditDashboardPost(@ModelAttribute("section") Section section, Model model, HttpSession session) {
         sectionDAO.updateMenue(section.getSection_id(), section.getMess_id(), section.getBreakfast(), section.getLunch(), section.getDinner());
         return "redirect:/localadmin/allmenues";
     }
 
-    @GetMapping("/localadmin/manage/menue/delete/{Item_Id}")
-    public String menueDeleteDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
+    @GetMapping("/localadmin/manage/menue/delete")
+    public String menueDeleteDashboard(Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         String Message = "Please Sign in to proceed!!!";
@@ -400,7 +399,7 @@ public class LocalAdminController {
         model.addAttribute("section", section);
         model.addAttribute("loggedinUser", curr_user);
 
-        return "addsection";
+        return "addlocalsection";
     }
 
     @PostMapping("/localadmin/menue/add")

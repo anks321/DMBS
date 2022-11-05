@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>Register Menues</head>
+<!-- <head th:replace="header :: header"></head> -->
+<body text-align="center">
+
+<!-- div th:replace="navbar :: navbar"></div> -->
+<section>
+
+
+<div class="container">
+  <div class="row">
+      <h1>Menue </h1>
+  </div>
+  
+  <div class="row">
+      <div class="col-lg-3">
+          <th:block th:if="${role=='section admin'}">
+            <a th:href="@{/localadmin/menue/add}" class="btn btn-primary btn-sm mb-3">Add Menue</a>
+          </th:block>
+
+          <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+      </div>
+  </div>
+  
+  <table class="table table-striped table-bordered">
+      <thead class="table-dark"> 
+          <tr>
+            <th>#</th>
+            <th>Mess Id</th>
+            <th>Section Id</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr th:each="menu: ${section}">
+          <td th:text="${menu.mess_id}"></td>
+          <td th:text="${menu.section_id}"></td>
+          <td th:text="${menu.breakfast}"></td>
+          <td th:text="${menu.lunch}"></td>
+          <td th:text="${menu.dinner}"></td>
+            
+           
+            <td>
+              <th:block th:if="${role=='section admin'}"><a th:href="@{/localadmin/manage/menue}" class="btn btn-danger">
+                  Update
+              </a>
+            </th:block>
+            </th:block>
+            <th:block th:if="${role=='section admin'}">
+            <a th:href="@{/localadmin/manage/menue/delete}" class="btn btn-danger">
+              Delete
+            </a>
+        </th:block>
+            </td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+</section>
+
+</body>
+</html>
