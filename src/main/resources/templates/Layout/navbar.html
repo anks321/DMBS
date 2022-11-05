@@ -34,32 +34,32 @@
               
             </ul>
             <th:block th:unless="${loggedinusername}">
-            <ul class="navbar-nav m-auto l-auto">
+            <ul class="navbar-nav m l-auto" style="float: right;">
                 <li class="nav-item">
-                    <a class="nav-link"  th:href="@{/login}">Login</a>
+                    <a class="nav-link active"  th:href="@{/login}">Login</a>
                 </li>
             </ul>
-            <ul class="navbar-nav m-auto ml-auto">
+            <ul class="navbar-nav ml-auto" style="float: right;">
                 <li class="nav-item">
-                    <a class="nav-link"  th:href="@{/studentregister}">Student Register</a>
+                    <a class="nav-link active"  th:href="@{/studentregister}">Student Register</a>
                 </li>
             </ul>
           
 
 
-            <ul class="navbar-nav m-auto ml-auto">
+            <ul class="navbar-nav ml-auto" style="float: right;">
               <li class="nav-item">
-                  <a class="nav-link"  th:href="@{/customerregister}">Customer Register</a>
+                  <a class="nav-link active"  th:href="@{/customerregister}">Customer Register</a>
               </li>
           </ul>
         </th:block>
           
-          <th:block th:if="${loggedinusername}">
+          <th:block th:if="${loggedinusername}" style="float: right;">
             
 
-            <ul class="navbar-nav m-auto ml-auto">
+            <ul class="navbar-nav ml-auto"  style="float: right;">
                 <li class="nav-item">
-                    <a class="nav-link"  th:href="@{/logout}">Logout</a>
+                    <a class="nav-link active"  th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
 

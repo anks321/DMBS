@@ -15,9 +15,9 @@
     </th:block>
     <th:block th:if=${Gadmin}><h1> Welcome <span th:text="Gadmin"></span> </h1>
     </th:block>
-    <th:block th:if=${section_head}><h1> Welcome <span th:text="Section_admin"></span> </h1>
+    <th:block th:if=${section_admin}><h1> Welcome <span th:text="section_head"></span> </h1>
     </th:block>
-    <th:block th:if=${employee}><h1> Welcome <span th:text="admin"></span> </h1>
+    <th:block th:if=${employee}><h1> Welcome <span th:text="mess_head"></span> </h1>
     </th:block>
     <!-- <th:block th:if=${admin}><h1> Welcome <span th:text="${empl.first_name}"></span> </h1>
     </th:block> -->
@@ -60,7 +60,7 @@
             </div>
         </div>
     </th:block>
-    <th:block th:if=${section_head}>
+    <th:block th:if=${section_admin}>
         <div class="row">
             <div class="row-lg-3">
                 <a th:href="@{/localadmin/allstudents}" class="btn btn-primary btn-sm mb-3">Students</a>

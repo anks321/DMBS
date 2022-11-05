@@ -480,7 +480,7 @@ public class AdminController {
         return "studentprofile";
     }
 
-    @GetMapping("/localadmin/allcustomers")
+    @GetMapping("/admin/allcustomers")
     public String getAllCustomers(Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String Message = "Please Sign in to proceed!!!";
@@ -497,7 +497,7 @@ public class AdminController {
         return "listcustomers";
     }
 
-    @GetMapping("/localadmin/manage/customer/{id}")
+    @GetMapping("/admin/manage/customer/{id}")
     public String customerDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -519,7 +519,7 @@ public class AdminController {
         return "updatecustomer";
     }
 
-    @PostMapping("/localadmin/manage/customer/edit/{id}")
+    @PostMapping("/admin/manage/customer/edit/{id}")
     public String customerEditDashboardPost(@PathVariable("id") int id,
             @ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
         customerDAO.update(customer.getBalance(), customer.getPin(), customer.getPhone_no(),
@@ -527,10 +527,10 @@ public class AdminController {
                 customer.getAccount_no(), customer.getSex(), customer.getIfsc(), customer.getFirst_name(),
                 customer.getLast_name(), customer.getEmail(), customer.getCity(), customer.getStreet(),
                 customer.getMess_id(), customer.getSection_id(), id);
-        return "redirect:/localadmin/allcustomers";
+        return "redirect:/admin/allcustomers";
     }
 
-    @GetMapping("/localadmin/manage/customer/delete/{id}")
+    @GetMapping("/admin/manage/customer/delete/{id}")
     public String customerDeleteDashboard(@PathVariable("id") int id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -558,12 +558,12 @@ public class AdminController {
         model.addAttribute("role", "section admin");
         model.addAttribute("loggedinuser", curr_user);
 
-        return "redirect:/localadmin/allcustomers";
+        return "redirect:/admin/allcustomers";
     }
 
    
 
-    @GetMapping("/localadmin/customer/add")
+    @GetMapping("/admin/customer/add")
     public String customerAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
@@ -583,13 +583,13 @@ public class AdminController {
         return "addcustomer";
     }
 
-    @PostMapping("/localadmin/customer/add")
+    @PostMapping("/admin/customer/add")
     public String customerAddDashboardPost(@ModelAttribute("customer") Customer customer, Model model,
             HttpSession session) {
 
         customerDAO.save(customer);
 
-        return "redirect:/localadmin/allcustomers";
+        return "redirect:/admin/allcustomers";
     }
 
 

@@ -23,7 +23,7 @@ public class AnnouncementsDAO {
 
     public void save(Announcements announcement) {
 		String sql = "insert into Announcements(mess_id, section_id, announce_text, date_and_time, A_id) values (?,?,?,?,?);";
-		temp.update(sql, announcement.getA_id(), announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time());
+		temp.update(sql, announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time(), announcement.getA_id());
 	}
  
 	public void update(String announce_text, String date_and_time, int A_id) {
@@ -32,12 +32,12 @@ public class AnnouncementsDAO {
 	} 
 
 	public void delete(int itemID) {
-		String sql = "delete from Announcements where item_id = ?";
+		String sql = "delete from Announcements where A_id = ?";
 		temp.update(sql, itemID);
 	}
 
 	public Announcements findByItem_Id(int itemID) {
-		String sql = "select * from Announcements where item_id = ?";
+		String sql = "select * from Announcements where A_id = ?";
 		return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Announcements.class), itemID);
 	}
 

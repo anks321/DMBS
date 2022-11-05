@@ -61,10 +61,8 @@ public class LocalAdminController {
 
         return "viewstudents";
     }
-    
 
     // CUSTOMERS
-
 
     @GetMapping("/localadmin/allcustomers")
     public String getAllCustomers(Model model, HttpSession session,
@@ -95,11 +93,11 @@ public class LocalAdminController {
         }
         model.addAttribute("role", "section admin");
         String username = auth_Service.getCurrentUser(session);
- 
+
         Employee emp = employeeDAO.findByUsername(username);
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
- 
+
         List<Inventory> Inventories = inventoryDAO.findByInventories(mess_no, section_no);
 
         model.addAttribute("inventories", Inventories);
@@ -108,7 +106,7 @@ public class LocalAdminController {
         return "listinventories";
     }
 
-    @GetMapping("/localadmin/manage/inventory/{id}")
+    @GetMapping("/localadmin/manage/inventory/{Item_Id}")
     public String inventoryDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -132,9 +130,16 @@ public class LocalAdminController {
     @PostMapping("/localadmin/manage/inventory/edit/{Item_Id}")
     public String inventoryEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("inventory") Inventory inventory, Model model, HttpSession session) {
-        inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),
-                inventory.getName(), Item_Id);
-        return "redirect:/localadmin/allemployees";
+        String curr_user = auth_Service.getCurrentUser(session);
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        inventory.setMess_id(mess_no);
+        inventory.setSection_id(section_no);
+
+        inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),inventory.getName(), Item_Id);
+        return "redirect:/localadmin/allinventories";
     }
 
     @GetMapping("/localadmin/manage/inventory/delete/{Item_Id}")
@@ -183,14 +188,20 @@ public class LocalAdminController {
     @PostMapping("/localadmin/inventory/add")
     public String inventoryAddDashboardPost(@ModelAttribute("inventory") Inventory inventory, Model model,
             HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
 
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+        inventory.setMess_id(mess_no);
+        inventory.setSection_id(section_no);
         inventoryDAO.save(inventory);
 
         return "redirect:/localadmin/allinventories";
     }
 
-    //ANNOUNCEMENTS
-    
+    // ANNOUNCEMENTS
+
     @GetMapping("/localadmin/allannouncements")
     public String announcementsDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -205,7 +216,7 @@ public class LocalAdminController {
         Employee emp = employeeDAO.findByUsername(username);
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
- 
+
         List<Announcements> announcements = announcementsDAO.findByAnnouncements(mess_no, section_no);
 
         model.addAttribute("announcements", announcements);
@@ -214,7 +225,7 @@ public class LocalAdminController {
         return "listannouncements";
     }
 
-    @GetMapping("/localadmin/manage/announcement/{id}")
+    @GetMapping("/localadmin/manage/announcement/{Item_Id}")
     public String announcementDashboard(@PathVariable("Item_Id") int Item_Id, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
@@ -238,7 +249,16 @@ public class LocalAdminController {
     @PostMapping("/localadmin/manage/announcement/edit/{Item_Id}")
     public String announcementEditDashboardPost(@PathVariable("Item_Id") int Item_Id,
             @ModelAttribute("announcement") Announcements announcement, Model model, HttpSession session) {
-        announcementsDAO.update( announcement.getAnnounce_text(), announcement.getDate_and_time(), announcement.getA_id());
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        announcement.setMess_id(mess_no);
+        announcement.setSection_id(section_no);
+        announcementsDAO.update(announcement.getAnnounce_text(), announcement.getDate_and_time(),
+                announcement.getA_id());
         return "redirect:/localadmin/allannouncements";
     }
 
@@ -271,7 +291,7 @@ public class LocalAdminController {
         }
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("role", "section admin");
-        
+
         Employee emp = employeeDAO.findByUsername(curr_user);
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
@@ -290,14 +310,22 @@ public class LocalAdminController {
     @PostMapping("/localadmin/announcement/add")
     public String announcementAddDashboardPost(@ModelAttribute("announcement") Announcements announcement, Model model,
             HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        announcement.setMess_id(mess_no);
+        announcement.setSection_id(section_no);
 
         announcementsDAO.save(announcement);
 
         return "redirect:/localadmin/allannouncements";
     }
 
-    //Menus
-    
+    // Menus
+
     @GetMapping("/localadmin/allmenues")
     public String menuesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -312,7 +340,7 @@ public class LocalAdminController {
         Employee emp = employeeDAO.findByUsername(username);
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
- 
+
         Section section = sectionDAO.findSection(mess_no, section_no);
 
         model.addAttribute("section", section);
@@ -337,7 +365,7 @@ public class LocalAdminController {
         Employee emp = employeeDAO.findByUsername(username);
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
- 
+
         Section section = sectionDAO.findSection(mess_no, section_no);
 
         model.addAttribute("section", section);
@@ -349,7 +377,16 @@ public class LocalAdminController {
 
     @PostMapping("/localadmin/manage/menue/edit")
     public String menueEditDashboardPost(@ModelAttribute("section") Section section, Model model, HttpSession session) {
-        sectionDAO.updateMenue(section.getSection_id(), section.getMess_id(), section.getBreakfast(), section.getLunch(), section.getDinner());
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        section.setMess_id(mess_no);
+        section.setSection_id(section_no);
+        sectionDAO.updateMenue(section.getSection_id(), section.getMess_id(), section.getBreakfast(),
+                section.getLunch(), section.getDinner());
         return "redirect:/localadmin/allmenues";
     }
 
@@ -386,7 +423,7 @@ public class LocalAdminController {
         }
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("role", "section admin");
-        
+
         Employee emp = employeeDAO.findByUsername(curr_user);
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
@@ -405,11 +442,17 @@ public class LocalAdminController {
     @PostMapping("/localadmin/menue/add")
     public String menueAddDashboardPost(@ModelAttribute("section") Section section, Model model,
             HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
 
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
+
+        section.setMess_id(mess_no);
+        section.setSection_id(section_no);
         sectionDAO.save(section);
 
         return "redirect:/localadmin/allmenues";
     }
-    
 
 }

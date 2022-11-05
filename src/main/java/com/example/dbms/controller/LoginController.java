@@ -138,7 +138,6 @@ public class LoginController {
             return "faltu";
         }
 
-        
         if (authenticateService.isstudent(session)) {
             model.addAttribute("student", studentDAO.findByUsername(username));
             model.addAttribute("loggedinusername", username);
@@ -156,7 +155,7 @@ public class LoginController {
         }
         if (authenticateService.issectionadmin(session)) {
             System.out.println("check");
-            model.addAttribute("section_head", employeeDAO.findByUsername(username));
+            model.addAttribute("section_admin", employeeDAO.findByUsername(username));
             model.addAttribute("loggedinusername", username);
             return "faltu";
         }
@@ -183,7 +182,6 @@ public class LoginController {
         authenticateService.logoutUser(session);
         return "redirect:/login";
     }
-   
 
     // @PostMapping("/logout")
     // public String logoutPost(HttpSession session, Model model) {

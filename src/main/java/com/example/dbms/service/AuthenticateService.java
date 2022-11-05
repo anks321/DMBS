@@ -108,6 +108,7 @@ public class AuthenticateService {
     }
 
     public void loginsectionAdmin(HttpSession session, String username) {
+        
         session.setAttribute(loggedUser, username);
         session.setAttribute("role", "section admin");
     }

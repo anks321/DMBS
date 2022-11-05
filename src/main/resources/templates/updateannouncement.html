@@ -124,6 +124,11 @@
     <div class="card-body">
         <form method="post" th:action="@{/localadmin/manage/announcement/edit/{id}(id=${announcement.A_id})}" th:object="${announcement}">
             <div class="form-group">
+                <label for="A_id">Announcement Id</label>
+                <input type="text" id="A_id" class="form-control" required="required" placeholder="Announcement Id"
+                    th:field="*{A_id}" />
+            </div>
+            <div class="form-group">
                 <label for="announce_text">Announcement Text</label>
                 <input type="text" id="announce_text" class="form-control" required="required" placeholder="Announcement Text"
                     th:field="*{announce_text}" />
