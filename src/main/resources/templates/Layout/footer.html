@@ -8,15 +8,26 @@
     
 </head>
 <body >
+
+
      <!-- Footer -->
-  
-  <footer th:fragment="footer1"  >
+     <style>
+      #footer {
+         position: fixed;
+         bottom: 0;
+         width: 100%;
+         height: 60px;   /* Height of the footer */
+         background: #6cf;
+      }
+      </style>
+  <div  id="footer" th:fragment="footer1"  >
     <link rel="stylesheet" href=
 "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!--load font awesome-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+    
     <footer class="bg-light text-center text-white">
       <!-- Grid container -->
       <div class="container p-4 pb-0">
@@ -78,7 +89,7 @@
 
 
 
-  </footer>
+  </div>
     
 </body>
 </html>

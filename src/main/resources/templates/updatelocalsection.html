@@ -119,20 +119,25 @@
     
         
     </style>
-    <h1 class="" style="text-align: center;color: #f50d0d;font-size: 50px;">Update Announcement</h1>
+    <h1 class="" style="text-align: center;color: #f50d0d;font-size: 50px;">Update Menue</h1>
 
     <div class="card-body">
-        <form method="post" th:action="@{/localadmin/manage/announcement/edit/{id}(id=${announcement.A_id})}" th:object="${announcement}">
-            <div class="form-group">
-                <label for="announce_text">Announcement Text</label>
-                <input type="text" id="announce_text" class="form-control" required="required" placeholder="Announcement Text"
-                    th:field="*{announce_text}" />
-            </div>
-            <div class="form-group">
-                <label for="date_and_time">Date and Time</label>
-                <input type="text" id="date_and_time" class="form-control" required="required" placeholder="Date and Time"
-                    th:field="*{date_and_time}" />
-            </div>
+        <form method="post" th:action="@{/localadmin/manage/menue/edit}" th:object="${section}">
+          <div class="form-group">
+            <label for="breakfast">Breakfast</label>
+            <input type="text" id="breakfast" class="form-control" required="required" placeholder="Breakfast"
+                th:field="*{breakfast}" />
+        </div>
+        <div class="form-group">
+            <label for="lunch">Lunch</label>
+            <input type="text" id="lunch" class="form-control" required="required" placeholder="Lunch"
+                th:field="*{lunch}" />
+        </div>
+        <div class="form-group">
+            <label for="dinner">Dinner</label>
+            <input type="text" id="dinner" class="form-control" required="required" placeholder="Dinner"
+                th:field="*{dinner}" />
+        </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

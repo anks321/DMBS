@@ -22,7 +22,7 @@ public class SectionDAO {
 	private JdbcTemplate temp;
 
 	public Section findSection(int mess_no, int section_no) {
-		String sql = "select * from section where mess_id =? AND section_id = ?;";
+		String sql = "select * from section where mess_id = ? AND section_id = ?;";
 
 		return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Section.class), mess_no, section_no);
 	}
@@ -42,18 +42,24 @@ public class SectionDAO {
 	}
 
 	public void updateMenue(int sectionid, int messid, String breakfast, String lunch, String dinner) {
-		String sql = "Update section set breakfast=?,set lunch=?,set dinner=? where section_id=? and mess_id=?";
+		String sql = "Update section set breakfast = ?, set lunch = ?, set dinner = ? where section_id = ? and mess_id = ?";
 		temp.update(sql, breakfast, lunch, dinner, sectionid, messid);
 	}
 
 	public void insert(int sectionid, int messid, int hall_no, String breakfast, String lunch, String dinner) {
-		String sql = "Insert into section values(?,?,?,?,?,?)";
+		String sql = "Insert into section values(?, ?, ?, ?, ?, ?)";
 		temp.update(sql, messid, sectionid, hall_no, breakfast, lunch, dinner);
 	}
 
-	public void delete(int sectionid) {
-		String sql = "Delete from section where section_id = ?";
-		temp.update(sql, sectionid);
+	public void delete(int messid, int sectionid) {
+		String sql = "Delete from section where mess_id = ? and section_id = ?";
+		temp.update(sql, messid, sectionid);
 	}
+
+	public void save(Section section) {
+		String sql = "Insert into section(section_id, mess_id, hall_no, breakfast, lunch, dinner) values(?, ?, ?, ?, ?, ?)";
+		temp.update(sql, section.getSection_id(), section.getMess_id(), section.getHall_no(), section.getBreakfast(), section.getLunch(), section.getDinner());
+	}
+	
 
 }
