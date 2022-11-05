@@ -57,7 +57,7 @@ public class StudentController {
         Student student = studentDAO.findByUsername(curr_user);
         model.addAttribute("loggedinusername", curr_user);
         model.addAttribute("student", student);
-        return "profile";
+        return "studentprofile";
 
     }
 

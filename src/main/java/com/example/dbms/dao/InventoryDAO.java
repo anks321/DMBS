@@ -27,7 +27,7 @@ public class InventoryDAO {
     
  
 	public void update(int cost, int quantity, String name,int item_id) {
-		String sql = "update inventories set cost = ?, quantity = ?, name = ?where item_id = ?";
+		String sql = "update inventories set cost = ?, quantity = ?, name = ? where item_id = ?";
 		temp.update(sql, cost, quantity, name, item_id);
 	} 
 
