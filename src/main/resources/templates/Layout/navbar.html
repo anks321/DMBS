@@ -20,9 +20,19 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
               </li>
+              <th:block th:if="${loggedinusername}">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" th:href="@{/loggedin}">Dashboard</a>
+                </li>
+                </th:block>
+              
+      
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" th:href="@{/about}">About</a>
               </li>
+              
+
+              
              
               
             </ul>
@@ -34,6 +44,7 @@
               
             </ul>
             <th:block th:unless="${loggedinusername}">
+              
             <ul class="navbar-nav m l-auto" style="float: right;">
                 <li class="nav-item">
                     <a class="nav-link active"  th:href="@{/login}">Login</a>
@@ -53,11 +64,10 @@
               </li>
           </ul>
         </th:block>
-          
-          <th:block th:if="${loggedinusername}" style="float: right;">
-            
-
+        <th:block th:if="${loggedinusername}" style="float: right;">
             <ul class="navbar-nav ml-auto"  style="float: right;">
+              
+
                 <li class="nav-item">
                     <a class="nav-link active"  th:href="@{/logout}">Logout</a>
                 </li>

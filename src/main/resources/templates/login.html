@@ -117,10 +117,10 @@ body {
       </style>
       <div class="wrapper">
         <div class="logo">
-            <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt="">
+            <img th:src="@{/images/login.jpeg}" alt="">
         </div>
         <div class="text-center mt-4 name">
-            Twitter
+            
         </div>
         <form method="POST" th:action="@{/login}" th:object="${user}">
             <div class="form-field d-flex align-items-center">
@@ -133,9 +133,7 @@ body {
             </div>
             <button class="btn btn-primary d-block w-100" type="submit">Log in</button>
         </form>
-        <div class="text-center fs-6">
-            <a href="#">Forget password?</a> or <a href="#">Sign up</a>
-        </div>
+        
     </div>
     
     

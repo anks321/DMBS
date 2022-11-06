@@ -21,7 +21,7 @@ public class HomeController {
         if (auth_Service.isAuthenticated(session)) {
             String username = auth_Service.getCurrentUser(session);
             model.addAttribute("loggedinusername", username);
-
+            model.addAttribute("role", session.getAttribute("role"));
         }
         return "home";
     }
@@ -31,7 +31,7 @@ public class HomeController {
         if (auth_Service.isAuthenticated(session)) {
             String username = auth_Service.getCurrentUser(session);
             model.addAttribute("loggedinusername", username);
-
+            model.addAttribute("role", session.getAttribute("role"));
         }
         return "about";
     }

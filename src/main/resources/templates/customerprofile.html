@@ -9,7 +9,9 @@
 </head>
 
 <body>
-<style>
+
+<Section>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -45,7 +47,7 @@
             width: 120px;
             height: 120px;
             background-color: #868d9b;
-            background: url('../images/customer.png');
+            
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -107,11 +109,10 @@
         }
     </style>
 
-<Section>
     <div class="card">
-        <div class="card_background_img"></div>
-        <div class="card_profile_img"></div>
-        <div class="user_details">
+        <img class="card_background_img" th:src="@{/images/back.png}" alt="">
+        <img class="card_profile_img" th:src="@{/images/customer.jpg}" alt="">
+            <div class="user_details">
             <h2 th:text="${customer.first_name}+' '+${customer.last_name}"></h2>
             <p>Customer Name</p>
         </div>

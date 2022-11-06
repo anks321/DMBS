@@ -7,17 +7,52 @@
 <!-- div th:replace="navbar :: navbar"></div> -->
 
 <section>
+    <style>
+        :root {
+--gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
+}
+
+
+.card {
+background: #222;
+border: 1px solid #dd2476;
+color: rgba(250, 250, 250, 0.8);
+margin-bottom: 2rem;
+
+}
+
+.btn {
+border: 5px solid;
+border-image-slice: 1;
+background: var(--gradient) !important;
+-webkit-background-clip: text !important;
+-webkit-text-fill-color: transparent !important;
+border-image-source:  var(--gradient) !important; 
+text-decoration: none;
+transition: all .4s ease;
+}
+
+.btn:hover, .btn:focus {
+background: var(--gradient) !important;
+-webkit-background-clip: none !important;
+-webkit-text-fill-color: #fff !important;
+border: 5px solid #fff !important; 
+box-shadow: #222 1px 0 10px;
+text-decoration: underline;
+}
+    </style>
+    
 <div class="container">
     <div class="row">
-        <th:block th:if=${student}><h1> Welcome <span th:text="${student.f_name}"></span> </h1>
+        <th:block th:if=${student}><h1 style="text-align: center;"> Welcome <span th:text="${student.f_name}"></span> </h1>
     </th:block>
     <th:block th:if=${customer}><h1> Welcome <span th:text="${customer.first_name}"></span> </h1>
     </th:block>
-    <th:block th:if=${Gadmin}><h1> Welcome <span th:text="Gadmin"></span> </h1>
+    <th:block th:if=${Gadmin}><h1 style="text-align: center;"> Welcome Global Admin </h1>
     </th:block>
-    <th:block th:if=${section_admin}><h1> Welcome <span th:text="section_head"></span> </h1>
+    <th:block th:if=${section_admin}><h1 style="text-align: center;"> Welcome <span th:text="section_head"></span> </h1>
     </th:block>
-    <th:block th:if=${employee}><h1> Welcome <span th:text="mess_head"></span> </h1>
+    <th:block th:if=${mess_head}><h1> Welcome <span th:text="mess_head"></span> </h1>
     </th:block>
     <!-- <th:block th:if=${admin}><h1> Welcome <span th:text="${empl.first_name}"></span> </h1>
     </th:block> -->
@@ -61,31 +96,152 @@
         </div>
     </th:block>
     <th:block th:if=${section_admin}>
-        <div class="row">
-            <div class="row-lg-3">
-                <a th:href="@{/localadmin/allstudents}" class="btn btn-primary btn-sm mb-3">Students</a>
-                <a th:href="@{/localadmin/allcustomers}" class="btn btn-primary btn-sm mb-3">Customers</a>
-                <a th:href="@{/localadmin/allinventories}" class="btn btn-primary btn-sm mb-3">Inventories</a>
-                <a th:href="@{/localadmin/allannouncements}" class="btn btn-primary btn-sm mb-3">Announcements</a>
-                <a th:href="@{/localadmin/allmenues}" class="btn btn-primary btn-sm mb-3">Menus</a>
-                <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
-            </div>
-        </div>
-    </th:block>
-    <th:block th:if=${Gadmin}>
-        <div class="row">
-            <div class="row-lg-3">
-                <a th:href="@{/gadmin/allmess}" class="btn btn-primary btn-sm mb-3">Mess</a>
-                <a th:href="@{/gadmin/allemployees}" class="btn btn-primary btn-sm mb-3">Employees</a>
+            <div class="container mx-auto mt-4">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                <img  th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                      
+                 
+                     <a th:href="@{/localadmin/allstudents}" class="btn mr-2"><i class="fas fa-link"></i>List of Students</a>
+                  
+                </div>
+                </div>
+                  </div>    
+                     <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                      
+                  
+                  <a th:href="@{/localadmin/allcustomers}" class="btn mr-2"><i class="fas fa-link"></i>Customers</a>
+                  
+                </div>
+                </div>
+                  </div>    
+                        <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/inv.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                      
+                  
+                  <a th:href="@{/localadmin/allinventories}" class="btn mr-2"><i class="fas fa-link"></i>Inventories</a>
+                  
+                </div>
+                </div>
+                </div>
+                  
+                  <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                      
+                  
+                     <a th:href="@{/localadmin/allannouncements}" class="btn mr-2"><i class="fas fa-link"></i>Announcements</a>
+                  
+                </div>
+                </div>
+                  </div>    
+                     <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                      
+                  
+                  <a th:href="@{/localadmin/allmenues}" class="btn mr-2"><i class="fas fa-link"></i>Menus</a>
+                  
+                </div>
+                </div>
+                  </div>    
+                        
+              </div>
+                
+                
                 
                 <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
-            </div>
-        </div>
+            
+        
     </th:block>
+    <th:block th:if=${Gadmin}>
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                <img  th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  
+                      
+                 
+                     <a th:href="@{/gadmin/addmess}" class="btn mr-2"><i class="fas fa-link"></i>Add mess</a>
+                  
+                </div>
+                </div>
+                  </div>    
+                     <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  
+                      
+                  
+                  <a th:href="@{/gadmin/allemployees}" class="btn mr-2"><i class="fas fa-link"></i>Employees</a>
+                  
+                </div>
+                </div>
+                  </div>
+            </div>
+            <div class="row">
+                <h1 style="text-align: center;">All Messes </h1>
+          
+            </div>
+            
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark"> 
+                <tr>
+                    <th>Mess</th>
+                    <th>Name</th>
+                    
+                    <th>Head</th>
+                    
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="me: ${mess}">
+                    <td th:text="${me.mess_id}"></td>
+                    <td th:text="${me.m_name}"></td>
+                    <td th:text="${me.Head_id}"></td>
+                    
+                  
+                    <td>
+                      <a  th:href="@{/gadmin/mess/delete/{id}(id=${me.mess_id})}"class="btn btn-danger">
+                          Delete
+                      </a>
+                      <a  th:href="@{/gadmin/mess/profile/{id}(id=${me.mess_id})}" class="btn btn-danger">
+                          View
+                      </a>
+                    </td>
+      
+                </tr>
+            </tbody>
+        </table>
+        
 
+    </th:block>
     
    
 </div>
+  
 </section>
 </body>
 </html>
+
+
