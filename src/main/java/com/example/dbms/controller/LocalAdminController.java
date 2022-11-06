@@ -57,9 +57,30 @@ public class LocalAdminController {
         System.out.println(students.get(0));
 
         model.addAttribute("students", students);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
 
         return "viewstudents";
+    }
+
+    @GetMapping("/localadmin/student/profile/{id}")
+    public String profile(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Student student = studentDAO.findByid(id);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("student", student);
+        model.addAttribute("role", "section admin");
+
+        return "studentprofile";
+
     }
 
     // CUSTOMERS
@@ -77,8 +98,30 @@ public class LocalAdminController {
 
         List<Customer> customers = customerDAO.allCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "viewcustomers";
+    }
+
+    @GetMapping("/localadmin/customer/profile/{id}")
+    public String custprofile(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Customer customer = customerDAO.findByid(id);
+        System.out.println(customer);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("customer", customer);
+        model.addAttribute("role", "section admin");
+
+        return "customerprofile";
+
     }
 
     // INVENTORIES
@@ -138,7 +181,7 @@ public class LocalAdminController {
         inventory.setMess_id(mess_no);
         inventory.setSection_id(section_no);
 
-        inventoryDAO.update(inventory.getCost(), inventory.getQuantity(),inventory.getName(), Item_Id);
+        inventoryDAO.update(inventory.getCost(), inventory.getQuantity(), inventory.getName(), Item_Id);
         return "redirect:/localadmin/allinventories";
     }
 
@@ -180,7 +223,7 @@ public class LocalAdminController {
         inventory.setSection_id(section_no);
 
         model.addAttribute("inventory", inventory);
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "addinventory";
     }
@@ -302,7 +345,7 @@ public class LocalAdminController {
         announcement.setSection_id(section_no);
 
         model.addAttribute("announcement", announcement);
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "addannouncement";
     }
@@ -434,7 +477,7 @@ public class LocalAdminController {
         section.setSection_id(section_no);
 
         model.addAttribute("section", section);
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "addlocalsection";
     }

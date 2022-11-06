@@ -41,7 +41,6 @@ public class StudentController {
     private ToastService toastService;
 
     // Forum, Poll, Announcements, Menu, Balance, Transactions
-    
 
     @GetMapping("/student/profile")
     public String profile(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -57,7 +56,7 @@ public class StudentController {
         Student student = studentDAO.findByUsername(curr_user);
         model.addAttribute("loggedinusername", curr_user);
         model.addAttribute("student", student);
-        return "profile";
+        return "studentprofile";
 
     }
 
@@ -66,7 +65,7 @@ public class StudentController {
 
         String loginMessage = "Please Sign in to proceed!!!";
 
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session) ) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -94,7 +93,7 @@ public class StudentController {
     public String Announce(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String loginMessage = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session) ) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -123,7 +122,7 @@ public class StudentController {
 
         String loginMessage = "Please Sign in to proceed!!!";
 
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session) ) {
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
@@ -138,7 +137,7 @@ public class StudentController {
         List<Transaction> list = transactionDAO.alltransactions(roll, 1);
         model.addAttribute("transactions", list);
         if (auth_Service.isAuthenticated(session)) {
-            model.addAttribute("loggedinUser", auth_Service.getCurrentUser(session));
+            model.addAttribute("loggedinusername", auth_Service.getCurrentUser(session));
 
             Student loggedUser = studentDAO.findByUsername(auth_Service.getCurrentUser(session));
             model.addAttribute("loggedUser", loggedUser);

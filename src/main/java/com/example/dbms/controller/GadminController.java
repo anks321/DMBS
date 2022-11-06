@@ -99,7 +99,7 @@ public class GadminController {
 
         model.addAttribute("mess", new Mess());
 
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "createmess";
     }
@@ -274,7 +274,7 @@ public class GadminController {
         System.out.println(students.get(0));
 
         model.addAttribute("students", students);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
 
         return "liststudents";
     }
@@ -337,37 +337,41 @@ public class GadminController {
         studentDAO.delete(id);
 
         model.addAttribute("role", "Gadmin");
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "redirect:/localadmin/allstudents";
     }
 
     // @GetMapping("/gadmin/student/add")
-    // public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    // public String studentAddDashboard(Model model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-    //     String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
-    //     if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
-    //         toastService.redirectWithErrorToast(redirectAttributes, Message);
-    //         return "redirect:/login";
-    //     }
-    //     model.addAttribute("role", "Gadmin");
-    //     String curr_user = auth_Service.getCurrentUser(session);
+    // String Message = "Sorry, You are not authorized to view this page!. Please
+    // Sign in as admin to proceed .......";
+    // if (!auth_Service.isAuthenticated(session) ||
+    // !auth_Service.isGadmin(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
+    // model.addAttribute("role", "Gadmin");
+    // String curr_user = auth_Service.getCurrentUser(session);
 
-    //     Student student = new Student();
+    // Student student = new Student();
 
-    //     model.addAttribute("student", student);
-    //     model.addAttribute("loggedinuser", curr_user);
+    // model.addAttribute("student", student);
+    // model.addAttribute("loggedinuser", curr_user);
 
-    //     return "addstudent";
+    // return "addstudent";
     // }
 
     // @PostMapping("/gadmin/student/add")
-    // public String studentAddDashboardPost(@ModelAttribute("student") Student student, Model model,
-    //         HttpSession session) {
+    // public String studentAddDashboardPost(@ModelAttribute("student") Student
+    // student, Model model,
+    // HttpSession session) {
 
-    //     studentDAO.save(student);
+    // studentDAO.save(student);
 
-    //     return "redirect:/gadmin/allstudents";
+    // return "redirect:/gadmin/allstudents";
     // }
 
     // CUSTOMERS
@@ -385,7 +389,7 @@ public class GadminController {
 
         List<Customer> customers = customerDAO.allCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("loggedinUser", username);
+        model.addAttribute("loggedinusername", username);
         return "listcustomers";
     }
 
@@ -406,7 +410,7 @@ public class GadminController {
 
         model.addAttribute("customer", customer);
 
-        model.addAttribute("loggedinUser", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "updatecustomer";
     }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import com.example.dbms.service.ToastService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +33,26 @@ public class CustomercController {
     private StudentDAO studentDAO;
     @Autowired
     private AnnouncementsDAO announcementsDAO;
+    @Autowired
+    private ToastService toastService;
+
+    @GetMapping("/customer/profile")
+    public String profile(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if (!auth_Service.isAuthenticated(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Customer customer = customerDAO.findByUsername(curr_user);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("customer", customer);
+        return "customerprofile";
+
+    }
 
     @GetMapping("/customerannouncement")
     public String Announce(Model model, HttpSession session, RedirectAttributes redirectAttributes) {

@@ -205,7 +205,11 @@
             </div>
         </div>
         <div class="text-center">
-            <a type="button" class="btn btn-primary" th:href="@{/admin/students}">Back</a>
+            <th:block th:if="${role=='section head'}">
+                <a type="button" class="btn btn-primary" th:href="@{/localadmin/allstudents}">Back to</a>
+            </th:block>
+            
+                <a type="button" class="btn btn-primary" th:href="@{/loggedin}">Back</a>
         </div>
            
 

@@ -133,7 +133,7 @@ public class LoginController {
 
         // System.out.println(session.getAttribute("loggedUser").toString());
 
-        // model.addAttribute("loggedinUser",
+        // model.addAttribute("loggedinusername",
         // authenticateService.getCurrentUser(session));
         String username = authenticateService.getCurrentUser(session);
         if (authenticateService.isGadmin(session)) {
