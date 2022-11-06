@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import com.example.dbms.dao.*;
 import java.util.List;
 
+import com.example.dbms.model.Employee;
 import com.example.dbms.model.Mess;
 import com.example.dbms.model.User;
 import com.example.dbms.service.AuthenticateService;
@@ -158,7 +159,12 @@ public class LoginController {
         }
         if (authenticateService.issectionadmin(session)) {
             System.out.println("check");
+            Employee emp = employeeDAO.findByUsername(username);
+            String first_name = emp.getFirst_name();
+            String last_name = emp.getLast_name();
             model.addAttribute("section_admin", employeeDAO.findByUsername(username));
+            model.addAttribute("f_n", first_name);
+            model.addAttribute("l_n", last_name);
             model.addAttribute("loggedinusername", username);
             return "faltu";
         }

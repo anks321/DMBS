@@ -50,7 +50,7 @@ text-decoration: underline;
     </th:block>
     <th:block th:if=${Gadmin}><h1 style="text-align: center;"> Welcome Global Admin </h1>
     </th:block>
-    <th:block th:if=${section_admin}><h1 style="text-align: center;"> Welcome <span th:text="section_head"></span> </h1>
+    <th:block th:if=${section_admin}><h1 style="text-align: center;"> Welcome <span th:text="${f_n}+' '+${l_n}"></span> </h1>
     </th:block>
     <th:block th:if=${mess_head}><h1> Welcome <span th:text="mess_head"></span> </h1>
     </th:block>
