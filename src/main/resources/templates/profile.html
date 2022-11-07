@@ -7,106 +7,110 @@
     <title>Document</title>
 </head>
 <body>
-    <style>* {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        background-color: #e1e7ed;
-        text-align: center;
-    }
-    
-    h3 {
-        font-size: 18px;
-        font-weight: 500;
-        color: #33363b;
-    }
-    
-    p{
-        font-size: 14px;
-        color: #868d9b;
-    }
-    
-    .card {
-        width: 600px;
-        height: 600px;
-        background-color: #ffffff;
-        margin: 0 auto;
-        margin-top: 80px;
-        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-    }
-    
-    .card_profile_img {
-        width: 120px;
-        height: 120px;
-        background-color: #868d9b;
-        background: url("https://source.unsplash.com/7Sz71zuuW4k");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        border: 2px solid #ffffff;
-        border-radius: 120px;
-        margin: 0 auto;
-        margin-top: -60px;
-    
-    }
-    
-    .card_background_img {
-        width: 100%;
-        height: 180px;
-        background-color: #e1e7ed;
-        background: url("https://source.unsplash.com/9wg5jCEPBsw");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
-    
-    .user_details p {
-        margin-bottom: 20px;
-        margin-top: -5px;
-    }
-    
-    .user_details h3 {
-        margin-top: 10px;
-    }
-    
-    .card_count {
-        padding: 30px;
-        border-top: 1px solid #dde1e7;
-    }
-    
-    .count {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 28px;
-    }
-    
-    .count p {
-        margin-top: -10px;
-    }
-    
-    .btn {
-        padding: 16px;
-        width: 100%;
-        border: none;
-        outline: none;
-        border-radius: 4px;
-        background-color: #24c5a1;
-        color: #ffffff;
-        cursor: pointer;
-        text-align: center;
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-    }
-    </style>
     
 <Section>
+  <style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e1e7ed;
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #33363b;
+}
+
+p{
+    font-size: 14px;
+    color: #868d9b;
+}
+
+.card {
+    width: 600px;
+    height: 600px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    margin-top: 80px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+}
+
+.card_profile_img {
+    width: 120px;
+    height: 120px;
+    background-color: #868d9b;
+    background: url("https://source.unsplash.com/7Sz71zuuW4k");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #ffffff;
+    border-radius: 120px;
+    margin: 0 auto;
+    margin-top: -60px;
+
+}
+
+.card_background_img {
+    width: 100%;
+    height: 180px;
+    background-color: #e1e7ed;
+    background: url("C:\\Users\\Admin\\Desktop\\DMBS\\src\\main\\resources\\images\\back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.user_details p {
+    margin-bottom: 20px;
+    margin-top: -5px;
+}
+
+.user_details h3 {
+    margin-top: 10px;
+}
+
+.card_count {
+    padding: 30px;
+    border-top: 1px solid #dde1e7;
+}
+
+.count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.count p {
+    margin-top: -10px;
+}
+
+.btn {
+    padding: 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background-color: #24c5a1;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+</style>
+
     <div class="card">
-        <div class="card_background_img"></div>
+        <div class="card_background_img">
+          <img 
+th:src="@{C:\Users\Admin\Desktop\DMBS\src\main\resources\images\back.jpg}" >
+        </div>
         <div class="card_profile_img"></div>
         <div class="user_details">
             <h3>Gordon Ramsay</h3>
@@ -149,87 +153,8 @@
     </div>
    
     
-    <div class="container">
-        <div class="grid-7 element-animation">
-          <!--card-1-->
-          <div class="card color-card">
-            <ul>
-              <li><i class="fas fa-arrow-left i-l w"></i></li>
-              <li><i class="fas fa-ellipsis-v i-r w"></i></li>
-              <li><i class="far fa-heart i-r w"></i></li>
-            </ul>
-            <img src="https://images.unsplash.com/photo-1499557354967-2b2d8910bcca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7d5363c18112a02ce22d0c46f8570147&auto=format&fit=crop&w=635&q=80%20635w" alt="profile-pic" class="profile">
-            <h1 class="title">Bevely Little</h1>
-            <p class="job-title"> SENIOR PRODUCT DESIGNER</p>
-            <div class="desc top">
-              <p>Create usable interface and designs @GraphicSpark</p>
-            </div>
-            <button class="btn color-a top"> Hire me</button>
       
-            <hr>
-            <div class="container">
-              <div class="content">
-                <div class="grid-2">
-                  <button class="color-b circule"> <i class="fab fa-dribbble fa-2x"></i></button>
-                  <h2 class="title">12.3k</h2>
-                  <p class="followers">Followers</p>
-                </div>
-                <div class="grid-2">
-                  <button class="color-c circule"><i class="fab fa-behance fa-2x"></i></button>
-                  <h2 class="title">16k</h2>
-                  <p class="followers">Followers</p>
-                </div>
-                <div class="grid-2">
-                  <button class="color-d circule"><i class="fab fa-github-alt fa-2x"></i></button>
-                  <h2 class="title">17.8k</h2>
-                  <p class="followers">Followers</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!--card-2-->
-      
-        <div class="grid-7 element-animation">
-          <div class="card color-card-2">
-            <ul>
-              <li><i class="fas fa-arrow-left i-l b"></i></li>
-              <li><i class="fas fa-ellipsis-v i-r b"></i></li>
-              <li><i class="far fa-heart i-r b"></i></li>
-            </ul>
-            <img src="https://images.unsplash.com/photo-1499557354967-2b2d8910bcca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7d5363c18112a02ce22d0c46f8570147&auto=format&fit=crop&w=635&q=80%20635w" alt="profile-pic" class="profile">
-            <h1 class="title-2">Bevely Little</h1>
-            <p class="job-title"> SENIOR PRODUCT DESIGNER</p>
-            <div class="desc top">
-              <p>Create usable interface and designs @GraphicSpark</p>
-            </div>
-            <button class="btn color-a top"> Hire me</button>
-      
-            <hr class="hr-2">
-            <div class="container">
-              <div class="content">
-                <div class="grid-2">
-                  <button class="color-b circule"> <i class="fab fa-dribbble fa-2x"></i></button>
-                  <h2 class="title-2">12.3k</h2>
-                  <p class="followers">Followers</p>
-                </div>
-                <div class="grid-2">
-                  <button class="color-c circule"><i class="fab fa-behance fa-2x"></i></button>
-                  <h2 class="title-2">16k</h2>
-                  <p class="followers">Followers</p>
-                </div>
-                <div class="grid-2">
-                  <button class="color-d circule"><i class="fab fa-github-alt fa-2x"></i></button>
-                  <h2 class="title-2">17.8k</h2>
-                  <p class="followers">Followers</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+        
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
       <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">

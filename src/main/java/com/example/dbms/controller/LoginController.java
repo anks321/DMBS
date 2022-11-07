@@ -2,11 +2,11 @@ package com.example.dbms.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.dbms.dao.StudentDAO;
+import com.example.dbms.dao.*;
+import java.util.List;
 
-import com.example.dbms.dao.CustomerDao;
-import com.example.dbms.dao.EmployeeDAO;
-
+import com.example.dbms.model.Employee;
+import com.example.dbms.model.Mess;
 import com.example.dbms.model.User;
 import com.example.dbms.service.AuthenticateService;
 import com.example.dbms.service.ToastService;
@@ -32,9 +32,11 @@ public class LoginController {
     private StudentDAO studentDAO;
     @Autowired
     private EmployeeDAO employeeDAO;
-    //
+
     @Autowired
     private CustomerDao customerDAO;
+    @Autowired
+    private MessDAO messDAO;
 
     @Autowired
     private ToastService toastService;
@@ -126,6 +128,8 @@ public class LoginController {
 
     @GetMapping("/loggedin")
     public String welcome(Model model, HttpSession session) {
+        List<Mess> mess = messDAO.getallMess();
+        model.addAttribute("mess", mess);
 
         // System.out.println(session.getAttribute("loggedUser").toString());
 
@@ -149,13 +153,23 @@ public class LoginController {
             return "faltu";
         }
         if (authenticateService.isadmin(session)) {
-            model.addAttribute("employee", employeeDAO.findByUsername(username));
+            Employee emp = employeeDAO.findByUsername(username);
+            String first_name = emp.getFirst_name();
+            String last_name = emp.getLast_name();
+            model.addAttribute("f_n", first_name);
+            model.addAttribute("l_n", last_name);
+            model.addAttribute("mess_head", employeeDAO.findByUsername(username));
             model.addAttribute("loggedinusername", username);
             return "faltu";
         }
         if (authenticateService.issectionadmin(session)) {
             System.out.println("check");
+            Employee emp = employeeDAO.findByUsername(username);
+            String first_name = emp.getFirst_name();
+            String last_name = emp.getLast_name();
             model.addAttribute("section_admin", employeeDAO.findByUsername(username));
+            model.addAttribute("f_n", first_name);
+            model.addAttribute("l_n", last_name);
             model.addAttribute("loggedinusername", username);
             return "faltu";
         }

@@ -147,7 +147,7 @@ public class LocalAdminController {
 
         model.addAttribute("inventories", Inventories);
 
-        model.addAttribute("UserLoggedIn", username);
+        model.addAttribute("loggedinusername", username);
         return "listinventories";
     }
 
@@ -167,7 +167,7 @@ public class LocalAdminController {
 
         model.addAttribute("inventory", inventory);
 
-        model.addAttribute("curr_user", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "updateinventory";
     }
@@ -201,7 +201,7 @@ public class LocalAdminController {
 
         inventoryDAO.delete(Item_Id);
 
-        model.addAttribute("curr_user", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "redirect:/localadmin/allinventories";
     }
@@ -266,7 +266,7 @@ public class LocalAdminController {
 
         model.addAttribute("announcements", announcements);
 
-        model.addAttribute("UserLoggedIn", username);
+        model.addAttribute("loggedinusername", username);
         return "listannouncements";
     }
 
@@ -286,7 +286,7 @@ public class LocalAdminController {
 
         model.addAttribute("announcement", announcement);
 
-        model.addAttribute("curr_user", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "updateannouncement";
     }
@@ -321,7 +321,7 @@ public class LocalAdminController {
 
         announcementsDAO.delete(Item_Id);
 
-        model.addAttribute("curr_user", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "redirect:/localadmin/allannouncements";
     }
@@ -390,7 +390,7 @@ public class LocalAdminController {
 
         model.addAttribute("section", section);
 
-        model.addAttribute("UserLoggedIn", username);
+        model.addAttribute("loggedinusername", username);
         return "listlocalsections";
     }
 
@@ -415,7 +415,7 @@ public class LocalAdminController {
 
         model.addAttribute("section", section);
 
-        model.addAttribute("curr_user", username);
+        model.addAttribute("loggedinusername", username);
 
         return "updatelocalsection";
     }
@@ -453,7 +453,7 @@ public class LocalAdminController {
 
         sectionDAO.delete(mess_no, section_no);
 
-        model.addAttribute("curr_user", curr_user);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "redirect:/localadmin/allmenues";
     }

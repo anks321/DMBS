@@ -104,7 +104,7 @@ public class AuthenticateService {
 
     public void loginAdmin(HttpSession session, String username) {
         session.setAttribute(loggedUser, username);
-        session.setAttribute("role", "admin");
+        session.setAttribute("role", "mess head");
     }
 
     public void loginsectionAdmin(HttpSession session, String username) {
@@ -134,7 +134,7 @@ public class AuthenticateService {
 
     public Boolean isadmin(HttpSession session) {
 
-        if (session.getAttribute("role").equals("admin")) {
+        if (session.getAttribute("role").equals("mess head")) {
             System.out.println(session.getAttribute("role"));
             return true;
         } else

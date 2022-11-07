@@ -82,6 +82,9 @@ public class StudentController {
         String lunch = Menu.getLunch();
         String dinner = Menu.getDinner();
 
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("mess_no", mess_no);
+        model.addAttribute("section_no", section_no);
         model.addAttribute("breakfast", breakfast);
         model.addAttribute("lunch", lunch);
         model.addAttribute("dinner", dinner);
