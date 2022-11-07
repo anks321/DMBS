@@ -11,8 +11,7 @@ import lombok.AllArgsConstructor;
 public class Questions {
     private int questionid;
     private String StartTime;
-    private String EndTime;
-    private String text;
+    private boolean Finished;
     // public Questions() {
     // }
 

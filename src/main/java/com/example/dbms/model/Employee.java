@@ -1,6 +1,7 @@
 package com.example.dbms.model;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,7 @@ public class Employee {
     private String street;
     private Integer mess_id;
     private Integer section_id;
+    public List<Questions> getQuestions() {
+        return null;
+    }
 }

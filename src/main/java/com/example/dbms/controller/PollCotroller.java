@@ -139,7 +139,7 @@ public class PollCotroller {
         return "redirect:/student/polls";
 
     }
-
+    
     @GetMapping("/polls/create")
     public String createpoll(HttpSession session, RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";

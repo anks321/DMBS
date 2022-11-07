@@ -40,6 +40,8 @@ public class LocalAdminController {
     private TransactionDAO transactionDAO;
     @Autowired
     private ToastService toastService;
+    @Autowired
+    private QuestionsDAO questionDAO;
 
     // STUDENTS
 
@@ -496,6 +498,42 @@ public class LocalAdminController {
         sectionDAO.save(section);
 
         return "redirect:/localadmin/allmenues";
+    }
+
+    @GetMapping("/localadmin/forums/add")
+    public String forumsAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        List<Forum> forums = forumDAO.getby ;
+        model.addAttribute("loggedinusername", curr_user);
+
+        return "localadminforums";
+    }
+
+    @GetMapping("/localadmin/allpolls")
+    public String getallpolls(Model model, HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            // toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+        Employee emp = employeeDAO.findByUsername(curr_user);
+
+        List<Questions> questions = questionDAO.getQuestionbySection(emp.getSection_id());
+        model.addAttribute("questions", questions);
+
+        return "pollquestionlist";
+
     }
 
 }
