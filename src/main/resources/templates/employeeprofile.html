@@ -9,192 +9,239 @@
 </head>
 
 <body>
-    <!-- div th:replace="navbar :: navbar"></div> --> 8
+
+<Section>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        body{
+    margin-top:20px;
+    color: #1a202c;
+    text-align: left;
+    background-color: #e2e8f0;    
+}
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
 
-        body {
-            background-color: #e1e7ed;
-            text-align: center;
-        }
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
 
-        h3 {
-            font-size: 18px;
-            font-weight: 500;
-            color: #33363b;
-        }
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
 
-        p {
-            font-size: 14px;
-            color: #868d9b;
-        }
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
 
-        .card {
-            width: 600px;
-            height: 600px;
-            background-color: #ffffff;
-            margin: 0 auto;
-            margin-top: 80px;
-            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-        }
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
 
-        .card_profile_img {
-            width: 120px;
-            height: 120px;
-            background-color: #868d9b;
-            background: url('../images/back.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            border: 2px solid #ffffff;
-            border-radius: 120px;
-            margin: 0 auto;
-            margin-top: -60px;
-
-        }
-
-        .card_background_img {
-            width: 100%;
-            height: 180px;
-            background-color: #e1e7ed;
-            background: url("https://source.unsplash.com/9wg5jCEPBsw");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .user_details p {
-            margin-bottom: 20px;
-            margin-top: -5px;
-        }
-
-        .user_details h3 {
-            margin-top: 10px;
-        }
-
-        .card_count {
-            padding: 30px;
-            border-top: 1px solid #dde1e7;
-        }
-
-        .count {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 28px;
-        }
-
-        .count p {
-            margin-top: -10px;
-        }
-
-        .btn {
-            padding: 16px;
-            width: 100%;
-            border: none;
-            outline: none;
-            border-radius: 4px;
-            background-color: #24c5a1;
-            color: #ffffff;
-            cursor: pointer;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
     </style>
-
-    <Section>
-        <div class="card">
-            <div class="card_background_img"></div>
-            <div class="card_profile_img"></div>
-            <div class="user_details">
-                <h2 th:text="${employee.first_name}+' '+${employee.last_name}"></h2>
-                <p>Employee Name</p>
-            </div>
-            <div class="card_count">
-                <div class="count">
-                    <div class="fans">
-                        <h2 th:text="${employee.username}"></h2>
-                        <p>Username</p>
+    <div class="container">
+        <div class="main-body">
+        
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-center text-center">
+                        <img src="/images/employee.jpg" alt="Admin" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                          <h4 th:text="${employee.first_name}+' '+${employee.last_name}"></h4>
+                          
+                        </div>
+                      </div>
                     </div>
-                    <div class="following">
-                        <h2 th:text="${employee.eid}"></h2>
-                        <p>Employee Id</p>
-                    </div>
-                    <div class="post">
-                        <h2 th:text="${employee.salary}"></h2>
-                        <p>Salary</p>
-                    </div>
+                  </div>
+                  
                 </div>
-                <div class="count">
-                    <div class="fans">
-                        <h2 th:text="${employee.age}"></h2>
-                        <p>Age</p>
+                <div class="col-md-8">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Username</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.username}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">employee Id</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.eid}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Mess Id</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.mess_id}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Section id</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.section_id}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Designation</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.Designation}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.email}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Phone Number</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.phone_no}">
+                          
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Salary</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.salary}">
+                          
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Date of Birth</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.dob}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">PIN Number</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.pin}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">City</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.city}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Balance</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary"th:text="${employee.balance}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Aadhar No</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.e_aadhar_number}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Acount No</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.account_no}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Ifsc code</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" th:text="${employee.ifsc}">
+                        
+                        </div>
+                      </div>
+                      <hr>
+                      
+                      
+                      <div class="row">
+                        <div class="col-sm-12">
+                            <a th:href="@{/localadmin/allemployees}" class="btn btn-info ">Back</a>
+                        </div>
+                      </div>
                     </div>
-                    <div class="following">
-                        <h2 th:text="${employee.pin}"></h2>
-                        <p>PIN</p>
-                    </div>
-                    <div class="post">
-                        <h2 th:text="${employee.dob}"></h2>
-                        <p>Date of Birth</p>
-                    </div>
+                  </div>
+    
+                  
                 </div>
-                <div class="count">
-                    <div class="fans">
-                        <h2 th:text="${employee.phone_no}"></h2>
-                        <p>Phone Number</p>
-                    </div>
-                    <div class="following">
-                        <h2 th:text="${employee.email}"></h2>
-                        <p>Email Id</p>
-                    </div>
-                    <div class="post">
-                        <h2 th:text="${employee.Designation}"></h2>
-                        <p>Designation</p>
-                    </div>
-                </div>
-                <div class="count">
-                    <div class="fans">
-                        <h2 th:text="${employee.e_aadhar_number}"></h2>
-                        <p>Aadhar Number</p>
-                    </div>
-                    <div class="following">
-                        <h2 th:text="${employee.account_no}"></h2>
-                        <p>Account Number</p>
-                    </div>
-                    <div class="post">
-                        <h2 th:text="${employee.ifsc}"></h2>
-                        <p>IFSC Number</p>
-                    </div>
-                </div>
-                <div class="count">
-                    <div class="fans">
-                        <h2 th:text="${employee.mess_id}"></h2>
-                        <p>Mess Id</p>
-                    </div>
-                    <div class="following">
-                        <h2 th:text="${employee.section_id}"></h2>
-                        <p>Section Id</p>
-                    </div>
-                    <div class="post">
-                        <h2 th:text="${employee.city}"></h2>
-                        <p>Posts</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center">
-            <button type="button" class="btn btn-primary" th:href="@{/loggedin}">Back</button>
-        </div>
-           
-
-    </Section>
+              </div>
+    
+    </div>
+    
+</Section>
 </body>
 
 </html>
+

@@ -52,7 +52,7 @@ text-decoration: underline;
     </th:block>
     <th:block th:if=${section_admin}><h1 style="text-align: center;"> Welcome <span th:text="${f_n}+' '+${l_n}"></span> </h1>
     </th:block>
-    <th:block th:if=${mess_head}><h1> Welcome <span th:text="mess_head"></span> </h1>
+    <th:block th:if=${mess_head}><h1> Welcome <span th:text="${f_n}+' '+${l_n}"></span> </h1>
     </th:block>
     <!-- <th:block th:if=${admin}><h1> Welcome <span th:text="${empl.first_name}"></span> </h1>
     </th:block> -->
@@ -84,16 +84,72 @@ text-decoration: underline;
             </div>
         </div>
     </th:block>
-    <th:block th:if=${employee}>
+    <th:block th:if=${mess_head}>
+      <div class="container mx-auto mt-4">
         <div class="row">
-            <div class="row-lg-3">
-                <a th:href="@{/admin/allsections}" class="btn btn-primary btn-sm mb-3">Sections</a>
-                <a th:href="@{/admin/allemployees}" class="btn btn-primary btn-sm mb-3">Employees</a>
-                <a th:href="@{/admin/customers}" class="btn btn-primary btn-sm mb-3">Customers</a>
-                <a th:href="@{/admin/students} " class="btn btn-primary btn-sm mb-3">Students</a>
-                
-            </div>
+          <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+        <img  th:src="@{/images/mess.jpg}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+              
+         
+          <a th:href="@{/admin/allsections}" class="btn btn-primary btn-sm mb-3">Sections</a>
+                      
+          
         </div>
+        </div>
+          </div>    
+             <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img th:src="@{/images/employee.png}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+              
+          
+          <a th:href="@{/admin/allemployees}" class="btn btn-primary btn-sm mb-3">Employees</a>
+                      
+          
+        </div>
+        </div>
+          </div>    
+                <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img th:src="@{/images/customer.jpg}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+              
+          
+          <a th:href="@{/admin/customers}" class="btn btn-primary btn-sm mb-3">Customers</a>
+                      
+          
+        </div>
+        </div>
+        </div>
+          
+          <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+        <img th:src="@{/images/student2.jpg}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+              
+          
+          <a th:href="@{/admin/students} " class="btn btn-primary btn-sm mb-3">Students</a>
+                      
+          
+        </div>
+        </div>
+          </div>    
+                
+                
+      </div>
+        
+        
+        
+        <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
+      
+      
+      
     </th:block>
     <th:block th:if=${section_admin}>
             <div class="container mx-auto mt-4">
@@ -219,8 +275,6 @@ text-decoration: underline;
                     <td th:text="${me.mess_id}"></td>
                     <td th:text="${me.m_name}"></td>
                     <td th:text="${me.Head_id}"></td>
-                    
-                  
                     <td>
                       <a  th:href="@{/gadmin/mess/delete/{id}(id=${me.mess_id})}"class="btn btn-danger">
                           Delete
@@ -243,5 +297,4 @@ text-decoration: underline;
 </section>
 </body>
 </html>
-
 

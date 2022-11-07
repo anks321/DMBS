@@ -153,6 +153,11 @@ public class LoginController {
             return "faltu";
         }
         if (authenticateService.isadmin(session)) {
+            Employee emp = employeeDAO.findByUsername(username);
+            String first_name = emp.getFirst_name();
+            String last_name = emp.getLast_name();
+            model.addAttribute("f_n", first_name);
+            model.addAttribute("l_n", last_name);
             model.addAttribute("mess_head", employeeDAO.findByUsername(username));
             model.addAttribute("loggedinusername", username);
             return "faltu";
