@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
 
-<head>Register Customer</head>
+<head>Login Controller</head>
 <!-- <head th:replace="header :: header"></head> -->
 
 <body text-align="center">
@@ -62,324 +62,249 @@
         <th:block th:if=${mess_head}>
           <h1> Welcome <span th:text="${f_n}+' '+${l_n}"></span> </h1>
         </th:block>
-        <!-- <th:block th:if=${admin}><h1> Welcome <span th:text="${empl.first_name}"></span> </h1>
-    </th:block> -->
       </div>
 
-      <!-- <th:block th:if=${student}>
-        <div class="row">
-          <div class="row-lg-3">
-            <a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
-            <a th:href="@{/studentmenu} " class="btn btn-primary btn-sm mb-3">Menue</a>
-            <a th:href="@{/studentannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
-            <a th:href="@{/student/polls}" class="btn btn-primary btn-sm mb-3">Polls</a>
-            <a th:href="@{/student/forum}" class="btn btn-primary btn-sm mb-3">Forum</a>
-            <a th:href="@{/Transactions}" class="btn btn-primary btn-sm mb-3">My Transactions</a>
-          </div>
-        </div>
-      </th:block> -->
       <th:block th:if=${student}>
-      <div class="container mx-auto mt-4">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img th:src="@{/images/proff.jpeg}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <a th:href="@{/studentmenu}" class="btn btn-primary btn-sm mb-3">Menue</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <a th:href="@{/studentannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img th:src="@{/images/poll.png}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <a th:href="@{/student/polls} " class="btn btn-primary btn-sm mb-3">Polls</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img th:src="@{/images/forum.jpg}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <a th:href="@{/student/forum} " class="btn btn-primary btn-sm mb-3">Forum</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img th:src="@{/images/trann.jpg}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <a th:href="@{/Transactions} " class="btn btn-primary btn-sm mb-3">My Transactions</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        </th:block>
-
-        <!-- <th:block th:if=${customer}>
+        <div class="container mx-auto mt-4">
           <div class="row">
-            <div class="row-lg-3">
-              <a th:href="@{/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
-              <a th:href="@{/customermenu} " class="btn btn-primary btn-sm mb-3">Menue</a>
-              <a th:href="@{/customerannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
-              <a th:href="@{/customertransactions}" class="btn btn-primary btn-sm mb-3">Transactions</a>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/proff.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/studentmenu}" class="btn btn-primary btn-sm mb-3">Menue</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/studentannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/poll.png}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/student/polls} " class="btn btn-primary btn-sm mb-3">Polls</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/forum.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/student/forum} " class="btn btn-primary btn-sm mb-3">Forum</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/trann.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/Transactions} " class="btn btn-primary btn-sm mb-3">My Transactions</a>
+                </div>
+              </div>
             </div>
           </div>
-        </th:block> -->
-        <th:block th:if=${customer}>
-    <div class="container mx-auto mt-4">
-        <div class="row">
+      </th:block>
+
+      <th:block th:if=${customer}>
+        <div class="container mx-auto mt-4">
+          <div class="row">
             <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/proff.jpeg}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <a th:href="@{/customer/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
-                    </div>
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/proff.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/customer/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
                 </div>
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <a th:href="@{/customermenu}" class="btn btn-primary btn-sm mb-3">Menue</a>
-                    </div>
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/customermenu}" class="btn btn-primary btn-sm mb-3">Menue</a>
                 </div>
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <a th:href="@{/customerannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
-                    </div>
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/customerannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
                 </div>
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/trann.jpg}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <a th:href="@{/customertransactions} " class="btn btn-primary btn-sm mb-3">My Transactions</a>
-                    </div>
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/trann.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <a th:href="@{/customertransactions} " class="btn btn-primary btn-sm mb-3">My Transactions</a>
                 </div>
+              </div>
             </div>
+          </div>
+      </th:block>
+
+      <th:block th:if=${mess_head}>
+        <div class="container mx-auto mt-4">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/mess.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/admin/allsections}" class="btn btn-primary btn-sm mb-3">Sections</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/employee.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/admin/allemployees}" class="btn btn-primary btn-sm mb-3">Employees</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/customer.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/admin/customers}" class="btn btn-primary btn-sm mb-3">Customers</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/student2.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/admin/students} " class="btn btn-primary btn-sm mb-3">Students</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </th:block>
+
+      <th:block th:if=${section_admin}>
+        <div class="container mx-auto mt-4">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/student2.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/allstudents}" class="btn mr-2"><i class="fas fa-link"></i>List of
+                    Students</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/customer3.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/allcustomers}" class="btn mr-2"><i class="fas fa-link"></i>Customers</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/inven.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/allinventories}" class="btn mr-2"><i class="fas fa-link"></i>Inventories</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/allannouncements}" class="btn mr-2"><i
+                      class="fas fa-link"></i>Announcements</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/allmenues}" class="btn mr-2"><i class="fas fa-link"></i>Menus</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </th:block>
+
+      <th:block th:if=${Gadmin}>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/gadmin/addmess}" class="btn mr-2"><i class="fas fa-link"></i>Add mess</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/gadmin/allemployees}" class="btn mr-2"><i class="fas fa-link"></i>Employees</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <h1 style="text-align: center;">All Messes </h1>
+          </div>
         </div>
-</th:block>
-
-        <th:block th:if=${mess_head}>
-          <div class="container mx-auto mt-4">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/mess.jpg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <a th:href="@{/admin/allsections}" class="btn btn-primary btn-sm mb-3">Sections</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/employee.png}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <a th:href="@{/admin/allemployees}" class="btn btn-primary btn-sm mb-3">Employees</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/customer.jpg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <a th:href="@{/admin/customers}" class="btn btn-primary btn-sm mb-3">Customers</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/student2.jpg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <a th:href="@{/admin/students} " class="btn btn-primary btn-sm mb-3">Students</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </th:block>
-
-        <th:block th:if=${section_admin}>
-          <div class="container mx-auto mt-4">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/student2.jpg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-
-                    <a th:href="@{/localadmin/allstudents}" class="btn mr-2"><i class="fas fa-link"></i>List of
-                      Students</a>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/customer2.webp}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-
-                    <a th:href="@{/localadmin/allcustomers}" class="btn mr-2"><i class="fas fa-link"></i>Customers</a>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/fridge.webp}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-
-                    <a th:href="@{/localadmin/allinventories}" class="btn mr-2"><i
-                        class="fas fa-link"></i>Inventories</a>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-
-                    <a th:href="@{/localadmin/allannouncements}" class="btn mr-2"><i
-                        class="fas fa-link"></i>Announcements</a>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-
-                    <a th:href="@{/localadmin/allmenues}" class="btn mr-2"><i class="fas fa-link"></i>Menus</a>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-
-
-            <!-- <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a> -->
-
-
-        </th:block>
-        <th:block th:if=${Gadmin}>
-          <div class="container">
-
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top"
-                    alt="...">
-                  <div class="card-body">
-
-
-
-                    <a th:href="@{/gadmin/addmess}" class="btn mr-2"><i class="fas fa-link"></i>Add mess</a>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/pngtree-vector-avatar-icon-png-image_313572.jpg}" class="card-img-top"
-                    alt="...">
-                  <div class="card-body">
-
-
-
-                    <a th:href="@{/gadmin/allemployees}" class="btn mr-2"><i class="fas fa-link"></i>Employees</a>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <h1 style="text-align: center;">All Messes </h1>
-
-            </div>
-
-          </div>
-          <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-              <tr>
-                <th>Mess</th>
-                <th>Name</th>
-
-                <th>Head</th>
-
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="me: ${mess}">
-                <td th:text="${me.mess_id}"></td>
-                <td th:text="${me.m_name}"></td>
-                <td th:text="${me.Head_id}"></td>
-                <td>
-                  <a th:href="@{/gadmin/mess/delete/{id}(id=${me.mess_id})}" class="btn btn-danger">
-                    Delete
-                  </a>
-                  <a th:href="@{/gadmin/mess/profile/{id}(id=${me.mess_id})}" class="btn btn-danger">
-                    View
-                  </a>
-                </td>
-
-              </tr>
-            </tbody>
-          </table>
-
-
-        </th:block>
-
-
-      </div>
-
+        <table class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Mess</th>
+              <th>Name</th>
+              <th>Head</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="me: ${mess}">
+              <td th:text="${me.mess_id}"></td>
+              <td th:text="${me.m_name}"></td>
+              <td th:text="${me.Head_id}"></td>
+              <td>
+                <a th:href="@{/gadmin/mess/delete/{id}(id=${me.mess_id})}" class="btn btn-danger">
+                  Delete
+                </a>
+                <a th:href="@{/gadmin/mess/profile/{id}(id=${me.mess_id})}" class="btn btn-danger">
+                  View
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </th:block>
+    </div>
   </section>
 </body>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})"></html>
 <head>Tis is Heading</head>
 
 <body id="page-top">
@@ -122,7 +122,7 @@
     <h1 class="" style="text-align: center;color: #f50d0d;font-size: 50px;">Update Student</h1>
 
     <div class="card-body">
-        <form method="post" th:action="@{/gadmin/manage/student/edit/{id}(id=${student.roll_no})}" th:object="${student}">
+        <form method="post" th:action="@{/admin/manage/student/edit/{id}(id=${student.roll_no})}" th:object="${student}">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" class="form-control" required="required" placeholder="Username"
