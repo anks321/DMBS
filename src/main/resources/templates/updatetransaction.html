@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::employee})"></html> -->
+<head></head>
+
+<body id="page-top" style="background-color: whitesmoke;background-image: url('/images/back3.jpg');">
+<style>
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #4b4d50;
+        text-align: center;
+    }
+    
+    h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: #33363b;
+    }
+    
+    p{
+        font-size: 14px;
+        color: #868d9b;
+    }
+    
+    .card-body {
+  position: relative;
+  width: 700px;
+  height: auto;
+  border-radius: 20px;
+  margin: 0 auto;
+    margin-top: 20px;
+
+  padding: 40px;
+  box-sizing: border-box;
+  background: #d7e6f1;
+  
+  
+}
+input {
+  caret-color: rgb(19, 18, 18);
+}
+
+.inputs {
+  text-align: left;
+  margin-top: 30px;
+}
+
+label, input, button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 4px;
+  margin-top: 15px;
+  color: #be0cf9;
+  font-size: large;
+}
+
+label:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+input {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+button {
+  color: white;
+  margin-top: 20px;
+  background: #1DA1F2;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  width: 100px;
+}
+.glow{
+    font-size: 60px;
+    color: #fff;
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+a {
+  position: absolute;
+  font-size: 8px;
+  bottom: 4px;
+  right: 4px;
+  text-decoration: none;
+  color: black;
+  background: yellow;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+    
+</style>
+       
+    <div class="card-body">
+        <h1 class="" style="text-align: center;color: #1808fa;font-size: 50px; border: #171313; font-family: Arial, Helvetica, sans-serif;" >Update Transaction</h1>
+    <form method="post" action:th="{@{/localadmin/inventory/add}}" th:object="${transaction}">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" class="form-control" required="required" placeholder="Amount"
+                th:field="*{amount}" />
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <input type="text" id="type" class="form-control" required="required" placeholder="Type"
+                th:field="*{type}" />
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="number" id="date" class="form-control" required="required" placeholder="Date"
+                th:field="*{date}" />
+        </div>
+        <div class="form-group">
+            <label for="mode_of_payment">Mode of Payment</label>
+            <input type="number" id="mode_of_payment" class="form-control" required="required" placeholder="Mode of Payment"
+                th:field="*{mode_of_payment}" />
+        </div>
+        <center><button type="submit" class="btn btn-primary">Submit</button></center>
+    </form>
+</div>
+</body>
+
+</html>

@@ -15,9 +15,11 @@ import com.example.dbms.dao.AnnouncementsDAO;
 import com.example.dbms.dao.CustomerDao;
 import com.example.dbms.dao.SectionDAO;
 import com.example.dbms.dao.StudentDAO;
+import com.example.dbms.dao.TransactionDAO;
 import com.example.dbms.model.Announcements;
 import com.example.dbms.model.Customer;
 import com.example.dbms.model.Section;
+import com.example.dbms.model.Transaction;
 import com.example.dbms.service.AuthenticateService;
 
 @Controller
@@ -25,6 +27,8 @@ public class CustomercController {
 
     @Autowired
     public CustomerDao customerDAO;
+    @Autowired
+    private TransactionDAO transactionDAO;
     @Autowired
     private AuthenticateService auth_Service;
     @Autowired
@@ -113,6 +117,28 @@ public class CustomercController {
         model.addAttribute("dinner", dinner);
 
         return "customermenue";
+    }
+
+    @GetMapping("/customer/transactions")
+    public String alltransactions(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.iscustomer(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        Customer customer = customerDAO.findByUsername(auth_Service.getCurrentUser(session));
+        int cid = customer.getCid();
+
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("loggedinusername", curr_user);
+
+        List<Transaction> list = transactionDAO.alltransactions(cid, 0);
+        model.addAttribute("transactions", list);
+
+        return "viewtransaction";
     }
 
 }

@@ -12,7 +12,7 @@ public class Transaction {
     private int t_id;
     private int amount;
     private int type;
-    private Date date;
+    private String date;
     private String mode_of_payment;
     private int roll_no;
     private int C_id;

@@ -119,7 +119,7 @@ public class StudentController {
         return "studentannouncement";
     }
 
-    @GetMapping("/studenttransaction")
+    @GetMapping("/student/transactions")
     public String alltransactions(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         String loginMessage = "Please Sign in to proceed!!!";
@@ -128,24 +128,17 @@ public class StudentController {
             toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
             return "redirect:/login";
         }
-        // if(student==null){
-        // student =
-        // customerDAO.findByUsername(authenticateService.getCurrentUser(session));
-        // }
 
         Student student = studentDAO.findByUsername(auth_Service.getCurrentUser(session));
         int roll = student.getRoll_no();
 
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("loggedinusername", curr_user);
+
         List<Transaction> list = transactionDAO.alltransactions(roll, 1);
         model.addAttribute("transactions", list);
-        if (auth_Service.isAuthenticated(session)) {
-            model.addAttribute("loggedinusername", auth_Service.getCurrentUser(session));
 
-            Student loggedUser = studentDAO.findByUsername(auth_Service.getCurrentUser(session));
-            model.addAttribute("loggedUser", loggedUser);
-        }
-
-        return "studenttransaction";
+        return "viewtransaction";
     }
 
 }

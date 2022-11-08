@@ -87,7 +87,6 @@ public class LocalAdminController {
         model.addAttribute("role", "section_admin");
 
         return "studentprofile";
-
     }
 
     // CUSTOMERS

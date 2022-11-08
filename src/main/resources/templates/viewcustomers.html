@@ -26,6 +26,7 @@
               <th>Name</th>
               <th>Username</th>
               <th>Profile</th>
+              <th>Transactions</th>
           </tr>
         </thead>
       <tbody>
@@ -36,6 +37,11 @@
               <td>
                 <a th:href="@{/localadmin/customer/profile/{id}(id=${cus.cid})}" class="btn btn-danger">
                     Check Now
+                </a>
+              </td>
+              <td>
+                <a th:href="@{/localadmin/customer/transactions/{id}(id=${cus.cid})}" class="btn btn-danger">
+                    Manage Transactions
                 </a>
               </td>
           </tr>
