@@ -26,9 +26,9 @@ public class QuestionsDAO {
     @Autowired
     private JdbcTemplate temp;
 
-    public void insertQuestion(int mess_id, int section_id, String start_time, String end_time, String text) {
-        String sql = "Insert into Questions(mess_id,section_id,StarTime,EndTime,text) values(?,?,?,?,?);";
-        temp.update(sql, mess_id, section_id, start_time, end_time, text);
+    public void insertQuestion(int mess_id, int section_id, String text, Integer finished) {
+        String sql = "Insert into Questions(mess_id,section_id,text,finished) values(?,?,?,?);";
+        temp.update(sql, mess_id, section_id, text, finished);
     }
 
     public List<Questions> getQuestions() {
@@ -57,7 +57,7 @@ public class QuestionsDAO {
     }
 
     public List<answered> getanswerdquestion(int roll_no, int section_id) {
-        String sql = "Select distinct questions.questionid,options.optionid,questions.text,options.OptionText from questions ,opt_student,options where section_id = ? AND questions.questionid=opt_student.Q_id and opt_id=optionid and opt_student.roll_no=? ;";
+        String sql = "Select distinct questions.questionid,options.optionid,questions.text,options.OptionText from questions ,opt_student,options where section_id = ? AND questions.questionid=opt_student.Q_id and opt_id=optionid and opt_student.roll_no=? and questions.questionid=options.Q_id ;";
 
         return temp.query(sql, new BeanPropertyRowMapper<>(answered.class), section_id, roll_no);
     }

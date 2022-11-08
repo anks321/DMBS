@@ -42,6 +42,11 @@
                             <a th:href="@{/student/forum/delete/{id}(id=${for.C_id})}" class="btn btn-danger">
                                 Delete
                             </a>
+                            <th:block th:if="${role='admin'}">
+                                <a th:href="@{/student/forum/delete/{id}(id=${for.C_id})}" class="btn btn-danger">
+                                    resolve
+                                </a>
+                            </th:block>
                         </td>
     
                     </tr>

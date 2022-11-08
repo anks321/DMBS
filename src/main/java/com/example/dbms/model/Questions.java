@@ -9,9 +9,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 
 public class Questions {
-    private int questionid;
-    private String StartTime;
-    private boolean Finished;
+    private Integer questionid;
+    private Integer mess_id;
+    private Integer section_id;
+    private String text;
+    private Integer Finished;
     // public Questions() {
     // }
 

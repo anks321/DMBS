@@ -21,6 +21,8 @@ import com.example.dbms.model.*;
 public class LocalAdminController {
 
     @Autowired
+    private OptionsDAO optionsDAO;
+    @Autowired
     private AuthenticateService auth_Service;
     @Autowired
     private StudentDAO studentDAO;
@@ -30,6 +32,8 @@ public class LocalAdminController {
     private SectionDAO sectionDAO;
     @Autowired
     private MessDAO messDAO;
+    @Autowired
+    private ForumDAO forumDAO;
     @Autowired
     private CustomerDao customerDAO;
     @Autowired
@@ -500,23 +504,25 @@ public class LocalAdminController {
         return "redirect:/localadmin/allmenues";
     }
 
-    @GetMapping("/localadmin/forums/add")
-    public String forumsAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    // @GetMapping("/localadmin/forums/add")
+    // public String forumsAddDashboard(Model model, HttpSession session,
+    // RedirectAttributes redirectAttributes) {
 
-        String Message = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        String curr_user = auth_Service.getCurrentUser(session);
-        model.addAttribute("role", "section admin");
+    // String Message = "Please Sign in to proceed!!!";
+    // if (!auth_Service.isAuthenticated(session) ||
+    // !auth_Service.issectionadmin(session)) {
+    // toastService.redirectWithErrorToast(redirectAttributes, Message);
+    // return "redirect:/login";
+    // }
+    // String curr_user = auth_Service.getCurrentUser(session);
+    // model.addAttribute("role", "section admin");
 
-        Employee emp = employeeDAO.findByUsername(curr_user);
-        List<Forum> forums = forumDAO.getby ;
-        model.addAttribute("loggedinusername", curr_user);
+    // Employee emp = employeeDAO.findByUsername(curr_user);
+    // // List<Forum> forums = forumDAO.getby() ;
+    // model.addAttribute("loggedinusername", curr_user);
 
-        return "localadminforums";
-    }
+    // return "localadminforums";
+    // }
 
     @GetMapping("/localadmin/allpolls")
     public String getallpolls(Model model, HttpSession session) {
@@ -531,8 +537,86 @@ public class LocalAdminController {
 
         List<Questions> questions = questionDAO.getQuestionbySection(emp.getSection_id());
         model.addAttribute("questions", questions);
+        model.addAttribute("loggedinusername", curr_user);
 
         return "pollquestionlist";
+
+    }
+
+    @GetMapping("/localadmin/addquestion")
+    public String getaddpolls(Model model, HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            // toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        model.addAttribute("loggedinusername", curr_user);
+        // List<Questions> questions =
+        // questionDAO.getQuestionbySection(emp.getSection_id());
+        model.addAttribute("question", new Questions());
+
+        return "addquestion";
+
+    }
+
+    @PostMapping("/localadmin/addquestion")
+    public String postaddpolls(@ModelAttribute("question") Questions question, Model model, HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            // toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+        Employee emp = employeeDAO.findByUsername(curr_user);
+
+        questionDAO.insertQuestion(emp.getMess_id(), emp.getSection_id(), question.getText(), 0);
+
+        return "redirect:/localadmin/allpolls";
+
+    }
+
+    @GetMapping("/localadmin/addoptions/{id}")
+    public String getaddoptions(@PathVariable("id") Integer questionid, Model model, HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            // toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        model.addAttribute("loggedinusername", curr_user);
+        // List<Questions> questions =
+        // questionDAO.getQuestionbySection(emp.getSection_id());
+        model.addAttribute("option", new Options());
+        model.addAttribute("questionid", questionid);
+
+        return "addoption";
+
+    }
+
+    @PostMapping("/localadmin/addoptions/{id}")
+    public String postaddoptions(@PathVariable("id") Integer questionid, @ModelAttribute("option") Options option,
+            Model model, HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            // toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section admin");
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        List<Options> opt = optionsDAO.getOptions(questionid);
+
+        // List<Questions> questions =
+        // questionDAO.getQuestionbySection(emp.getSection_id());
+        optionsDAO.addOption(opt.size() + 1, questionid, option.getOptionText());
+
+        return "redirect:/localadmin/allpolls";
 
     }
 
