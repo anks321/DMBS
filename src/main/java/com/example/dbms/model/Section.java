@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 public class Section {
     private Integer section_id;
     private Integer mess_id;
-    private Integer hall_no;
     private String breakfast;
     private String lunch;
     private String dinner;

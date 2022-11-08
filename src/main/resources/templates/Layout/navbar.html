@@ -25,44 +25,19 @@
                   <a class="nav-link active" aria-current="page" th:href="@{/loggedin}">Dashboard</a>
                 </li>
                 </th:block>
-              
-      
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" th:href="@{/about}">About</a>
               </li>
-              
-
-              
-             
-              
             </ul>
-            
             
             <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-              <!-- <h3 style="color:white;margin-bottom:0">Mess</h3> -->
-             
-              
             </ul>
             <th:block th:unless="${loggedinusername}">
-              
             <ul class="navbar-nav m l-auto" style="float: right;">
                 <li class="nav-item">
                     <a class="nav-link active"  th:href="@{/login}">Login</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto" style="float: right;">
-                <li class="nav-item">
-                    <a class="nav-link active"  th:href="@{/studentregister}">Student Register</a>
-                </li>
-            </ul>
-          
-
-
-            <ul class="navbar-nav ml-auto" style="float: right;">
-              <li class="nav-item">
-                  <a class="nav-link active"  th:href="@{/customerregister}">Customer Register</a>
-              </li>
-          </ul>
         </th:block>
         <th:block th:if="${loggedinusername}" style="float: right;">
             <ul class="navbar-nav ml-auto"  style="float: right;">

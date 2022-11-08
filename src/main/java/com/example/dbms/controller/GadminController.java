@@ -121,7 +121,7 @@ public class GadminController {
         System.out.println(mess);
         messDAO.insertMess(mess.getMess_id(), mess.getM_name(), mess.getHead_id(),
                 mess.getHostel_name());
-        sectionDAO.insert(1, mess.getMess_id(), 0, "Null", "Null", "Null");
+        sectionDAO.insert(1, mess.getMess_id(), "Null", "Null", "Null");
         return "redirect:/gadmin/allmess";
     }
 

@@ -41,11 +41,9 @@
                   </a>
                 </th:block>
                 <th:block th:if="${ques.Finished == 0}">
-                  <p>
                       Poll Closed
-                  </p>
                 </th:block>
-                <a th:href="@{/localadmin/pollresult/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                <a th:href="@{/localadmin/pollresult/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger" style=" margin-left: 1cm;">
                   Poll Result
                 </a>
               </td>

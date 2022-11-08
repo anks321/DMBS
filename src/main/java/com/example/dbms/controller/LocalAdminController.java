@@ -436,33 +436,8 @@ public class LocalAdminController {
         int mess_no = emp.getMess_id();
         int section_no = emp.getSection_id();
 
-        section.setMess_id(mess_no);
-        section.setSection_id(section_no);
-        sectionDAO.updateMenue(section.getSection_id(), section.getMess_id(), section.getBreakfast(),
-                section.getLunch(), section.getDinner());
-        return "redirect:/localadmin/allmenues";
-    }
-
-    @GetMapping("/localadmin/manage/menue/delete")
-    public String menueDeleteDashboard(Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-
-        String Message = "Please Sign in to proceed!!!";
-        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
-            toastService.redirectWithErrorToast(redirectAttributes, Message);
-            return "redirect:/login";
-        }
-        String curr_user = auth_Service.getCurrentUser(session);
-        model.addAttribute("role", "section_admin");
-
-        Employee emp = employeeDAO.findByUsername(curr_user);
-        int mess_no = emp.getMess_id();
-        int section_no = emp.getSection_id();
-
-        sectionDAO.delete(mess_no, section_no);
-
-        model.addAttribute("loggedinusername", curr_user);
-
+        sectionDAO.updateMenue(section.getBreakfast(), section.getLunch(), section.getDinner(), 
+                                section_no, mess_no);
         return "redirect:/localadmin/allmenues";
     }
 
@@ -507,26 +482,6 @@ public class LocalAdminController {
 
         return "redirect:/localadmin/allmenues";
     }
-
-    // @GetMapping("/localadmin/forums/add")
-    // public String forumsAddDashboard(Model model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
-
-    // String Message = "Please Sign in to proceed!!!";
-    // if (!auth_Service.isAuthenticated(session) ||
-    // !auth_Service.issectionadmin(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
-    // String curr_user = auth_Service.getCurrentUser(session);
-    // model.addAttribute("role", "section_admin");
-
-    // Employee emp = employeeDAO.findByUsername(curr_user);
-    // // List<Forum> forums = forumDAO.getby() ;
-    // model.addAttribute("loggedinusername", curr_user);
-
-    // return "localadminforums";
-    // }
 
     @GetMapping("/localadmin/allpolls")
     public String getallpolls(Model model, HttpSession session) {
@@ -729,7 +684,7 @@ public class LocalAdminController {
     }
 
     @GetMapping("/localadmin/forum")
-    public String getpollresult(@PathVariable("id") Integer id, Model model, HttpSession session) {
+    public String viewforums(Model model, HttpSession session) {
         String Message = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
             // toastService.redirectWithErrorToast(redirectAttributes, Message);
@@ -739,9 +694,40 @@ public class LocalAdminController {
         model.addAttribute("role", "section_admin");
         model.addAttribute("loggedinusername", curr_user);
         
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        int mess_no = emp.getMess_id();
+        int section_no = emp.getSection_id();
 
+        List<Forum> forums = forumDAO.findByforums(mess_no, section_no);
+
+        model.addAttribute("forums", forums);
+
+        model.addAttribute("loggedinusername", curr_user);
 
         return "viewforums";
+
+    }
+
+    @GetMapping("/localadmin/resolveforum/{id}")
+    public String resolveforums(@PathVariable("id") Integer id, Model model, HttpSession session) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            // toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+        model.addAttribute("loggedinusername", curr_user);
+        
+        Employee emp = employeeDAO.findByUsername(curr_user);
+        Forum forums = forumDAO.getforumbyid(id);
+
+        model.addAttribute("forums", forums);
+
+        forumDAO.updateresolved(1, id);
+
+        return "redirect:/localadmin/forum";
+
     }
 
 }

@@ -158,7 +158,7 @@ public class AdminController {
         String username = auth_Service.getCurrentUser(session);
         Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
         model.addAttribute("role", "mess_head");
-        sectionDAO.insert(section.getSection_id(), mess_id, section.getHall_no(), section.getBreakfast(),
+        sectionDAO.insert(section.getSection_id(), mess_id, section.getBreakfast(),
                 section.getLunch(), section.getDinner());
 
         return "redirect:/admin/allsections";
@@ -667,6 +667,8 @@ public class AdminController {
         String curr_user = auth_Service.getCurrentUser(session);
         Employee employee = employeeDAO.findByUsername(curr_user);
         customer.setMess_id(employee.getMess_id());
+        int num_cus = customerDAO.countcustomers();
+        customer.setCid(num_cus + 1);
         customerDAO.save(customer);
 
         return "redirect:/admin/allcustomers";

@@ -24,9 +24,7 @@ public class ForumDAO {
 
 	public List<Forum> getallforum() {
 		String sql = "select * from forum ;";
-
 		return temp.query(sql, new BeanPropertyRowMapper<>(Forum.class));
-
 	}
 
 	public void deleteforumbyid(int id) {
@@ -34,9 +32,22 @@ public class ForumDAO {
 		temp.update(sql, id);
 	}
 
+	public int countforum() {
+		String sqll = "select COUNT(*) from forum";
+		int hai = temp.queryForObject(sqll, Integer.class);
+		if(hai==0) return 0;
+		String sql = "select MAX(C_id) from forum";
+		return temp.queryForObject(sql, Integer.class);
+	}
+
 	public Forum getforumbyid(int id) {
 		String sql = "select * from forum where C_id=?";
 		return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Forum.class), id);
+	}
+
+	public void updateresolved(int resolve, int id) {
+        String sql = "update forum set resolved = ? where C_id=?";
+		temp.update(sql, resolve, id);
 	}
 
 	public List<Forum> getforumbymess(int id) {
@@ -46,16 +57,21 @@ public class ForumDAO {
 
 	public List<Forum> getmyforum(int roll_no) {
 		String sql = "select * from forum where roll_no=? ;";
-
 		return temp.query(sql, new BeanPropertyRowMapper<>(Forum.class), roll_no);
 
 	}
 
-	public void insertforum(int roll_no, String Datetime, String text, int resolved, int mess_id) {
-		String sql = "insert into forum(roll_no,complaint,date_time,resolved,mess_id) values (?,?,?,?,?);";
+	public void insertforum(int id, String Datetime, int roll, int resolve, String text,int mess_id,  int section_id) {
+		String sql = "insert into forum(C_id, date_time, roll_no, resolved, complaint, mess_id, section_id) values (?,?,?,?,?,?,?);";
 
-		temp.update(sql, roll_no, text, Datetime, resolved, mess_id);
+		temp.update(sql, id, Datetime, roll, resolve, text, mess_id,  section_id);
 
+	}
+
+	public List<Forum> findByforums(int mess_no, int section_no) {
+		String sql = "select * from forum where mess_id =? AND section_id = ?;";
+
+		return temp.query(sql, new BeanPropertyRowMapper<>(Forum.class), mess_no, section_no);
 	}
 
 }

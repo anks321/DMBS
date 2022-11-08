@@ -81,6 +81,14 @@ public class CustomerDao {
 		}
 	}
 
+	public int countcustomers() {
+        String sqll = "select COUNT(*) from customer";
+		int hai = temp.queryForObject(sqll, Integer.class);
+		if(hai==0) return 0;
+		String sql = "select MAX(cid) from customer";
+		return temp.queryForObject(sql, Integer.class);
+	}
+
 	public boolean userExists(String username) {
 
 		String sql = "select count(*) from customer where username='" + username + "'";

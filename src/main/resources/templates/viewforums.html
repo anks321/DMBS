@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+<head>View Forum</head>
+<!-- <head th:replace="header :: header"></head> -->
+<body text-align="center">
+
+<!-- div th:replace="navbar :: navbar"></div> -->
+<section>
+
+
+<div class="container">
+  <div class="row">
+      <h1>Forums </h1>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      
+        <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+        
+    </div>
+</div>
+
+  <table class="table table-striped table-bordered">
+      <thead class="table-dark"> 
+          <tr>
+              <th>Date</th>
+              <th>Roll Number</th>
+              <th>Complaint</th>
+              <th>Resolve</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="forumm: ${forums}">
+              <td th:text="${forumm.date_time}"></td>
+              <td th:text="${forumm.roll_no}"></td>
+              <td th:text="${forumm.complaint}"></td>
+              <td>
+                <th:block th:if="${forumm.resolved == 1}">
+                  <p>
+                      Resolved
+                  </p>
+                </th:block>
+                <th:block th:if="${forumm.resolved == 0}">
+                    <a th:href="@{/localadmin/resolveforum/{id}(id=${forumm.getC_id()})}" class="btn btn-danger">
+                      Resolve it
+                    </a>
+                </th:block>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+</section>
+</body>
+</html>

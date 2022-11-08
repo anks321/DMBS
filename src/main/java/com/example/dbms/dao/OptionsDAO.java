@@ -45,6 +45,9 @@ public class OptionsDAO {
     }
 
     public int countoptions() {
+        String sqll = "select COUNT(*) from options";
+		int hai = temp.queryForObject(sqll, Integer.class);
+		if(hai==0) return 0;
 		String sql = "select MAX(optionid) from options";
 		return temp.queryForObject(sql, Integer.class);
 	}

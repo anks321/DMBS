@@ -68,7 +68,7 @@ public class ForumContorller {
     }
 
     @PostMapping("/student/forum/add")
-    public String addforum(@ModelAttribute("newfor") Forum newforum, Model model, HttpSession session,
+    public String addforum(@ModelAttribute("newfor") Forum newfor, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         String loginMessage = "Please Sign in to proceed!!!";
         if (!auth_Service.isAuthenticated(session) || !auth_Service.isstudent(session)) {
@@ -76,11 +76,15 @@ public class ForumContorller {
             return "redirect:/login";
         }
         String curr_user = auth_Service.getCurrentUser(session);
+        System.out.println("aa  gaya");
 
         Student student = studentDAO.findByUsername(curr_user);
         Integer mess_id=student.getMess_id();
+        Integer section_id=student.getSection_id();
 
-        forumDAO.insertforum(student.getRoll_no(), "new", newforum.getComplaint(), 0,mess_id);
+        int num_forum = forumDAO.countforum();
+
+        forumDAO.insertforum(num_forum + 1, newfor.getDate_time(), student.getRoll_no(), 0, newfor.getComplaint(), mess_id, section_id);
         return "redirect:/student/forum";
     }
 

@@ -42,6 +42,9 @@ public class AnnouncementsDAO {
 	}
 
 	public int countannounce() {
+		String sqll = "select COUNT(*) from Announcements";
+		int hai = temp.queryForObject(sqll, Integer.class);
+		if(hai==0) return 0;
 		String sql = "select MAX(A_id) from Announcements";
 		return temp.queryForObject(sql, Integer.class);
 	}

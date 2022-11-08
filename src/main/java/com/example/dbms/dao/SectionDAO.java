@@ -41,14 +41,14 @@ public class SectionDAO {
 		}
 	}
 
-	public void updateMenue(int sectionid, int messid, String breakfast, String lunch, String dinner) {
-		String sql = "Update section set breakfast = ?, set lunch = ?, set dinner = ? where section_id = ? and mess_id = ?";
+	public void updateMenue(String breakfast, String lunch, String dinner, int sectionid, int messid) {
+		String sql = "Update section set breakfast = ?, lunch = ?, dinner = ? where section_id = ? and mess_id = ?";
 		temp.update(sql, breakfast, lunch, dinner, sectionid, messid);
 	}
 
-	public void insert(int sectionid, int messid, int hall_no, String breakfast, String lunch, String dinner) {
-		String sql = "Insert into section values(?, ?, ?, ?, ?, ?)";
-		temp.update(sql, messid, sectionid, hall_no, breakfast, lunch, dinner);
+	public void insert(int sectionid, int messid, String breakfast, String lunch, String dinner) {
+		String sql = "Insert into section values(?, ?, ?, ?, ?)";
+		temp.update(sql, messid, sectionid, breakfast, lunch, dinner);
 	}
 
 	public void delete(int messid, int sectionid) {
@@ -57,8 +57,8 @@ public class SectionDAO {
 	}
 
 	public void save(Section section) {
-		String sql = "Insert into section(section_id, mess_id, hall_no, breakfast, lunch, dinner) values(?, ?, ?, ?, ?, ?)";
-		temp.update(sql, section.getSection_id(), section.getMess_id(), section.getHall_no(), section.getBreakfast(), section.getLunch(), section.getDinner());
+		String sql = "Insert into section(section_id, mess_id, breakfast, lunch, dinner) values(?, ?, ?, ?, ?)";
+		temp.update(sql, section.getSection_id(), section.getMess_id(), section.getBreakfast(), section.getLunch(), section.getDinner());
 	}
 	
 	public int countmenu(int messid, int sectionid) {
