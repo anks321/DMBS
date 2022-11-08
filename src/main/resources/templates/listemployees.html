@@ -31,7 +31,7 @@
           </th:block>
 
           <a th:href="@{/admin/allemployees}"></a>
-          <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Mess</a>
+          <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
         </div>
       </div>
 
@@ -68,6 +68,11 @@
               <th:block th:if="${role=='Gadmin'}">
                 <a th:href="@{/gadmin/manage/employee/delete/{id}(id=${emp.eid})}" class="btn btn-danger">
                   Delete
+                </a>
+              </th:block>
+              <th:block th:if="${role=='Gadmin'}">
+                <a th:href="@{/gadmin/employee/profile/{id}(id=${emp.eid})}" class="btn btn-danger">
+                  View
                 </a>
               </th:block>
               <th:block th:if="${role=='mess_head'}">

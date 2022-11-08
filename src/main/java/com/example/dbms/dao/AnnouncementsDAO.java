@@ -22,8 +22,8 @@ public class AnnouncementsDAO {
     private JdbcTemplate temp;
 
     public void save(Announcements announcement) {
-		String sql = "insert into Announcements(mess_id, section_id, announce_text, date_and_time, A_id) values (?,?,?,?,?);";
-		temp.update(sql, announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time(), announcement.getA_id());
+		String sql = "insert into Announcements(A_id, mess_id, section_id, announce_text, date_and_time) values (?,?,?,?,?);";
+		temp.update(sql, announcement.getA_id(), announcement.getMess_id(), announcement.getSection_id(), announcement.getAnnounce_text(), announcement.getDate_and_time());
 	}
  
 	public void update(String announce_text, String date_and_time, int A_id) {
@@ -39,6 +39,11 @@ public class AnnouncementsDAO {
 	public Announcements findByItem_Id(int itemID) {
 		String sql = "select * from Announcements where A_id = ?";
 		return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Announcements.class), itemID);
+	}
+
+	public int countannounce() {
+		String sql = "select MAX(A_id) from Announcements";
+		return temp.queryForObject(sql, Integer.class);
 	}
 
 	public List<Announcements> allAnnouncements() {

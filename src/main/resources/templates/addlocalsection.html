@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})"></html>
+<!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})"></html> -->
 <head>Tis is Heading</head>
 
 <body id="page-top">
@@ -94,6 +94,7 @@
         font-weight: 900;
         box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
         transition: 0.5s;
+        width: 100px;
     }
     .glow{
         font-size: 60px;
@@ -140,7 +141,7 @@
             <input type="text" id="dinner" class="form-control" required="required" placeholder="Dinner"
                 th:field="*{dinner}" />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <center><button type="submit" class="btn btn-primary">Submit</button></center>
     </form>
 </div>
 </body>

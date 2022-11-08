@@ -40,13 +40,13 @@ public class EmployeeDAO {
 
 	}
 
-	public void update(Integer eid, Integer salary, Integer age, String phone_no, Integer pin, String dob, String ifsc,
+	public void update(Integer eid, String password , Integer salary, Integer age, String phone_no, Integer pin, String dob, String ifsc,
 			String account_no,
 			String e_aadhar_number, String first_name, String last_name, String Designation, String email, String city,
 			String street, Integer mess_id, Integer section_id, String username) {
 
-		String sql = "update employees set salary = ?,age = ?,phone_no = ?,pin = ?,dob = ?,ifsc = ?,account_no = ?,e_aadhar_number = ?,first_name = ?,last_name = ?,Designation = ?,email = ?,city = ?,street = ?,mess_id = ?,section_id = ?, username = ? where eid = ?";
-		temp.update(sql, salary, age, phone_no, pin, dob, ifsc, account_no, e_aadhar_number, first_name, last_name,
+		String sql = "update employees set password = ?,salary = ?,age = ?,phone_no = ?,pin = ?,dob = ?,ifsc = ?,account_no = ?,e_aadhar_number = ?,first_name = ?,last_name = ?,Designation = ?,email = ?,city = ?,street = ?,mess_id = ?,section_id = ?, username = ? where eid = ?";
+		temp.update(sql, password, salary, age, phone_no, pin, dob, ifsc, account_no, e_aadhar_number, first_name, last_name,
 				Designation, email, city, street, mess_id, section_id, username, eid);
 	}
 
@@ -94,24 +94,18 @@ public class EmployeeDAO {
 	}
 
 	public void makesectionhead(Integer id) {
-		String section = "section_head";
+		String section = "section_admin";
 		String sql = "update employees set designation = ? where eid=?";
-
 		temp.update(sql, section, id);
 
 	}
 
-	// public Employee findByID(int userID) {
-	// String sql = "select * from employees where userID = ?";
-	// return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Employee.class),
-	// userID);
+	public void makemesshead(Integer id) {
+		String mess = "mess_head";
+		String sql = "update employees set designation = ? where eid=?";
+		temp.update(sql, mess, id);
 
-	// }
-
-	// public void updateProfile(String username, String filename) {
-	// String query = "update employees set photo = ? where username = ?";
-	// temp.update(query, filename, username);
-	// }
+	}
 
 	public boolean userExists(String username) {
 
@@ -123,6 +117,19 @@ public class EmployeeDAO {
 			return true;
 		else
 			return false;
+	}
+
+	public boolean checksectionhead(int mess_id, int section_id) {
+
+		String section = "section_admin";
+
+		String sql = "select count(*) from employees where mess_id=? and section_id=? and designation=?;";
+		int found = temp.queryForObject(sql, Integer.class, mess_id, section_id, section);
+
+		if (found == 0)
+			return false;
+		else
+			return true;
 	}
 
 	public List<Employee> allEmployees() {

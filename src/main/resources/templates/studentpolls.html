@@ -35,12 +35,20 @@
               <td th:text="${ques.questionid}"></td>
               <td th:text="${ques.text}"></td>
               <td>
-                  
+                <th:block th:if="${ques.Finished == 1}">
                   <a th:href="@{/student/polls/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
                       Answer
                   </a>
+                </th:block>
+                <th:block th:if="${ques.Finished == 0}">
+                  <p>
+                      Poll Closed
+                  </p>
+                </th:block>
+                <a th:href="@{/localadmin/pollresult/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                  Poll Result
+                </a>
               </td>
-
           </tr>
       </tbody>
   </table>

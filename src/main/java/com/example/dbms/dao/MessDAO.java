@@ -25,11 +25,6 @@ public class MessDAO {
         String sql = "Select * from section where mess_id=?";
         return temp.query(sql, new BeanPropertyRowMapper<>(Section.class), mess_id);
     }
-
-    public List<Mess> getmess(int mess_id) {
-        String sql = "Select * from mess where mess_id=?";
-        return temp.query(sql, new BeanPropertyRowMapper<>(Mess.class), mess_id);
-    }
     public Mess getmessbyid(int mess_id) {
         String sql = "Select * from mess where mess_id=?";
         return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Mess.class), mess_id);

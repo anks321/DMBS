@@ -80,7 +80,6 @@ public class CustomercController {
         model.addAttribute("announcements", announce);
         System.out.println("mess_no");
         System.out.println(section_no);
-        System.out.println(announce.get(0));
 
         return "customerannouncement";
     }

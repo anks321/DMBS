@@ -75,7 +75,6 @@ public class PollCotroller {
         Integer section_no = student.getSection_id();
 
         List<answered> questions = questionsDAO.getanswerdquestion(student.getRoll_no(), section_no);
-        System.out.println(questions.get(0));
         model.addAttribute("questions", questions);
 
         return "stansque";

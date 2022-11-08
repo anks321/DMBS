@@ -1,32 +1,144 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
-<head>asf</head>
-<!-- <head th:replace="header :: header"></head> -->
-<body text-align="center">
+<html lang="en">
+<!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::employee})"></html> -->
+<head></head>
 
-<!-- div th:replace="navbar :: navbar"></div> -->
+<body id="page-top" style="background-color: whitesmoke;background-image: url('/images/back3.jpg');">
+<style>
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #4b4d50;
+        text-align: center;
+    }
+    
+    h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: #33363b;
+    }
+    
+    p{
+        font-size: 14px;
+        color: #868d9b;
+    }
+    
+    .card-body {
+  position: relative;
+  width: 700px;
+  height: auto;
+  border-radius: 20px;
+  margin: 0 auto;
+    margin-top: 20px;
 
-<section>
-<div class="row register-form" style="margin-top: 100px; width: 100%;">
-    <div class="col-md-8 offset-md-2" style="background-color: aliceblue;">
+  padding: 40px;
+  box-sizing: border-box;
+  background: #d7e6f1;
+  
+  
+}
+input {
+  caret-color: rgb(19, 18, 18);
+}
+
+.inputs {
+  text-align: left;
+  margin-top: 30px;
+}
+
+label, input, button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 4px;
+  margin-top: 15px;
+  color: #be0cf9;
+  font-size: large;
+}
+
+label:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+input {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+button {
+  color: white;
+  margin-top: 20px;
+  background: #1DA1F2;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  width: 100px;
+}
+.glow{
+    font-size: 60px;
+    color: #fff;
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+a {
+  position: absolute;
+  font-size: 8px;
+  bottom: 4px;
+  right: 4px;
+  text-decoration: none;
+  color: black;
+  background: yellow;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+    
+</style>
+       
+    <div class="card-body">
+        <h1 class="" style="text-align: center;color: #1808fa;font-size: 50px; border: #171313; font-family: Arial, Helvetica, sans-serif;" >Add Section</h1>
         <form display="inline" class="custom-form" style="background-color: aliceblue;" method="post" model="customer" th:action="@{/admin/addsection}" th:object="${section}">
-            <h1>Create mess</h1>
             <div class="row form-group">
                 <div class="col-sm-4 label-column"><label class="col-form-label" for="f_name-input-field">Section Id</label></div>
-                <div class="col-sm-5 input-column"><input type="number" class="form-control" placeholder="First Name" required="required" th:field="*{section_id}"></div>
+                <div class="col-sm-5 input-column"><input type="number" class="form-control" placeholder="Section Id" required="required" th:field="*{section_id}"></div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-4 label-column"><label class="col-form-label" for="f_name-input-field">hall_no </label></div>
-                <div class="col-sm-5 input-column"><input type="number" class="form-control" placeholder="First Name" required="required" th:field="*{hall_no}"></div>
+                <div class="col-sm-5 input-column"><input type="number" class="form-control" placeholder="Hall Number" required="required" th:field="*{hall_no}"></div>
             </div>
             
             <div class="form-group">
-                <button type="submit" class="btn btn-info btn-block btn-lg">Create</button>
+                <center><button type="submit" class="btn btn-info btn-block btn-lg">Create</button></center>
             </div>
         </form>
     </div>
-</div>
-</section>
-
 </body>
+
 </html>

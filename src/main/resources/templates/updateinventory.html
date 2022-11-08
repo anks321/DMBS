@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})"></html>
-<head>Tis is Heading</head>
+<!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::employee})"></html> -->
+<head></head>
 
-<body id="page-top">
+<body id="page-top" style="background-color: whitesmoke;background-image: url('/images/back3.jpg');">
 <style>
 * {
         margin: 0;
@@ -29,19 +29,20 @@
     
     .card-body {
   position: relative;
-  width: 500px;
+  width: 700px;
   height: auto;
   border-radius: 20px;
   margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 20px;
 
   padding: 40px;
   box-sizing: border-box;
-  background: #ecf0f3;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+  background: #d7e6f1;
+  
+  
 }
 input {
-  caret-color: red;
+  caret-color: rgb(19, 18, 18);
 }
 
 .inputs {
@@ -119,9 +120,9 @@ a {
 
     
 </style>
-<h1 class="" style="text-align: center;color: #f50d0d;font-size: 50px;">Update Inventory</h1>
-
+       
     <div class="card-body">
+        <h1 class="" style="text-align: center;color: #1808fa;font-size: 50px; border: #171313; font-family: Arial, Helvetica, sans-serif;" >Update Inventory</h1>
         <form method="post" th:action="@{/localadmin/manage/inventory/edit/{id}(id=${inventory.item_id})}"
             th:object="${inventory}">  
             <div class="form-group">

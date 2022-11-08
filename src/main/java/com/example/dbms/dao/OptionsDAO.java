@@ -44,6 +44,16 @@ public class OptionsDAO {
         temp.update(sql, question_id, option_id);
     }
 
+    public int countoptions() {
+		String sql = "select MAX(optionid) from options";
+		return temp.queryForObject(sql, Integer.class);
+	}
+
+    public int countoptionsByQuestion(int id) {
+		String sql = "select COUNT(*) from options where Q_id = ?";
+		return temp.queryForObject(sql, Integer.class, id);
+	}
+
     public List<Student> getStudentsforoption(int option_id, int question_id) {
         String sql = "Select * from Students where roll_no in(Select * from Opt_Student where optionid=? and Q_id=?)";
 

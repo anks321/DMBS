@@ -123,7 +123,6 @@ public class AdminController {
         String username = auth_Service.getCurrentUser(session);
         Integer mess_id = employeeDAO.findByUsername(username).getMess_id();
         List<Section> sections = messDAO.getSectionsbyMess(mess_id);
-        System.out.println(sections.get(0));
         model.addAttribute("sections", sections);
         model.addAttribute("loggedinusername", username);
 
@@ -217,7 +216,6 @@ public class AdminController {
         Employee employee = employeeDAO.findByUsername(username);
 
         List<Employee> employees = employeeDAO.findBymess(employee.getMess_id());
-        System.out.println(employees.get(0));
         model.addAttribute("employees", employees);
         List<Section> sections = messDAO.getSectionsbyMess(employee.getMess_id());
         model.addAttribute("loggedinusername", username);
@@ -243,7 +241,6 @@ public class AdminController {
 
         // yaha ana haii section wise employee banan hai
 
-        // System.out.println(employees.get(0));
         List<Section> sections = messDAO.getSectionsbyMess(employee.getMess_id());
         model.addAttribute("employees", employees);
         model.addAttribute("loggedinusername", username);
@@ -297,8 +294,16 @@ public class AdminController {
         model.addAttribute("role", "mess_head");
         String username = auth_Service.getCurrentUser(session);
         model.addAttribute("loggedinusername", username);
-        employeeDAO.makesectionhead(id);
+        Employee employee = employeeDAO.findByid(id);
 
+        int mess_no = employee.getMess_id();
+        int section_no = employee.getSection_id();
+        Section sec = sectionDAO.findSection(mess_no, section_no);
+        if (employeeDAO.checksectionhead(mess_no, section_no) || employee.getDesignation().equals("section_admin")) {
+            return "redirect:/admin/allemployees";
+        }
+
+        employeeDAO.makesectionhead(id);
         return "redirect:/admin/allemployees";
     }
 

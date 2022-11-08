@@ -79,11 +79,11 @@ public class AuthenticateService {
 
     public Boolean checkSectionHeadCredentials(String username, String password) {
         Employee employee = employees.findByUsername(username);
-        System.out.println("Checking");
+        System.out.println("Checking2");
         if (employee != null) {
             System.out.println("Checking");
             return (bCryptPasswordEncoder.matches(password, employee.getPassword()))
-                    && employee.getDesignation().equals("section head");
+                    && employee.getDesignation().equals("section_admin");
         }
         return false;
     }
@@ -104,13 +104,13 @@ public class AuthenticateService {
 
     public void loginAdmin(HttpSession session, String username) {
         session.setAttribute(loggedUser, username);
-        session.setAttribute("role", "mess head");
+        session.setAttribute("role", "mess_head");
     }
 
     public void loginsectionAdmin(HttpSession session, String username) {
         
         session.setAttribute(loggedUser, username);
-        session.setAttribute("role", "section admin");
+        session.setAttribute("role", "section_admin");
     }
 
     public void loginGlobalAdmin(HttpSession session, String username) {
@@ -134,7 +134,7 @@ public class AuthenticateService {
 
     public Boolean isadmin(HttpSession session) {
 
-        if (session.getAttribute("role").equals("mess head")) {
+        if (session.getAttribute("role").equals("mess_head")) {
             System.out.println(session.getAttribute("role"));
             return true;
         } else
@@ -142,7 +142,7 @@ public class AuthenticateService {
     }
 
     public Boolean issectionadmin(HttpSession session) {
-        if (session.getAttribute("role").equals("section admin"))
+        if (session.getAttribute("role").equals("section_admin"))
             return true;
         else
             return false;

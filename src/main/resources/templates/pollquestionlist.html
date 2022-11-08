@@ -1,52 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+
 <head>Register Customer</head>
 <!-- <head th:replace="header :: header"></head> -->
+
 <body text-align="center">
 
-<!-- div th:replace="navbar :: navbar"></div> -->
-<section>
+  <!-- div th:replace="navbar :: navbar"></div> -->
+  <section>
 
 
-<div class="container">
-  <div class="row">
-      <h1>Polls</h1>
-  </div>
-  
-  <div class="row">
-      <div class="col-lg-3">
-        <!-- <a th:href="@{/student/polls/answered}" class="btn btn-primary btn-sm mb-3">Previously Answered</a>-->
-        <a th:href="@{/localadmin/addquestion}" class="btn btn-primary btn-sm mb-3">Create a poll</a> 
-          <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+    <div class="container">
+      <div class="row">
+        <h1>Polls</h1>
       </div>
-  </div>
-  
-  <table class="table table-striped table-bordered">
-      <thead class="table-dark"> 
-        <tr >
-          <th >#</th>
-          <th >Text</th>
-          <th >Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        
+
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- <a th:href="@{/student/polls/answered}" class="btn btn-primary btn-sm mb-3">Previously Answered</a>-->
+          <a th:href="@{/localadmin/addquestion}" class="btn btn-primary btn-sm mb-3">Create a poll</a>
+          <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+        </div>
+      </div>
+
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Question Id</th>
+            <th>Text</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
           <tr th:each="ques:${questions}">
-              <td th:text="${ques.questionid}"></td>
-              <td th:text="${ques.text}"></td>
-              <td>
-                  
-                  <a th:href="@{/localadmin/addoptions/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
-                      Create options
-                  </a>
-              </td>
+            <td th:text="${ques.questionid}"></td>
+            <td th:text="${ques.text}"></td>
+            <td>
+              <a th:href="@{/localadmin/addoptions/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                Create options
+              </a>
+              <a th:href="@{/localadmin/viewoptions/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                View options
+              </a>
+              <!-- <a th:href="@{/localadmin/deleteoptions/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                    Delete options
+                  </a>  -->
+              <a th:href="@{/localadmin/deletequestions/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                Delete Question
+              </a>
+              <th:block th:if="${ques.Finished == 0}">
+                <a th:href="@{/localadmin/startpoll/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                  Start Poll
+                </a>
+              </th:block>
+              <th:block th:if="${ques.Finished == 1}">
+                <a th:href="@{/localadmin/endpoll/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                  End Poll
+                </a>
+              </th:block>
+                <a th:href="@{/localadmin/pollresult/{id}(id=${ques.getQuestionid()})}" class="btn btn-danger">
+                  Poll Result
+                </a>
+            </td>
+            <!-- <th:block th:if="${role=='section_admin' && num_menu == 0}">
+              <a th:href="@{/localadmin/menue/add}" class="btn btn-primary btn-sm mb-3">Add Menue</a>
+            </th:block> -->
 
           </tr>
-      </tbody>
-  </table>
-</div>
+        </tbody>
+      </table>
+    </div>
 
-</section>
+  </section>
 
 </body>
+
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+
+<head>View Option</head>
+<!-- <head th:replace="header :: header"></head> -->
+
+<body text-align="center">
+
+    <!-- div th:replace="navbar :: navbar"></div> -->
+    <section>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+                </div>
+            </div>
+            <div class="row">
+                <h3>View Options </h3>
+            </div>
+            <br>
+            <th>Question Id</th>
+            <td th:text="${question.questionid}"></td>
+            <br> <br>
+            <th>Question Text</th>
+            <td th:text="${question.text}"></td>
+            <br> <br>
+            <ul th:each="opt: ${options}">
+                <li th:text="${opt.optionid} + '  ' + ${opt.OptionText}"></li>
+            </ul>
+        </div>
+    </section>
+</body>
+
+</html>

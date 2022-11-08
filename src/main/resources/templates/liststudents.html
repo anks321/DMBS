@@ -15,7 +15,7 @@
   
   <div class="row">
       <div class="col-lg-3">
-        <th:block th:if="${role=='mess_head' || role=='section head'}">
+        <th:block th:if="${role=='mess_head' || role=='section_admin'}">
           <th:block th:each="sec:${sections}"><a th:href="@{/admin/students/{id}(id=${sec.getSection_id()})}" Th:text="'Section '+${sec.getSection_id()}"class="btn btn-primary btn-sm mb-3"></a></th:block>
           <a th:href="@{/admin/students}" class="btn btn-primary btn-sm mb-3">All Sections</a>
         </th:block>

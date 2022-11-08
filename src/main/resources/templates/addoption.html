@@ -1,42 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="en">
+<!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::employee})"></html> -->
+<head></head>
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                    <h1 class="text-center">Add Option</h1>
-                    <div class="card-body">
-                        <form th:action="@{/localadmin/addoptions/{id}(id=${questionid})}" th:object="${option}" method="POST" >
-                            <div class="form-group">
-                                <label>Complaint</label>
-                                <input 
-                                type="text"
-                                name="Complaint"
-                                th:field="*{OptionText}"
-                                class="form-control"
-                                />
-                            </div>
-                           
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+<body id="page-top" style="background-color: whitesmoke;background-image: url('https://static.vecteezy.com/system/resources/thumbnails/002/106/276/small/geometric-black-and-gold-background-free-vector.jpg');">
+<style>
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     
-                        </form>
-                    </div>
-                </div>
+    body {
+        background-color: #4b4d50;
+        text-align: center;
+    }
+    
+    h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: #33363b;
+    }
+    
+    p{
+        font-size: 14px;
+        color: #868d9b;
+    }
+    
+    .card-body {
+  position: relative;
+  width: 700px;
+  height: auto;
+  border-radius: 20px;
+  margin: 0 auto;
+    margin-top: 80px;
+
+  padding: 40px;
+  box-sizing: border-box;
+  background: #d7e6f1;
+  
+  
+}
+input {
+  caret-color: rgb(19, 18, 18);
+}
+
+.inputs {
+  text-align: left;
+  margin-top: 80px;
+}
+
+label, input, button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 4px;
+  margin-top: 15px;
+  color: #be0cf9;
+  font-size: large;
+}
+
+label:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+input {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+button {
+  color: white;
+  margin-top: 20px;
+  background: #1DA1F2;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  width: 100px;
+  
+}
+.glow{
+    font-size: 60px;
+    color: #fff;
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+a {
+  position: absolute;
+  font-size: 8px;
+  bottom: 4px;
+  right: 4px;
+  text-decoration: none;
+  color: black;
+  background: yellow;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+    
+</style>
+       
+    <div class="card-body">
+        <!-- <h1 class="" style="text-align: center;color: #171313;font-size: 50px; border: #171313;">ADD Complaint</h1> -->
+        <form th:action="@{/localadmin/addoptions/{id}(id=${questionid})}" th:object="${option}" method="POST" >
+            <div class="form-group">
+                <label>Add Option</label>
+                <input 
+                type="text"
+                name="Complaint"
+                th:field="*{OptionText}"
+                class="form-control"
+                />
             </div>
-        </div>
+           
+           <center> <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div></center>
 
-
-    </section>
-    
+        </form>
+    </div>
 </body>
+
 </html>

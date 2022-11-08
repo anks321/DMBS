@@ -108,7 +108,7 @@ public class LoginController {
                     && employeeDAO.userExists(username)) {
                 authenticateService.loginsectionAdmin(session, username);
                 System.out.println(username);
-                System.out.println("here");
+                System.out.println("xxx");
                 // authenticateService.loginUser(session, username);
                 // System.out.println(username);
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");

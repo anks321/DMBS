@@ -71,7 +71,6 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/proff.jpeg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
                   <a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">My Profile</a>
                 </div>
               </div>
@@ -80,7 +79,6 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
                   <a th:href="@{/studentmenu}" class="btn btn-primary btn-sm mb-3">Menue</a>
                 </div>
               </div>
@@ -89,7 +87,6 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/announce.jpeg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
                   <a th:href="@{/studentannouncement}" class="btn btn-primary btn-sm mb-3">Announcement</a>
                 </div>
               </div>
@@ -98,7 +95,6 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/poll.png}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
                   <a th:href="@{/student/polls} " class="btn btn-primary btn-sm mb-3">Polls</a>
                 </div>
               </div>
@@ -107,7 +103,6 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/forum.jpg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
                   <a th:href="@{/student/forum} " class="btn btn-primary btn-sm mb-3">Forum</a>
                 </div>
               </div>
@@ -116,7 +111,6 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/trann.jpg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
                   <a th:href="@{/Transactions} " class="btn btn-primary btn-sm mb-3">My Transactions</a>
                 </div>
               </div>
@@ -211,9 +205,8 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/student2.jpg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <a th:href="@{/localadmin/allstudents}" class="btn mr-2"><i class="fas fa-link"></i>List of
-                    Students</a>
-
+                  <a th:href="@{/localadmin/allstudents}" class="btn mr-2"><i class="fas fa-link">
+                  </i>List of Students</a>
                 </div>
               </div>
             </div>
@@ -221,7 +214,7 @@
               <div class="card" style="width: 18rem;">
                 <img th:src="@{/images/customer3.jpg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <a th:href="@{/localadmin/allcustomers}" class="btn mr-2"><i class="fas fa-link"></i>Customers</a>
+                  <a th:href="@{/localadmin/allcustomers}" class="btn mr-2"><i class="fas fa-link"></i>List of Customers</a>
                 </div>
               </div>
             </div>
@@ -230,7 +223,6 @@
                 <img th:src="@{/images/inven.jpg}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <a th:href="@{/localadmin/allinventories}" class="btn mr-2"><i class="fas fa-link"></i>Inventories</a>
-
                 </div>
               </div>
             </div>
@@ -250,21 +242,26 @@
                   <a th:href="@{/localadmin/allmenues}" class="btn mr-2"><i class="fas fa-link"></i>Menus</a>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img th:src="@{/images/menu.jpeg}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-
-                    <a th:href="@{/localadmin/allpolls}" class="btn mr-2"><i class="fas fa-link"></i>Polls</a>
-
-                  </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/poll.png}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/allpolls}" class="btn mr-2"><i
+                      class="fas fa-link"></i>Polls</a>
                 </div>
               </div>
-
+            </div>
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/customer3.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <a th:href="@{/localadmin/all}" class="btn mr-2"><i class="fas fa-link"></i>Forum</a>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
       </th:block>
 
       <th:block th:if=${Gadmin}>

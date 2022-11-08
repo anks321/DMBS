@@ -26,9 +26,9 @@ public class QuestionsDAO {
     @Autowired
     private JdbcTemplate temp;
 
-    public void insertQuestion(int mess_id, int section_id, String text, Integer finished) {
-        String sql = "Insert into Questions(mess_id,section_id,text,finished) values(?,?,?,?);";
-        temp.update(sql, mess_id, section_id, text, finished);
+    public void insertQuestion(int id, int mess_id, int section_id, String text, Integer finished) {
+        String sql = "Insert into Questions(questionid, mess_id,section_id,text,finished) values(?,?,?,?,?);";
+        temp.update(sql, id, mess_id, section_id, text, finished);
     }
 
     public List<Questions> getQuestions() {
@@ -36,6 +36,21 @@ public class QuestionsDAO {
 
         return temp.query(sql, new BeanPropertyRowMapper<>(Questions.class));
     }
+
+    public void delete(int id) {
+		String sql = "delete from Questions where questionid = ?";
+		temp.update(sql, id);
+	}
+
+    public void updatefinished(int finish, int id) {
+        String sql = "update Questions set finished = ? where questionid=?";
+		temp.update(sql, finish, id);
+	}
+
+    public int countquestions() {
+		String sql = "select MAX(questionid) from Questions";
+		return temp.queryForObject(sql, Integer.class);
+	}
 
     public List<Questions> getQuestionbySection(int section_id) {
         String sql = "Select * from Questions where section_id = ?;";

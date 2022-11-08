@@ -17,7 +17,7 @@
 
       <div class="row">
         <div class="col-lg-3">
-          <th:block th:if="${role=='section admin'}">
+          <th:block th:if="${role=='section_admin' && num_menu == 0}">
             <a th:href="@{/localadmin/menue/add}" class="btn btn-primary btn-sm mb-3">Add Menue</a>
           </th:block>
 
@@ -46,13 +46,13 @@
 
 
             <td>
-              <th:block th:if="${role=='section admin'}"><a th:href="@{/localadmin/manage/menue}"
+              <th:block th:if="${role=='section_admin'}"><a th:href="@{/localadmin/manage/menue}"
                   class="btn btn-danger">
                   Update
                 </a>
               </th:block>
               </th:block>
-              <th:block th:if="${role=='section admin'}">
+              <th:block th:if="${role=='section_admin'}">
                 <a th:href="@{/localadmin/manage/menue/delete}" class="btn btn-danger">
                   Delete
                 </a>

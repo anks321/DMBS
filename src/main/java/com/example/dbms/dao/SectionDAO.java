@@ -61,5 +61,9 @@ public class SectionDAO {
 		temp.update(sql, section.getSection_id(), section.getMess_id(), section.getHall_no(), section.getBreakfast(), section.getLunch(), section.getDinner());
 	}
 	
+	public int countmenu(int messid, int sectionid) {
+		String sql = "select count(*) from section where mess_id = ? and section_id = ?";
+		return temp.queryForObject(sql, Integer.class, messid, sectionid);
+	}
 
 }

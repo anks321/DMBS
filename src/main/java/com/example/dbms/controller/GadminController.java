@@ -75,13 +75,15 @@ public class GadminController {
 
         String curr_user = auth_Service.getCurrentUser(session);
         Employee employee = employeeDAO.findByid(id);
+        
         int mess_id = employee.getMess_id();
-        if (messDAO.getmess(mess_id).get(0).getHead_id() != null || !employee.getDesignation().equals("mess_head")) {
+        model.addAttribute("loggedinusername", curr_user);
+        if (messDAO.getmessbyid(mess_id).getHead_id() != null || employee.getDesignation().equals("mess_head")) {
             return "redirect:/gadmin/allemployees";
         }
+        employeeDAO.makemesshead(id);
         messDAO.makeMesshead(employee.getMess_id(), id);
         return "redirect:/gadmin/allmess";
-
     }
 
     @GetMapping("/gadmin/addmess")
@@ -136,11 +138,26 @@ public class GadminController {
         model.addAttribute("role", "Gadmin");
         String username = auth_Service.getCurrentUser(session);
         List<Employee> employees = employeeDAO.allEmployees();
-        System.out.println(employees.get(0));
         model.addAttribute("employees", employees);
 
         model.addAttribute("loggedinusername", username);
         return "listemployees";
+    }
+
+    @GetMapping("/gadmin/employee/profile/{id}")
+    public String employeeprofile(@PathVariable("id") Integer id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isGadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "Gadmin");
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("loggedinusername", curr_user);
+        Employee employee = employeeDAO.findByid(id);
+        model.addAttribute("employee", employee);
+        return "employeeprofile";
     }
 
     @GetMapping("/gadmin/manage/employee/{id}")
@@ -182,7 +199,7 @@ public class GadminController {
         if (curremployee.getMess_id() != null) {
             mess_id = curremployee.getMess_id();
         }
-        employeeDAO.update(id, employee.getSalary(), employee.getAge(), employee.getPhone_no(),
+        employeeDAO.update(id, employee.getPassword(), employee.getSalary(), employee.getAge(), employee.getPhone_no(),
                 employee.getPin(), employee.getDob(),
                 employee.getIfsc(), employee.getAccount_no(), employee.getE_aadhar_number(), employee.getFirst_name(),
                 employee.getLast_name(),
@@ -224,7 +241,6 @@ public class GadminController {
         Mess mess = messDAO.getmessbyid(id);
         model.addAttribute("mess", mess);
         return "messprofile";
-
     }
 
     @GetMapping("/gadmin/employee/add")
@@ -271,7 +287,6 @@ public class GadminController {
         model.addAttribute("role", "Gadmin");
         String username = auth_Service.getCurrentUser(session);
         List<Student> students = studentDAO.allStudents();
-        System.out.println(students.get(0));
 
         model.addAttribute("students", students);
         model.addAttribute("loggedinusername", username);
