@@ -29,7 +29,7 @@ public class OptionsDAO {
     @Autowired
     public JdbcTemplate temp;
 
-    public void addOption(int option_id, int question_id, int text) {
+    public void addOption(int option_id, int question_id, String text) {
         String sql = "Insert into options values(?,?,?);";
         temp.update(sql, option_id, question_id, text);
     }

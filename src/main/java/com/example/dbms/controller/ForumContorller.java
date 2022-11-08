@@ -78,8 +78,9 @@ public class ForumContorller {
         String curr_user = auth_Service.getCurrentUser(session);
 
         Student student = studentDAO.findByUsername(curr_user);
+        Integer mess_id=student.getMess_id();
 
-        forumDAO.insertforum(student.getRoll_no(), "new", newforum.getComplaint(), 0);
+        forumDAO.insertforum(student.getRoll_no(), "new", newforum.getComplaint(), 0,mess_id);
         return "redirect:/student/forum";
     }
 

@@ -39,6 +39,11 @@ public class ForumDAO {
 		return temp.queryForObject(sql, new BeanPropertyRowMapper<>(Forum.class), id);
 	}
 
+	public List<Forum> getforumbymess(int id) {
+		String sql = "select * from forum where mess_id=?";
+		return temp.query(sql, new BeanPropertyRowMapper<>(Forum.class), id);
+	}
+
 	public List<Forum> getmyforum(int roll_no) {
 		String sql = "select * from forum where roll_no=? ;";
 
@@ -46,10 +51,10 @@ public class ForumDAO {
 
 	}
 
-	public void insertforum(int roll_no, String Datetime, String text, int resolved) {
-		String sql = "insert into forum(roll_no,complaint,date_time,resolved) values (?,?,?,?) ;";
-		
-		temp.update(sql, roll_no, text, Datetime, resolved);
+	public void insertforum(int roll_no, String Datetime, String text, int resolved, int mess_id) {
+		String sql = "insert into forum(roll_no,complaint,date_time,resolved,mess_id) values (?,?,?,?,?);";
+
+		temp.update(sql, roll_no, text, Datetime, resolved, mess_id);
 
 	}
 

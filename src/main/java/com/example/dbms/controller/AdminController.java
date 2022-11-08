@@ -26,6 +26,8 @@ public class AdminController {
     private StudentDAO studentDAO;
 
     @Autowired
+    private ForumDAO forumDAO;
+    @Autowired
     private InventoryDAO inventoryDAO;
     @Autowired
     private SectionDAO sectionDAO;
@@ -665,4 +667,22 @@ public class AdminController {
         return "redirect:/admin/allcustomers";
     }
 
+
+    @GetMapping("/admin/forums")
+    public String getAllforums(Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        model.addAttribute("role", "admin");
+        String username = auth_Service.getCurrentUser(session);
+
+       
+        Employee employee = employeeDAO.findByUsername(username);
+        List<Forum> forums= forumDAO.getforumbymess(employee.getMess_id());
+        model.addAttribute("loggedinusername", username);
+        return "listforums";
+    }
 }
