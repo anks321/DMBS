@@ -74,7 +74,7 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="/images/employee.jpg" alt="Admin" class="rounded-circle" width="150">
+                        <img src="/images/employee.png" alt="Admin" class="rounded-circle" width="150">
                         <div class="mt-3">
                           <h4 th:text="${employee.first_name}+' '+${employee.last_name}"></h4>
                           
@@ -190,15 +190,6 @@
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Balance</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary"th:text="${employee.balance}">
-                        
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
                           <h6 class="mb-0">Aadhar No</h6>
                         </div>
                         <div class="col-sm-9 text-secondary" th:text="${employee.e_aadhar_number}">
@@ -228,8 +219,8 @@
                       
                       <div class="row">
                         <div class="col-sm-12">
-                            <a th:href="@{/localadmin/allemployees}" class="btn btn-info ">Back</a>
-                        </div>
+                          <a th:href="@{/admin/allemployees}" class="btn btn-info ">Back</a>
+                      </div>
                       </div>
                     </div>
                   </div>

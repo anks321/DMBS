@@ -165,24 +165,45 @@ public class AdminController {
         return "redirect:/admin/allsections";
     }
 
-    // @GetMapping("/admin/deletesection/{id}")
-    // public String deletesectionDashboard(@PathVariable("id") Integer id, Model
-    // model, HttpSession session,
-    // RedirectAttributes redirectAttributes) {
+    @GetMapping("/admin/deletesection/{id}")
+    public String deletesectionDashboard(@PathVariable("id") Integer id, Model
+    model, HttpSession session,
+    RedirectAttributes redirectAttributes) {
 
-    // String Message = "Please Sign in to proceed!!!";
-    // if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session))
-    // {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
-    // String username = auth_Service.getCurrentUser(session);
+    String Message = "Please Sign in to proceed!!!";
+    if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session))
+    {
+    toastService.redirectWithErrorToast(redirectAttributes, Message);
+    return "redirect:/login";
+    }
+    String username = auth_Service.getCurrentUser(session);
 
-    // model.addAttribute("role", "mess_head");
-    // sectionDAO.delete(id);
-    // return "redirect:/admin/allsections";
-    // }
+    model.addAttribute("role", "mess_head");
+    Employee emp = employeeDAO.findByUsername(username);
+    int m_id = emp.getMess_id();
+    sectionDAO.delete(m_id, id);
+    return "redirect:/admin/allsections";
+    }
 
+    @GetMapping("/admin/manage/employee/profile/{id}")
+    public String employeeprofileDashboard(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Employee employee = employeeDAO.findByid(id);
+
+        model.addAttribute("employee", employee);
+        model.addAttribute("role", "admin");
+        model.addAttribute("loggedinusername", curr_user);
+
+        return "employeeprofile";
+    }
     @GetMapping("/admin/allemployees")
     public String secemployeesDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -414,6 +435,8 @@ public class AdminController {
         return "liststudents";
     }
 
+    
+
     @GetMapping("/admin/student/add")
     public String studentAddDashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -431,6 +454,41 @@ public class AdminController {
         model.addAttribute("loggedinuser", curr_user);
 
         return "addstudent";
+    }
+
+    @GetMapping("/admin/manage/student/edit/{id}")
+    public String studentDashboard(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Sorry, You are not authorized to view this page!. Please Sign in as admin to proceed .......";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.isadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Student student = studentDAO.findByid(id);
+        model.addAttribute("role", "admin");
+
+        model.addAttribute("student", student);
+
+        model.addAttribute("loggedinusername", curr_user);
+
+        return "updatestudent";
+    }
+
+    @PostMapping("/admin/manage/student/edit/{id}")
+    public String studentEditDashboardPost(@PathVariable("id") int id,
+            @ModelAttribute("student") Student student, Model model, HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+        Employee employee = employeeDAO.findByUsername(curr_user);
+        System.out.println(employee);
+        studentDAO.update(student.getRoll_no(), student.getRoom_no(), student.getBalance(),
+                student.getF_name(),student.getL_name(), student.getHostel_name(), student.getSex(), student.getParent(),
+                student.getPhone_no(), student.getS_email(), student.getLocalGaurdian(), student.getAadhar_no(),
+                student.getS_account_no(), student.getS_ifsc(),student.getMess_id(), student.getSection_id(),student.getUsername());
+        return "redirect:/admin/students";
     }
 
     @PostMapping("/admin/student/add")

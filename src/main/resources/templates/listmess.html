@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="/Layout/base::layout(~{::section})">
+
 <head>Register Customer</head>
 <!-- <head th:replace="header :: header"></head> -->
+
 <body text-align="center">
 
-<!-- div th:replace="navbar :: navbar"></div> -->
-<section>
+    <!-- div th:replace="navbar :: navbar"></div> -->
+    <section>
 
 
-<div class="container">
-  <div class="row">
-      <h1>Mess </h1>
+        <div class="container">
+            <div class="row">
+                <h1>Mess </h1>
 
-  </div>
-  
-  <div class="row">
-      <div class="col-lg-3">
-        
-          <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
-          <a th:href="@{/gadmin/addmess}" class="btn btn-primary btn-sm mb-3">Add mess</a>
-      </div>
-  </div>
-  
-  <table class="table table-striped table-bordered">
-      <thead class="table-dark"> 
-          <tr>
-              <th>#</th>
-              <th>Name</th>
-              
-              <th>Head</th>
-              
-              <th>Actions</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr th:each="me: ${mess}">
-              <td th:text="${me.mess_id}"></td>
-              <td th:text="${me.m_name}"></td>
-              <td th:text="${me.Head_id}"></td>
-              
-            
-              <td>
-                <a  th:href="@{/gadmin/mess/delete/{id}(id=${me.mess_id})}"class="btn btn-danger">
-                    Delete
-                </a>
-                <a  th:href="@{/gadmin/mess/profile/{id}(id=${me.mess_id})}" class="btn btn-danger">
-                    View
-                </a>
-              </td>
+            </div>
 
-          </tr>
-      </tbody>
-  </table>
-</div>
-</section>
+            <div class="row">
+                <div class="col-lg-3">
+
+                    <a th:href="@{/loggedin}" class="btn btn-primary btn-sm mb-3">Back</a>
+                    <a th:href="@{/gadmin/addmess}" class="btn btn-primary btn-sm mb-3">Add mess</a>
+                </div>
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mess Id</th>
+                        <th>Name</th>
+                        <th>Head</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="me: ${mess}">
+                        <td th:text="${me.mess_id}"></td>
+                        <td th:text="${me.m_name}"></td>
+                        <td th:text="${me.Head_id}"></td>
+                        <td>
+                            <a th:href="@{/gadmin/mess/delete/{id}(id=${me.mess_id})}" class="btn btn-danger">
+                                Delete
+                            </a>
+                            <a th:href="@{/gadmin/mess/profile/{id}(id=${me.mess_id})}" class="btn btn-danger">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
 </body>
+
 </html>
