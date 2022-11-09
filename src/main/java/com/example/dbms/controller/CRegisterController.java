@@ -34,8 +34,6 @@ public class CRegisterController {
     private ToastService toastService;
     @Autowired
     private AuthenticateService authenticateService;
-    // @Autowired
-    // EmailSenderService emailSenderService;
 
     @GetMapping("/customerregister")
     public String showForm(Model model, HttpSession session) {
@@ -51,13 +49,6 @@ public class CRegisterController {
     @PostMapping("/customerregister")
     public String submitForm(@ModelAttribute("customer") Customer customer, Model model, BindingResult bindingResult,
             HttpSession session, RedirectAttributes redirectAttributes) {
-
-        // userValidator.validate(userForm, bindingResult);
-
-        // if (bindingResult.hasErrors()) {
-
-        // return "register";
-        // }
 
         String username = customer.getUsername();
         String errorMessage = null;

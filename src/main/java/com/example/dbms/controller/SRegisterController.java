@@ -35,8 +35,6 @@ public class SRegisterController {
 	private ToastService toastService;
 	@Autowired
 	private AuthenticateService authenticateService;
-	// @Autowired
-	// EmailSenderService emailSenderService;
 
 	@GetMapping("/studentregister")
 	public String showForm(Model model, HttpSession session) {
@@ -62,17 +60,10 @@ public class SRegisterController {
 	public String submitForm(@ModelAttribute("student") Student student, Model model, BindingResult bindingResult,
 			HttpSession session, RedirectAttributes redirectAttributes) {
 
-		// userValidator.validate(userForm, bindingResult);
-
-		// if (bindingResult.hasErrors()) {
-
-		// return "register";
-		// }
 
 		String username = student.getUsername();
 		String errorMessage = null;
 
-		// System.out.println(username);
 
 		try {
 
