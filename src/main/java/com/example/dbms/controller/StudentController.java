@@ -12,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.dbms.service.AuthenticateService;
 import com.example.dbms.service.ToastService;
-import com.example.dbms.validator.UserValidator;
 import com.example.dbms.dao.AnnouncementsDAO;
 import com.example.dbms.dao.SectionDAO;
 import com.example.dbms.dao.StudentDAO;
@@ -35,8 +34,6 @@ public class StudentController {
     private AnnouncementsDAO announcementsDAO;
     @Autowired
     private TransactionDAO transactionDAO;
-    @Autowired
-    private UserValidator userValidator;
     @Autowired
     private ToastService toastService;
 

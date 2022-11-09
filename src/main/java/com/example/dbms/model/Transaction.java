@@ -14,7 +14,6 @@ public class Transaction {
     private int type;
     private String date;
     private String mode_of_payment;
-    private int roll_no;
-    private int C_id;
-    
+    private Integer roll_no;
+    private Integer C_id;  
 }

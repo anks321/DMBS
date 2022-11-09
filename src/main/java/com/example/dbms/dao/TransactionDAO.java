@@ -29,11 +29,11 @@ public class TransactionDAO {
     public List<Transaction> alltransactions(int id, int isStudent) {
         String sql = "";
         if(isStudent == 1) {
-            sql = "select * from Transactions where roll_no='" + id + "'";}
+            sql = "select * from Transactions where roll_no=?";}
         else{
-            sql = "select * from Transactions where C_id='" + id + "'";}
+            sql = "select * from Transactions where C_id=?";}
 
-		return temp.query(sql, new BeanPropertyRowMapper<>(Transaction.class));
+		return temp.query(sql, new BeanPropertyRowMapper<>(Transaction.class), id);
 	}
 
     public void inserttransac(int t_id, int amount, int type, String date, String mode_of_payment, int roll_no, int C_id) {

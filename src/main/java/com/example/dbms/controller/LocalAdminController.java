@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.dbms.service.*;
-import com.example.dbms.validator.UserValidator;
 import com.example.dbms.dao.*;
 import com.example.dbms.model.*;
 
@@ -729,7 +728,7 @@ public class LocalAdminController {
 
     }
 
-    //STUDENTS
+    //STUDENT TRANSACTIONS
 
     @GetMapping("/localadmin/student/transactions/{roll}")
     public String studenttransactions(@PathVariable("roll") int roll, Model model, HttpSession session,
@@ -750,6 +749,7 @@ public class LocalAdminController {
 
         List<Transaction> list = transactionDAO.alltransactions(roll, 1);
         model.addAttribute("transactions", list);
+
 
         return "managestudenttransactions";
     }
@@ -782,14 +782,15 @@ public class LocalAdminController {
         String curr_user = auth_Service.getCurrentUser(session);
 
         Transaction trans = transactionDAO.findById(id);
-        int roll = trans.getRoll_no();
+        Integer roll = trans.getRoll_no();
 
         Student student = studentDAO.findByid(roll);
         int balance = student.getBalance();
         studentDAO.updateBalanceStudent(balance - transaction.getAmount(), roll);
 
         transactionDAO.update(id, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), roll, -1);
-        return "redirect:/localadmin/student/transactions/{roll}";
+        String rll=Integer.toString(roll);
+        return "redirect:/localadmin/student/transactions/"+rll;
     }
 
     @GetMapping("/localadmin/student/transaction/delete/{id}")
@@ -814,8 +815,8 @@ public class LocalAdminController {
         transactionDAO.delete(id);
 
         model.addAttribute("loggedinusername", curr_user);
-
-        return "redirect:/localadmin/student/transactions/{roll}";
+        String rll=Integer.toString(roll);
+        return "redirect:/localadmin/student/transactions/"+rll;
     }
 
     @GetMapping("/localadmin/student/transaction/add/{roll}")
@@ -851,7 +852,8 @@ public class LocalAdminController {
 
         transactionDAO.inserttransac(num_trans + 1, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), roll, -1);
         
-        return "redirect:/localadmin/student/transactions/{roll}";
+        String rll=Integer.toString(roll);
+        return "redirect:/localadmin/student/transactions/"+rll;
     }
 
 
@@ -915,7 +917,9 @@ public class LocalAdminController {
         customerDAO.updateBalanceCustomer(balance - transaction.getAmount(), cid);
 
         transactionDAO.update(id, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), -1, cid);
-        return "redirect:/localadmin/customer/transactions/{cid}";
+
+        String rll=Integer.toString(cid);
+        return "redirect:/localadmin/customer/transactions/"+rll;
     }
 
     @GetMapping("/localadmin/customer/transaction/delete/{id}")
@@ -941,7 +945,8 @@ public class LocalAdminController {
 
         model.addAttribute("loggedinusername", curr_user);
 
-        return "redirect:/localadmin/customer/transactions/{cid}";
+        String rll=Integer.toString(cid);
+        return "redirect:/localadmin/customer/transactions/"+rll;
     }
 
     @GetMapping("/localadmin/customer/transaction/add/{cid}")
@@ -977,7 +982,8 @@ public class LocalAdminController {
 
         transactionDAO.inserttransac(num_trans + 1, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), -1, cid);
         
-        return "redirect:/localadmin/customer/transactions/{cid}";
+        String rll=Integer.toString(cid);
+        return "redirect:/localadmin/customer/transactions/"+rll;
     }
 
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.dbms.service.*;
-import com.example.dbms.validator.UserValidator;
 import com.example.dbms.dao.*;
 import com.example.dbms.model.*;
 

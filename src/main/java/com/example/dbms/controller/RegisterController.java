@@ -11,7 +11,6 @@ import com.example.dbms.model.*;
 import com.example.dbms.service.AuthenticateService;
 // import com.example.dbms.service.Em ailSenderService;
 import com.example.dbms.service.ToastService;
-import com.example.dbms.validator.UserValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -33,8 +32,6 @@ public class RegisterController {
 	 private StudentDAO studentDAO;
 	 @Autowired
 	 private ToastService toastService;
-	 @Autowired
-	 private UserValidator userValidator;
 	 @Autowired
 	 private AuthenticateService authenticateService;
 	//  @Autowired
