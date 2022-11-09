@@ -106,8 +106,6 @@ public class StudentController {
         Integer section_no = student.getSection_id();
 
         List<Announcements> announce = announcementsDAO.findByAnnouncements(mess_no, section_no);
-        // String announce_text = announce.getAnnounce_text();
-        // String date_and_time = announce.getDate_and_time();
 
         model.addAttribute("announcements", announce);
         System.out.println("mess_no");

@@ -92,11 +92,6 @@ public class PollCotroller {
         String curr_user = auth_Service.getCurrentUser(session);
         model.addAttribute("loggedinusername", curr_user);
 
-        // Student student = studentDAO.findByUsername(curr_user);
-
-        // Integer mess_no = student.getMess_id();
-        // Integer section_no = student.getSection_id();
-
         Questions question = questionsDAO.getQuestionbyId(questionid);
 
         List<Options> options = optionsDAO.getOptions(questionid);
@@ -125,13 +120,6 @@ public class PollCotroller {
         String curr_user = auth_Service.getCurrentUser(session);
 
         Student student = studentDAO.findByUsername(curr_user);
-
-        // Integer mess_no = student.getMess_id();
-        // Integer section_no = student.getSection_id();
-        // System.out.println(ans.getOptionid());
-        // System.out.println(ans.getQ_id());
-        // System.out.println(student.getRoll_no());
-
         optionsDAO.chooseOption(ans.getOptionid(), qid,
                 student.getRoll_no());
 
@@ -149,7 +137,6 @@ public class PollCotroller {
         String curr_user = auth_Service.getCurrentUser(session);
 
         Student student = studentDAO.findByUsername(curr_user);
-        // model.addAttribute("newpoll",new())
         return "Createpoll";
     }
 

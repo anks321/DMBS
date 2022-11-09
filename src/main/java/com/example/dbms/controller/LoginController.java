@@ -25,9 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class LoginController {
 
-    // @Autowired
-    // private SecurityService securityService;
-
     @Autowired
     private StudentDAO studentDAO;
     @Autowired
@@ -52,7 +49,6 @@ public class LoginController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        // System.out.println(session.getAttribute("loggedUser").toString());
         if (authenticateService.isAuthenticated(session)) {
             return "redirect:/loggedin";
         }
@@ -74,7 +70,6 @@ public class LoginController {
             System.out.println("Global Admin");
             if (authenticateService.checkglobaladmin(username, password)) {
                 authenticateService.loginGlobalAdmin(session, username);
-
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
 
                 return "redirect:/loggedin";
@@ -84,33 +79,27 @@ public class LoginController {
                     && studentDAO.userExists(username)) {
                 authenticateService.loginStudent(session, username);
                 System.out.println(username);
-                // authenticateService.loginUser(session, username);
-                // System.out.println(username);
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
                 return "redirect:/loggedin";
-            } else if (authenticateService.checkCustomerCredentials(username, password)
+            } 
+            else if (authenticateService.checkCustomerCredentials(username, password)
                     && customerDAO.userExists(username)) {
                 authenticateService.loginCustomer(session, username);
                 System.out.println(username);
-                // authenticateService.loginUser(session, username);
-                // System.out.println(username);
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
                 return "redirect:/loggedin";
-            } else if (authenticateService.checkEmployeeCredentials(username, password)
+            } 
+            else if (authenticateService.checkEmployeeCredentials(username, password)
                     && employeeDAO.userExists(username)) {
                 authenticateService.loginAdmin(session, username);
                 System.out.println(username);
-                // authenticateService.loginUser(session, username);
-                // System.out.println(username);
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
                 return "redirect:/loggedin";
-            } else if (authenticateService.checkSectionHeadCredentials(username, password)
+            } 
+            else if (authenticateService.checkSectionHeadCredentials(username, password)
                     && employeeDAO.userExists(username)) {
                 authenticateService.loginsectionAdmin(session, username);
                 System.out.println(username);
-                System.out.println("xxx");
-                // authenticateService.loginUser(session, username);
-                // System.out.println(username);
                 toastService.redirectWithSuccessToast(redirectAttributes, "Successfully logged in.");
                 return "redirect:/loggedin";
             }
@@ -130,11 +119,6 @@ public class LoginController {
     public String welcome(Model model, HttpSession session) {
         List<Mess> mess = messDAO.getallMess();
         model.addAttribute("mess", mess);
-
-        // System.out.println(session.getAttribute("loggedUser").toString());
-
-        // model.addAttribute("loggedinusername",
-        // authenticateService.getCurrentUser(session));
         String username = authenticateService.getCurrentUser(session);
         if (authenticateService.isGadmin(session)) {
             model.addAttribute("Gadmin", "Yes");
@@ -173,9 +157,6 @@ public class LoginController {
             model.addAttribute("loggedinusername", username);
             return "faltu";
         }
-        // if (authenticateService.isadmin(session)) {
-        // model.addAttribute("admin", customerDAO.findByUsername(username));
-        // }
 
         model.addAttribute("loggedinusername", username);
         if (studentDAO.userExists(username)) {
@@ -196,10 +177,5 @@ public class LoginController {
         authenticateService.logoutUser(session);
         return "redirect:/login";
     }
-
-    // @PostMapping("/logout")
-    // public String logoutPost(HttpSession session, Model model) {
-    // return "redirect:/welcome";
-    // }
 
 }
