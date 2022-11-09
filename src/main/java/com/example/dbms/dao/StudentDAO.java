@@ -53,6 +53,11 @@ public class StudentDAO {
 				aadhar_no, s_account_no, s_ifsc, mess_id, section_id, username, roll_no);
 	}
 
+	public void updateBalanceStudent(int val, int roll_no){
+		String sql = "update student set Balance = ? where roll_no = ?";
+		jt.update(sql, val, roll_no);
+	}
+
 	public void delete(int roll_no) {
 
 		String sql = "delete from student where roll_no = ?";

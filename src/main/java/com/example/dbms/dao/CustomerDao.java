@@ -52,6 +52,11 @@ public class CustomerDao {
 				last_name, email, city, street, mess_id, section_id, id);
 	}
 
+	public void updateBalanceCustomer(int val, int cid){
+		String sql = "update customer set Balance = ? where cid = ?";
+		temp.update(sql, val, cid);
+	}
+
 	public void delete(int id) {
 
 		String sql = "delete from customer where cid = ?";

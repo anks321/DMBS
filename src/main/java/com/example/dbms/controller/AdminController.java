@@ -307,42 +307,6 @@ public class AdminController {
         return "redirect:/admin/allemployees";
     }
 
-    // EMPLOYEES
-
-    // STUDENTS
-
-    // @GetMapping("/dashboard/student/delete/{id}")
-    // public String studentDeleteDashboard(@PathVariable("id") int id, Model model,
-    // HttpSession session,
-    // RedirectAttributes redirectAttributes) {
-
-    // String Message = "Sorry, You are not authorized to view this page!. Please
-    // Sign in as admin to proceed .......";
-    // if (!auth_Service.isAuthenticated(session) ||
-    // !auth_Service.isGadmin(session)) {
-    // toastService.redirectWithErrorToast(redirectAttributes, Message);
-    // return "redirect:/login";
-    // }
-    // String curr_user = auth_Service.getCurrentUser(session);
-    // Student student = studentDAO.findByid(id);
-    // int roll = student.getRoll_no();
-
-    // List<Transaction> transactions = transactionDAO.alltransactions(roll, 1);
-
-    // String TranMessage = "Sorry, Student has some transactions!";
-    // if (transactions.isEmpty()) {
-    // toastService.redirectWithErrorToast(redirectAttributes, TranMessage);
-    // return "redirect:/dashboard/manage/students";
-    // }
-
-    // studentDAO.delete(id);
-
-    // model.addAttribute("role", "Gadmin");
-    // model.addAttribute("loggedinusername", curr_user);
-
-    // return "redirect:/dashboard/manage/students";
-    // }
-
     // CUSTOMERS
 
     @GetMapping("/admin/customers/{id}")

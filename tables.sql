@@ -139,6 +139,7 @@ CREATE TABLE `employees` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
 --
 -- Table structure for table `forum`
 --
@@ -378,13 +379,13 @@ CREATE TABLE `transactions` (
   `C_id` int DEFAULT NULL,
   `amount` int DEFAULT NULL,
   `type` int DEFAULT NULL,
-  `date` date DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
   `mode_of_payment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`t_id`),
   KEY `fk_9` (`roll_no`),
   KEY `fk_10` (`C_id`),
-  CONSTRAINT `fk_10` FOREIGN KEY (`C_id`) REFERENCES `customer` (`cid`),
-  CONSTRAINT `fk_9` FOREIGN KEY (`roll_no`) REFERENCES `student` (`roll_no`)
+  CONSTRAINT `fk_10` FOREIGN KEY (`C_id`) REFERENCES `customer` (`cid`) on delete cascade,
+  CONSTRAINT `fk_9` FOREIGN KEY (`roll_no`) REFERENCES `student` (`roll_no`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

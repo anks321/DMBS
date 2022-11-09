@@ -124,7 +124,7 @@ a {
        
     <div class="card-body">
         <h1 class="" style="text-align: center;color: #1808fa;font-size: 50px; border: #171313; font-family: Arial, Helvetica, sans-serif;" >Add Transaction</h1>
-    <form method="post" action:th="{@{/localadmin/inventory/add}}" th:object="${transaction}">
+    <form method="post" action:th="@{/localadmin/student/transaction/add/{id}(id=${roll})}" th:object="${transaction}">
         <div class="form-group">
             <label for="amount">Amount</label>
             <input type="number" id="amount" class="form-control" required="required" placeholder="Amount"
@@ -132,17 +132,32 @@ a {
         </div>
         <div class="form-group">
             <label for="type">Type</label>
-            <input type="text" id="type" class="form-control" required="required" placeholder="Type"
+            <input type="number" id="type" class="form-control" required="required" placeholder="Type"
                 th:field="*{type}" />
         </div>
+        <!-- <div class="row form-group">
+            <div class="col-sm-4 label-column" >
+                <label class="col-form-label" for="type-input-field">Diet Type </label>
+            </div>
+            <div class="col-sm-4 label-column" >
+                <div class="form-check "   >
+                    <input class="form-check-input"  type="radio" required="required" th:field="*{type}" id="option1" value="0">
+                    <label class="form-check-label" for="option1" >Normal Diet</label>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio"  required="required" th:field="*{type}" id="option2" value="1">
+                    <label class="form-check-label" for="option2" >Extra Diet</label>
+                </div>
+            </div>
+        </div> -->
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="number" id="date" class="form-control" required="required" placeholder="Date"
+            <input type="text" id="date" class="form-control" required="required" placeholder="Date"
                 th:field="*{date}" />
         </div>
         <div class="form-group">
             <label for="mode_of_payment">Mode of Payment</label>
-            <input type="number" id="mode_of_payment" class="form-control" required="required" placeholder="Mode of Payment"
+            <input type="text" id="mode_of_payment" class="form-control" required="required" placeholder="Mode of Payment"
                 th:field="*{mode_of_payment}" />
         </div>
         <center><button type="submit" class="btn btn-primary">Submit</button></center>

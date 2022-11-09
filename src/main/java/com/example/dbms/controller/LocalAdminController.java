@@ -729,4 +729,255 @@ public class LocalAdminController {
 
     }
 
+    //STUDENTS
+
+    @GetMapping("/localadmin/student/transactions/{roll}")
+    public String studenttransactions(@PathVariable("roll") int roll, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Student student = studentDAO.findByid(roll);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("student", student);
+        model.addAttribute("role", "section_admin");
+
+        List<Transaction> list = transactionDAO.alltransactions(roll, 1);
+        model.addAttribute("transactions", list);
+
+        return "managestudenttransactions";
+    }
+
+    @GetMapping("/localadmin/student/transaction/edit/{id}")
+    public String studenttransactionedit( @PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+
+        Transaction transaction = transactionDAO.findById(id);
+
+        model.addAttribute("transaction", transaction);
+
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("id", id);
+
+        return "updatetransaction";
+    }
+
+    @PostMapping("/localadmin/student/transaction/edit/{id}")
+    public String studenttransactioneditPost(@PathVariable("id") int id,
+            @ModelAttribute("transaction") Transaction transaction, Model model, HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Transaction trans = transactionDAO.findById(id);
+        int roll = trans.getRoll_no();
+
+        Student student = studentDAO.findByid(roll);
+        int balance = student.getBalance();
+        studentDAO.updateBalanceStudent(balance - transaction.getAmount(), roll);
+
+        transactionDAO.update(id, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), roll, -1);
+        return "redirect:/localadmin/student/transactions/{roll}";
+    }
+
+    @GetMapping("/localadmin/student/transaction/delete/{id}")
+    public String studenttransactiondelete(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+
+        Transaction trans = transactionDAO.findById(id);
+        int roll = trans.getRoll_no();
+
+        Student student = studentDAO.findByid(roll);
+        int balance = student.getBalance();
+        studentDAO.updateBalanceStudent(balance + trans.getAmount(), roll);
+
+        transactionDAO.delete(id);
+
+        model.addAttribute("loggedinusername", curr_user);
+
+        return "redirect:/localadmin/student/transactions/{roll}";
+    }
+
+    @GetMapping("/localadmin/student/transaction/add/{roll}")
+    public String studenttransactionadd(@PathVariable("roll") int roll, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+
+        Transaction transaction = new Transaction();
+
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("roll", roll);
+
+        return "addtransaction";
+    }
+
+    @PostMapping("/localadmin/student/transaction/add/{roll}")
+    public String studenttransactionaddPost(@PathVariable("roll") int roll, @ModelAttribute("transaction") Transaction transaction, Model model,
+            HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Student student = studentDAO.findByid(roll);
+        int balance = student.getBalance();
+        studentDAO.updateBalanceStudent(balance - transaction.getAmount(), roll);
+        
+        int num_trans = transactionDAO.counttrans();
+
+        transactionDAO.inserttransac(num_trans + 1, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), roll, -1);
+        
+        return "redirect:/localadmin/student/transactions/{roll}";
+    }
+
+
+    // CUSTOMER TRANSACTIONS
+
+    @GetMapping("/localadmin/customer/transactions/{cid}")
+    public String customertransactions(@PathVariable("cid") int cid, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String loginMessage = "Please Sign in to proceed!!!";
+
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, loginMessage);
+            return "redirect:/login";
+        }
+
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Customer customer = customerDAO.findByid(cid);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("customer", customer);
+        model.addAttribute("role", "section_admin");
+
+        List<Transaction> list = transactionDAO.alltransactions(cid, 0);
+        model.addAttribute("transactions", list);
+
+        return "managecustomertransactions";
+    }
+
+    @GetMapping("/localadmin/customer/transaction/edit/{id}")
+    public String customertransactionedit( @PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+
+        Transaction transaction = transactionDAO.findById(id);
+
+        model.addAttribute("transaction", transaction);
+
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("id", id);
+
+        return "updatecustransaction";
+    }
+
+    @PostMapping("/localadmin/customer/transaction/edit/{id}")
+    public String customertransactioneditPost(@PathVariable("id") int id,
+            @ModelAttribute("transaction") Transaction transaction, Model model, HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Transaction trans = transactionDAO.findById(id);
+        int cid = trans.getC_id();
+
+        Customer customer = customerDAO.findByid(cid);
+        int balance = customer.getBalance();
+        customerDAO.updateBalanceCustomer(balance - transaction.getAmount(), cid);
+
+        transactionDAO.update(id, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), -1, cid);
+        return "redirect:/localadmin/customer/transactions/{cid}";
+    }
+
+    @GetMapping("/localadmin/customer/transaction/delete/{id}")
+    public String customertransactiondelete(@PathVariable("id") int id, Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+
+        Transaction trans = transactionDAO.findById(id);
+        int cid = trans.getC_id();
+
+        Customer customer = customerDAO.findByid(cid);
+        int balance = customer.getBalance();
+        customerDAO.updateBalanceCustomer(balance + trans.getAmount(), cid);
+
+        transactionDAO.delete(id);
+
+        model.addAttribute("loggedinusername", curr_user);
+
+        return "redirect:/localadmin/customer/transactions/{cid}";
+    }
+
+    @GetMapping("/localadmin/customer/transaction/add/{cid}")
+    public String customertransactionadd(@PathVariable("cid") int cid, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        String Message = "Please Sign in to proceed!!!";
+        if (!auth_Service.isAuthenticated(session) || !auth_Service.issectionadmin(session)) {
+            toastService.redirectWithErrorToast(redirectAttributes, Message);
+            return "redirect:/login";
+        }
+        String curr_user = auth_Service.getCurrentUser(session);
+        model.addAttribute("role", "section_admin");
+
+        Transaction transaction = new Transaction();
+
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("loggedinusername", curr_user);
+        model.addAttribute("cid", cid);
+
+        return "addcustransaction";
+    }
+
+    @PostMapping("/localadmin/customer/transaction/add/{cid}")
+    public String customertransactionaddPost(@PathVariable("cid") int cid, @ModelAttribute("transaction") Transaction transaction, Model model,
+            HttpSession session) {
+        String curr_user = auth_Service.getCurrentUser(session);
+
+        Customer customer = customerDAO.findByid(cid);
+        int balance = customer.getBalance();
+        customerDAO.updateBalanceCustomer(balance - transaction.getAmount(), cid);
+        
+        int num_trans = transactionDAO.counttrans();
+
+        transactionDAO.inserttransac(num_trans + 1, transaction.getAmount(), transaction.getType(), transaction.getDate(), transaction.getMode_of_payment(), -1, cid);
+        
+        return "redirect:/localadmin/customer/transactions/{cid}";
+    }
+
 }

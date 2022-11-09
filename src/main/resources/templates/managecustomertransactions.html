@@ -199,13 +199,13 @@
                                 </td>
                                 <td th:text="${tran.mode_of_payment}"></td>
                                 <td>
-                                    <a th:href="@{/localadmin/customer/transaction/edit/{cid}(cid=${customer.cid})/{id}(id=${tran.t_id})}"
+                                    <a th:href="@{/localadmin/customer/transaction/edit/{id}(id=${tran.t_id})}"
                                         class="btn btn-danger">
                                         Update
                                     </a>
                                 </td>
                                 <td>
-                                    <a th:href="@{/localadmin/customer/transaction/delete/{cid}(cid=${customer.cid})/{id}(id=${tran.t_id})}"
+                                    <a th:href="@{/localadmin/customer/transaction/delete/{id}(id=${tran.t_id})}"
                                         class="btn btn-danger">
                                         Delete
                                     </a>
